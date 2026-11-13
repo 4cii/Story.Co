@@ -14,6 +14,119 @@
     src: url('../assets/ZT Formom.ttf') format('truetype');
 }
 
+
+body {
+  min-height: 100vh;
+  background: #f9f0e1; 
+  color: var(--darkchoco);
+  font-family: "ZT Formom", Georgia, "Times New Roman", serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* home page */
+.awning {
+  display: block;
+  width: 100%;
+  height: auto;
+  
+}
+
+.hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: clamp(40px, 7vw, 90px) 24px 80px;
+  text-align: center;
+}
+
+.hero__title {
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(56px, 10.2vw, 150px);   /* semua dekorasi pakai satuan em, jadi ikut skala */
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.line { display: block; }
+
+.word {
+  position: relative;
+  display: inline-block;
+}
+
+
+.deco {
+  position: absolute;
+  pointer-events: none;
+  max-width: none;
+}
+
+
+.deco--yellow {
+  width: 108%;
+  left: -4%;
+  top: -48%;
+  z-index: -1;
+}
+
+
+.deco--green {
+  width: 90%;
+  right: 0;
+  bottom: -30%;
+}
+
+.smiley {
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin: 0 0.01em;
+  vertical-align: -0.02em;
+}
+
+
+.btn {
+  margin-top: 5rem;
+  display: inline-block;
+  padding: 0.45em 1.5em;
+  font-family: inherit;
+  font-size: clamp(22px, 2.8vw, 34px);
+  color: var(--white);
+  text-decoration: none;
+  background: linear-gradient(90deg, var(--mocca), var(--darkchoco));
+  border: 3px solid var(--mocca);
+  border-radius: 8px;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+ 
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* end home page */
+
+
+/* sign up page */
+
+:root {
+  --brown: #512524;
+  --mocca: #7E4146; 
+  --gold: #E2B95F;
+  --matcha: #8DB56A;
+  --darkchoco: #2F0E0D;
+  --orange: #E38025;
+  --blue: #46B7F2;
+  --white: #fff;
+}
+
+@font-face {
+    font-family: 'ZT Formom';
+    src: url('../assets/ZT Formom.ttf') format('truetype');
+}
+
 /* home page */
 
 body {
@@ -113,12 +226,11 @@ body {
 /* sign up page */
 
 .page {
-  /* warna khusus sign up (dipasang di sini biar :root kamu tetap utuh) */
+  overflow: hidden;
   --field-bg: #efe5d9;
   --field-border: #e2d5c4;
   --muted: #a39484;
   --outline: #a89a88;
-
   display: grid;
   grid-template-columns: 47.5fr 52.5fr;
   grid-template-rows: minmax(0, 1fr);
@@ -127,7 +239,6 @@ body {
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 }
 
-/* kiri: gambar cafe */
 .visual {
   position: relative;
   overflow: hidden;
@@ -140,48 +251,47 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
 }
 
-/* kanan: form (scroll sendiri kalau layar pendek, karena body overflow hidden) */
+/* ukuran vertikal pakai vh, jadi form menyusut mengikuti tinggi layar dan tidak perlu scroll */
 .panel {
   display: flex;
-  overflow-y: auto;
-  padding: clamp(24px, 4vw, 56px);
+  overflow: hidden;
+  padding: clamp(16px, 3vh, 40px) clamp(24px, 4vw, 56px);
 }
 
 .panel__inner {
   width: 100%;
-  max-width: 630px;
+  max-width: 520px;
   margin: auto;
 }
 
 .title {
-  margin-bottom: clamp(20px, 3vw, 44px);
+  margin-bottom: clamp(10px, 2.6vh, 28px);
   text-align: center;
   font-family: "ZT Formom", Georgia, "Times New Roman", serif;
   font-weight: 400;
-  font-size: clamp(64px, 7.8vw, 116px);
+  font-size: clamp(44px, 9.5vh, 88px);
   line-height: 1;
   letter-spacing: -0.02em;
 }
 
-.field { margin-bottom: 14px; }
+.field { margin-bottom: clamp(8px, 1.6vh, 14px); }
 
 .field label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   font-family: "ZT Formom", Georgia, serif;
-  font-size: clamp(22px, 2vw, 28px);
+  font-size: clamp(18px, 3vh, 24px);
   line-height: 1;
 }
 
 .field input {
   width: 100%;
-  height: 54px;
-  padding: 0 22px;
+  height: clamp(40px, 6.4vh, 50px);
+  padding: 0 18px;
   font: inherit;
-  font-size: 17px;
+  font-size: clamp(14px, 2vh, 16px);
   color: var(--darkchoco);
   background: var(--field-bg);
   border: 2px solid var(--field-border);
@@ -197,10 +307,10 @@ body {
 
 .btn-primary {
   width: 100%;
-  height: 68px;
-  margin-top: 14px;
+  height: clamp(46px, 7.4vh, 60px);
+  margin-top: clamp(10px, 1.8vh, 16px);
   font-family: "ZT Formom", Georgia, serif;
-  font-size: clamp(24px, 2.2vw, 32px);
+  font-size: clamp(20px, 3.4vh, 28px);
   color: var(--white);
   cursor: pointer;
   background: linear-gradient(90deg, var(--mocca), var(--darkchoco));
@@ -215,9 +325,9 @@ body {
 }
 
 .login-text {
-  margin: 24px 0 18px;
+  margin: clamp(12px, 2.4vh, 20px) 0 clamp(10px, 2vh, 16px);
   text-align: center;
-  font-size: 17px;
+  font-size: 15px;
   color: var(--muted);
 }
 
@@ -230,11 +340,11 @@ body {
 .divider {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   width: 82%;
-  margin: 0 auto 26px;
+  margin: 0 auto clamp(12px, 2.4vh, 20px);
   color: var(--muted);
-  font-size: 17px;
+  font-size: 15px;
 }
 
 .divider::before,
@@ -249,11 +359,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
+  gap: 14px;
   width: 100%;
-  height: 76px;
+  height: clamp(46px, 8vh, 64px);
   font: inherit;
-  font-size: 19px;
+  font-size: clamp(15px, 2.2vh, 17px);
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--darkchoco);
@@ -268,13 +378,12 @@ body {
   outline-offset: 3px;
 }
 
-.btn-google img { display: block; }
-
-@media (max-width: 800px) {
-  .page {
-    grid-template-columns: 1fr;
-    grid-template-rows: 240px minmax(0, 1fr);
-  }
+.btn-google img {
+  display: block;
+  width: clamp(22px, 3.6vh, 30px);
+  height: auto;
 }
+
+
 
 /* end sign up page */
