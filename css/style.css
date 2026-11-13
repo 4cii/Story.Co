@@ -100,7 +100,6 @@ body {
   background: linear-gradient(90deg, var(--mocca), var(--darkchoco));
   border: 3px solid var(--mocca);
   border-radius: 8px;
-  transition: transform 0.15s ease, filter 0.15s ease;
 }
 
  
@@ -109,118 +108,7 @@ body {
 /* end home page */
 
 
-/* sign up page */
 
-:root {
-  --brown: #512524;
-  --mocca: #7E4146; 
-  --gold: #E2B95F;
-  --matcha: #8DB56A;
-  --darkchoco: #2F0E0D;
-  --orange: #E38025;
-  --blue: #46B7F2;
-  --white: #fff;
-}
-
-@font-face {
-    font-family: 'ZT Formom';
-    src: url('../assets/ZT Formom.ttf') format('truetype');
-}
-
-/* home page */
-
-body {
-  min-height: 100vh;
-  background: #f9f0e1; 
-  color: var(--darkchoco);
-  font-family: "ZT Formom", Georgia, "Times New Roman", serif;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-
-.awning {
-  display: block;
-  width: 100%;
-  height: auto;
-  
-}
-
-.hero {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: clamp(40px, 7vw, 90px) 24px 80px;
-  text-align: center;
-}
-
-.hero__title {
-  margin: 0;
-  font-weight: 400;
-  font-size: clamp(56px, 10.2vw, 150px);   /* semua dekorasi pakai satuan em, jadi ikut skala */
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-}
-
-.line { display: block; }
-
-.word {
-  position: relative;
-  display: inline-block;
-}
-
-
-.deco {
-  position: absolute;
-  pointer-events: none;
-  max-width: none;
-}
-
-
-.deco--yellow {
-  width: 108%;
-  left: -4%;
-  top: -48%;
-  z-index: -1;
-}
-
-
-.deco--green {
-  width: 90%;
-  right: 0;
-  bottom: -30%;
-}
-
-.smiley {
-  display: inline-block;
-  width: 0.5em;
-  height: 0.5em;
-  margin: 0 0.01em;
-  vertical-align: -0.02em;
-}
-
-
-.btn {
-  margin-top: 5rem;
-  display: inline-block;
-  padding: 0.45em 1.5em;
-  font-family: inherit;
-  font-size: clamp(22px, 2.8vw, 34px);
-  color: var(--white);
-  text-decoration: none;
-  background: linear-gradient(90deg, var(--mocca), var(--darkchoco));
-  border: 3px solid var(--mocca);
-  border-radius: 8px;
-  transition: transform 0.15s ease, filter 0.15s ease;
-}
-
- 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-/* end home page */
 
 
 /* sign up page */
@@ -312,9 +200,9 @@ body {
   font-family: "ZT Formom", Georgia, serif;
   font-size: clamp(20px, 3.4vh, 28px);
   color: var(--white);
-  cursor: pointer;
+  text-decoration: none;
   background: linear-gradient(90deg, var(--mocca), var(--darkchoco));
-  border: 3px solid var(--darkchoco);
+  border: 3px solid var(--mocca);
   border-radius: 8px;
   box-shadow: 0 0 0 2px var(--mocca);
 }
@@ -383,7 +271,4 @@ body {
   width: clamp(22px, 3.6vh, 30px);
   height: auto;
 }
-
-
-
 /* end sign up page */
