@@ -10,6 +10,7 @@ const struk = {
         hour12: false
     }),
     mood: "Happy",
-    code: "Latte"
+    code: "Latte",
+    status: "pending"
 }
 console.log(struk)
