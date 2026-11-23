@@ -314,22 +314,29 @@ if (storyForm && menuForm) {
       daftarCerita = [...dataAwalCerita];
     }
 
-    // Gabungkan cerita/gambar + pilihan menu
-    const dataLengkap = {
-      id: "SC-" + Math.floor(1000 + Math.random() * 9000),
-      tanggal: new Date().toISOString(),
-      status: "waiting",
-      menu: selectedMenu,
-      ...draftPayload
+    const sekarang = new Date();
+    const formatMood = draftPayload.mood
+      ? draftPayload.mood.charAt(0).toUpperCase() + draftPayload.mood.slice(1)
+      : null;
+
+    // Objek struk sesuai struktur yang diminta
+    const struk = {
+      story: draftPayload.type === "text" ? draftPayload.text : draftPayload.image,
+      date: sekarang.toLocaleDateString("en-CA"),
+      day: sekarang.toLocaleDateString("en-US", { weekday: "long" }),
+      time: sekarang.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      }),
+      mood: formatMood,
+      code: selectedMenu,
+      status: "pending",
     };
 
-    daftarCerita.unshift(dataLengkap);
+    daftarCerita.unshift(struk);
     localStorage.setItem(KUNCI_STORAGE, JSON.stringify(daftarCerita));
 
-    console.log("Tersimpan ke localStorage:", dataLengkap);
-
-    // Opsional: simpan ID terakhir kalau mau ditampilkan di popup/halaman berikutnya
-    sessionStorage.setItem("LAST_ORDER_ID", dataLengkap.id);
-    alert(`Order saved! Your code: ${dataLengkap.id}`);
+    console.log("Struk tersimpan:", struk);
   });
 }
