@@ -346,6 +346,7 @@ body {
 }
 
 .writing-table {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -363,28 +364,71 @@ body {
 
 .writing-form {
   position: absolute;
+  left: 0;
+  right: 0;                      /* lebar penuh, jadi tengahnya ikut tengah meja */
+  bottom: 4rem;
   display: flex;
   justify-content: center;
-  bottom: 4rem;
 }
 
-#menu-book {
-  width: 30%;
+.book-btn {
+  flex: none;
+  width: clamp(180px, 24vw, 420px);
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
   translate: 0 30px;
-
-  transition:
-    transform 1s ease,
-    opacity 1s ease;
+  transition: transform 1s ease, opacity 1s ease, visibility 0s;
 }
 
-#menu-book:hover {
-  transform: rotate(5deg);
-}
+.book-btn img { display: block; width: 100%; height: auto; }
+.book-btn:hover { transform: rotate(5deg); }
+.book-btn:focus-visible { outline: 3px solid var(--mocca); outline-offset: 6px; border-radius: 0.5rem; }
 
-#menu-book.fade-out {
+.book-btn.fade-out {
   opacity: 0;
   transform: scale(0.7) rotate(-10deg);
+  visibility: hidden;
   pointer-events: none;
+  transition: transform 1s ease, opacity 1s ease, visibility 0s 1s;
+}
+
+/* kartu: tersembunyi sampai buku diklik */
+.writing-base {
+  visibility: hidden;
+  opacity: 0;
+  scale: 0.9;
+  pointer-events: none;
+  transition: opacity 0.6s ease 0.3s, scale 0.6s ease 0.3s, visibility 0s 1s;
+}
+
+.writing-form.is-open .writing-base {
+  visibility: visible;
+  opacity: 1;
+  scale: 1;
+  pointer-events: auto;
+  transition: opacity 0.6s ease 0.3s, scale 0.6s ease 0.3s, visibility 0s;
+}
+
+/* pensil & brush muncul setelah buku terbuka */
+.pencil-sect,
+.brush-sect { transition: opacity 0.5s ease 0.5s; }
+
+.writing-form:not(.is-open) .pencil-sect,
+.writing-form:not(.is-open) .brush-sect {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book-btn,
+  .book-btn.fade-out,
+  .writing-base,
+  .writing-form.is-open .writing-base,
+  .pencil-sect,
+  .brush-sect { transition: none; }
 }
 
 .writing-base {
@@ -401,6 +445,8 @@ body {
   background-color: var(--brown);
   border: 5px solid var(--darkchoco);
   border-radius: 2rem;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .writing-input {
@@ -549,19 +595,6 @@ body {
 [hidden] {
   display: none !important;
 }
-
-/* pencil & brush */
-.pencil-sect img,
-.brush-sect img {
-  position: absolute;
-  width: auto;
-  height: 90%;
-  cursor: pointer;
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.pencil-sect img { top: 50%; left: 6vw; }
-.brush-sect img  { top: 50%; right: 6vw; }
 
 .mode-btn {
   padding: 0;

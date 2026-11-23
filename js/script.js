@@ -30,12 +30,20 @@ document.querySelectorAll(".btn").forEach((btn) => {
   btn.addEventListener("focus", pickScribble);
 });
 
-// Writing story Act
-const menuBook = document.getElementById("menu-book");
 
-menuBook.addEventListener("click", function() {
-  menuBook.classList.add("fade-out");
-});
+// Writing strory Act: buku menu membuka kartu
+const bookBtn = document.getElementById("book-btn");
+const writingForm = document.querySelector(".writing-form");
+
+if (bookBtn && writingForm) {
+  bookBtn.addEventListener("click", () => {
+    bookBtn.classList.add("fade-out");        // buku memudar
+    writingForm.classList.add("is-open");     // kartu, pensil, dan brush muncul
+    setTimeout(() => {
+      document.getElementById("write-story")?.focus({ preventScroll: true });
+    }, 700);
+  });
+}
 
 const storyForm = document.getElementById("story-form");
 
@@ -250,56 +258,5 @@ storyForm.addEventListener("submit", (e) => {
 });
 }
 
-// DATA JS
-let daftarCerita = [];
 
-function esc(teks) {
-  const d = document.createElement("div");
-  d.textContent = teks;
-  return d.innerHTML;
-}
-
-// eksekusi 1 data
-document.addEventListener("DOMContentLoaded", () => {
-  
-  document
-  .getElementById("")
-  .addEventListener("click",);
-
-  document
-  .getElementById("")
-  .addEventListener("submit", handleFormSubmit);
-});
-
-// mengambil data dari data.js
-function muatData() {
-  const tersimpan = localStorage.getItem(KUNCI_STORAGE);
-
-  if (tersimpan) {
-    try {
-      daftarCerita = JSON.parse(tersimpan);
-    } catch {
-      daftarCerita = [];
-    }
-  } else {
-    daftarCerita =
-    typeof dataAwalCerita !== "undefined" ? [...dataAwalCerita] : [];
-    simpanData();
-  }
-  // ---
-}
-
-// menampilkan ke halaman web
-function tampilkanCeritaPilihan() {
-  const strukCerita = document.getElementById("");
-
-  // makesure struk kosong
-  strukCerita.innerHTML = "";
-
-  // menampilkan baris
-  daftarCerita.forEach((cerita) => {
-    strukCerita.appendChild(buatListStruk(cerita));
-  });
-  // ---
-}
 
