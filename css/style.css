@@ -14,7 +14,6 @@
 
   --delay: 0.8s;
 
-  /* warna tambahan untuk dashboard admin */
   --ink: #2f0e0d;
   --mocca-dark: #5f2f33;
   --gold-dark: #c99a36;
@@ -238,6 +237,8 @@ body {
 }
 
 /* end home page */
+
+
 /* sign up page */
 
 .page {
@@ -329,9 +330,11 @@ body {
 }
 
 /* end sign up page */
+
+
 /* write story page */
 .write-sect {
-  position: relative;            /* kunci tinggi ke ukuran layar */
+  position: relative;          
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -385,7 +388,7 @@ body {
 .writing-form {
   position: absolute;
   left: 0;
-  right: 0;                      /* lebar penuh, jadi tengahnya ikut tengah meja */
+  right: 0;        
   bottom: 18vh;
   display: flex;
   justify-content: center;
@@ -413,7 +416,7 @@ body {
   transition: transform 1s ease, opacity 1s ease, visibility 0s 1s;
 }
 
-/* kartu: tersembunyi sampai buku diklik */
+
 .writing-base {
   visibility: hidden;
   opacity: 0;
@@ -468,11 +471,11 @@ body {
 
 .writing-input {
   position: absolute;
-  inset: 0.9rem;                       /* mengikuti ukuran bingkai, tanpa vw/vh */
+  inset: 0.9rem;            
   display: flex;
   flex-direction: column;
   padding: clamp(1rem, 2.2vw, 1.75rem);
-  padding-bottom: clamp(1.75rem, 3vw, 2.5rem);   /* ruang untuk tombol Send */
+  padding-bottom: clamp(1.75rem, 3vw, 2.5rem);   
   background-color: var(--cream);
   border-radius: 1rem;
 }
@@ -553,7 +556,7 @@ body {
   cursor: pointer;
 }
 
-.mood input {                          /* radio disembunyikan, tapi tetap bisa difokus */
+.mood input {                      
   position: absolute;
   inset: 0;
   width: 100%;
@@ -581,7 +584,7 @@ body {
 }
 
 #mood-picker:has(input:checked) .mood input:not(:checked) + img {
-  opacity: 0.55;                       /* yang tidak dipilih memudar */
+  opacity: 0.55;                 
 }
 
 .mood input:focus-visible + img {
@@ -676,7 +679,6 @@ body {
   border-radius: 0.75rem;
 }
 
-/* bar di bawah canvas: undo | warna | redo */
 .draw-bar {
   display: flex;
   flex: none;
@@ -696,7 +698,7 @@ body {
 
 .swatch {
   position: relative;
-  width: clamp(2.5rem, 5vw, 3.75rem);       /* lebih besar dari sebelumnya */
+  width: clamp(2.5rem, 5vw, 3.75rem);       
   height: clamp(2.5rem, 5vw, 3.75rem);
   padding: 0;
   border: 0;
@@ -875,7 +877,7 @@ body {
 /* end write story page */
 
 
-/* ---------- dashboard admin ---------- */
+
 
 .admin {
   --font-display: 'ZT Formom', 'Times New Roman', serif;
