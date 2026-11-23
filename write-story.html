@@ -1,16 +1,185 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body class="write-story">
-    <div class="write-section">
-        <img src="assets/table.png" alt="table">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Story.Co</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
+  <body>
+    <div class="write-sect">
+      <h1 class="write-title">Sit with me</h1>
+      <div class="writing-table">
+        <img class="table-img" src="assets/table.png" alt="table" />
+
+        <div class="writing-form">
+          <img id="menu-book" src="assets/menu-book.png" alt="menu-book" />
+
+          <div class="writing-base">
+            <div class="writing-input">
+              <form class="story-form" id="story-form" novalidate>
+                <div class="input-one">
+                  <label class="story-label" id="story-label" for="write-story"
+                    >My story...</label
+                  >
+
+                  <!-- mode tulis -->
+                  <textarea
+                    id="write-story"
+                    name="write-story"
+                    maxlength="2000"
+                    aria-describedby="form-hint"
+                  ></textarea>
+
+                  <!-- mode gambar -->
+                  <div class="draw-area" id="draw-area" hidden>
+                    <div class="canvas-wrap">
+                      <canvas
+                        id="draw-canvas"
+                        aria-label="Drawing area"
+                      ></canvas>
+                    </div>
+
+                    <div class="draw-bar">
+                      <button
+                        type="button"
+                        class="tool-btn"
+                        id="undo"
+                        aria-label="Undo"
+                        disabled
+                      >
+                        ↶
+                      </button>
+
+                      <div
+                        class="draw-tools"
+                        role="group"
+                        aria-label="Brush color"
+                      >
+                        <button
+                          type="button"
+                          class="swatch"
+                          data-color="#c0554f"
+                          aria-label="Red"
+                          aria-pressed="false"
+                        ></button>
+                        <button
+                          type="button"
+                          class="swatch"
+                          data-color="#e38025"
+                          aria-label="Orange"
+                          aria-pressed="false"
+                        ></button>
+                        <button
+                          type="button"
+                          class="swatch"
+                          data-color="#e2b95f"
+                          aria-label="Gold"
+                          aria-pressed="true"
+                        ></button>
+                        <button
+                          type="button"
+                          class="swatch"
+                          data-color="#459063"
+                          aria-label="Green"
+                          aria-pressed="false"
+                        ></button>
+                        <button
+                          type="button"
+                          class="swatch"
+                          data-color="#2f9fb5"
+                          aria-label="Teal"
+                          aria-pressed="false"
+                        ></button>
+                      </div>
+
+                      <button
+                        type="button"
+                        class="tool-btn"
+                        id="redo"
+                        aria-label="Redo"
+                        disabled
+                      >
+                        ↷
+                      </button>
+                    </div>
+                  </div>
+
+                  <p
+                    class="form-hint"
+                    id="form-hint"
+                    role="status"
+                    aria-live="polite"
+                  ></p>
+                </div>
+
+                <div
+                  class="input-two"
+                  role="radiogroup"
+                  aria-labelledby="mood-label"
+                >
+                  <span class="mood-label" id="mood-label">My mood</span>
+                  <div id="mood-picker">
+                    <label class="mood">
+                      <input type="radio" name="mood" value="angry" />
+                      <img src="assets/mood-angry.png" alt="Angry" />
+                    </label>
+                    <label class="mood">
+                      <input type="radio" name="mood" value="stressed" />
+                      <img src="assets/mood-stressed.png" alt="Stressed" />
+                    </label>
+                    <label class="mood">
+                      <input type="radio" name="mood" value="happy" />
+                      <img src="assets/mood-happy.png" alt="Happy" />
+                    </label>
+                    <label class="mood">
+                      <input type="radio" name="mood" value="calm" />
+                      <img src="assets/mood-calm.png" alt="Calm" />
+                    </label>
+                    <label class="mood">
+                      <input type="radio" name="mood" value="sad" />
+                      <img src="assets/mood-sad.png" alt="Sad" />
+                    </label>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <button class="btn send-btn" type="submit" form="story-form">
+              Send →
+            </button>
+          </div>
+
+          <!-- pensil = mode tulis -->
+          <div class="pencil-sect">
+            <button
+              type="button"
+              class="mode-btn"
+              data-mode="write"
+              aria-pressed="true"
+            >
+              <img src="assets/pencil.png" alt="" />
+              <span class="sr-only">Write</span>
+            </button>
+          </div>
+
+          <!-- brush = mode gambar -->
+          <div class="brush-sect">
+            <button
+              type="button"
+              class="mode-btn"
+              data-mode="draw"
+              aria-pressed="false"
+            >
+              <img src="assets/brush.png" alt="" />
+              <span class="sr-only">Draw</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    
-</body>
+    <script src="js/script.js"></script>
+  </body>
 </html>
