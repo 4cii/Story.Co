@@ -9,17 +9,24 @@
 
   <body>
     <div class="write-sect">
+      <button><img src="assets/back-btn.png" alt="back button" /></button>
       <h1 class="write-title">Sit with me</h1>
       <div class="writing-table">
         <img class="table-img" src="assets/table.png" alt="table" />
 
         <div class="writing-form">
-          <button type="button" class="book-btn" id="book-btn" aria-label="Open the menu to start writing">
-            <img src="assets/menu-book.png" alt="menu book">
+          <button
+            type="button"
+            class="book-btn"
+            id="book-btn"
+            aria-label="Open the menu to start writing"
+          >
+            <img src="assets/menu-book.png" alt="menu book" />
           </button>
 
           <div class="writing-base">
-            <div class="writing-input">
+            <!-- write & draw -->
+            <div class="writing-input" id="write-step">
               <form class="story-form" id="story-form" novalidate>
                 <div class="input-one">
                   <label class="story-label" id="story-label" for="write-story"
@@ -148,8 +155,68 @@
               </form>
             </div>
 
-            <button class="btn send-btn" type="submit" form="story-form">
+            <button
+              class="btn send-btn"
+              id="send-btn"
+              type="submit"
+              form="story-form"
+            >
               Send →
+            </button>
+
+            <!-- choose menu -->
+            <div class="writing-input menu-input" id="menu-step" hidden>
+              <form class="menu-form" id="menu-form" novalidate>
+                <h2 class="menu-title">Choose the menu</h2>
+
+                <div
+                  class="menu-grid"
+                  role="radiogroup"
+                  aria-label="Choose a drink"
+                >
+                  <label class="menu-item">
+                    <input type="radio" name="menu" value="iced-latte" />
+                    <img src="assets/drink-1.png" alt="Iced Latte" />
+                  </label>
+                  <label class="menu-item">
+                    <input type="radio" name="menu" value="hot-latte" />
+                    <img src="assets/drink-5.png" alt="Hot Latte" />
+                  </label>
+                  <label class="menu-item">
+                    <input type="radio" name="menu" value="hot-tea" />
+                    <img src="assets/drink-2.png" alt="Hot Tea" />
+                  </label>
+                  <label class="menu-item">
+                    <input type="radio" name="menu" value="hot-choco" />
+                    <img src="assets/drink-coffee.png" alt="Hot Chocolate" />
+                  </label>
+                  <label class="menu-item">
+                    <input type="radio" name="menu" value="hot-matcha" />
+                    <img src="assets/drink-latte.png" alt="Hot Matcha" />
+                  </label>
+                  <label class="menu-item">
+                    <input type="radio" name="menu" value="iced-matcha" />
+                    <img src="assets/drink-tea.png" alt="Iced Matcha" />
+                  </label>
+                </div>
+
+                <p
+                  class="form-hint"
+                  id="menu-hint"
+                  role="status"
+                  aria-live="polite"
+                ></p>
+              </form>
+            </div>
+
+            <button
+              class="btn send-btn"
+              id="order-btn"
+              type="submit"
+              form="menu-form"
+              hidden
+            >
+              Order →
             </button>
           </div>
 

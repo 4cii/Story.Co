@@ -1,4 +1,8 @@
-// BTN SCRIBBLE
+const KUNCI_STORAGE = "STORY_CO_DATA";
+
+// ==========================================
+// 1. BTN SCRIBBLE
+// ==========================================
 const scribbles = [
   "../assets/oret-ijo2.png",
   "../assets/oret-kuning2.png",
@@ -31,23 +35,30 @@ document.querySelectorAll(".btn").forEach((btn) => {
 });
 
 
-// Writing strory Act: buku menu membuka kartu
+// ==========================================
+// 2. BUKU MENU MEMBUKA KARTU
+// ==========================================
 const bookBtn = document.getElementById("book-btn");
 const writingForm = document.querySelector(".writing-form");
 
 if (bookBtn && writingForm) {
   bookBtn.addEventListener("click", () => {
-    bookBtn.classList.add("fade-out");        // buku memudar
-    writingForm.classList.add("is-open");     // kartu, pensil, dan brush muncul
+    bookBtn.classList.add("fade-out");
+    writingForm.classList.add("is-open");
     setTimeout(() => {
       document.getElementById("write-story")?.focus({ preventScroll: true });
     }, 700);
   });
 }
 
-const storyForm = document.getElementById("story-form");
 
-if (storyForm) {
+// ==========================================
+// 3. STEP 1 (TULIS/GAMBAR) -> STEP 2 (CHOOSE MENU) -> SAVE LOCALSTORAGE
+// ==========================================
+const storyForm = document.getElementById("story-form");
+const menuForm = document.getElementById("menu-form");
+
+if (storyForm && menuForm) {
   const story = document.getElementById("write-story");
   const hint = document.getElementById("form-hint");
   const label = document.getElementById("story-label");
@@ -59,14 +70,24 @@ if (storyForm) {
   const redoBtn = document.getElementById("redo");
   const swatches = document.querySelectorAll(".swatch");
 
+  // Elemen perpindahan step
+  const writeStep = document.getElementById("write-step");
+  const sendBtn = document.getElementById("send-btn");
+  const menuStep = document.getElementById("menu-step");
+  const orderBtn = document.getElementById("order-btn");
+  const menuHint = document.getElementById("menu-hint");
+
+  // Variabel penampung sementara sebelum pilih minuman
+  let draftPayload = null;
+
   let mode = "write";
   let color = document.querySelector('.swatch[aria-pressed="true"]').dataset.color;
   const brushSize = 5;
-  const strokes = [];        // tiap garis: { color, size, points: [{x, y}] }, koordinat 0..1
+  const strokes = [];
   let redoStack = [];
   let current = null;
 
-  /* ---------- pesan ---------- */
+  /* ---------- pesan error ---------- */
   const showError = (msg) => {
     hint.textContent = msg;
     hint.classList.add("is-error");
@@ -104,7 +125,7 @@ if (storyForm) {
     b.addEventListener("click", () => setMode(b.dataset.mode)),
   );
 
-// COLOR PICKER
+  /* ---------- color picker ---------- */
   swatches.forEach((s) => {
     s.style.background = s.dataset.color;
     s.addEventListener("click", () => {
@@ -113,7 +134,7 @@ if (storyForm) {
     });
   });
 
-// CANVAS
+  /* ---------- canvas ---------- */
   function setStyle(s) {
     ctx.strokeStyle = s.color;
     ctx.fillStyle = s.color;
@@ -125,7 +146,7 @@ if (storyForm) {
   function drawStroke(s, w, h) {
     setStyle(s);
     const [first, ...rest] = s.points;
-    if (!rest.length) {                       // satu titik = bulatan kecil
+    if (!rest.length) {
       ctx.beginPath();
       ctx.arc(first.x * w, first.y * h, s.size / 2, 0, Math.PI * 2);
       ctx.fill();
@@ -146,15 +167,14 @@ if (storyForm) {
 
   function resizeCanvas() {
     const r = canvas.getBoundingClientRect();
-    if (!r.width || !r.height) return;        // masih tersembunyi
+    if (!r.width || !r.height) return;
     const dpr = window.devicePixelRatio || 1;
     canvas.width = Math.round(r.width * dpr);
     canvas.height = Math.round(r.height * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    redraw();                                  // gambar utuh karena disimpan sebagai garis, bukan piksel
+    redraw();
   }
 
-  // jalan saat canvas muncul atau ukuran layar berubah
   new ResizeObserver(resizeCanvas).observe(canvas);
 
   const toPoint = (e) => {
@@ -221,42 +241,95 @@ if (storyForm) {
     return out.toDataURL("image/png");
   }
 
-// Kirim
-storyForm.addEventListener("submit", (e) => {
-  e.preventDefault();
+  /* ---------- SUBMIT STEP 1: VALIDASI & PINDAH KE CHOOSE MENU ---------- */
+  storyForm.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-  let payload;
+    if (mode === "write") {
+      const text = story.value.trim();
+      const moodValue = storyForm.elements.mood.value;
 
-  if (mode === "write") {
-    const text = story.value.trim();
-    const moodValue = storyForm.elements.mood.value;   // "" kalau belum memilih
+      if (!text) {
+        story.setAttribute("aria-invalid", "true");
+        showError("Write a few words first.");
+        story.focus();
+        return;
+      }
 
-    if (!text) {
-      story.setAttribute("aria-invalid", "true");
-      showError("Write a few words first.");
-      story.focus();
+      if (!moodValue) {
+        showError("Pick a mood first.");
+        return;
+      }
+
+      draftPayload = { type: "text", text, mood: moodValue };
+    } else {
+      if (!strokes.length) {
+        showError("Draw something first.");
+        return;
+      }
+
+      draftPayload = { type: "drawing", image: exportPNG(), mood: null };
+    }
+
+    // Ganti tampilan ke Step 2 (Choose the menu)
+    writeStep.hidden = true;
+    sendBtn.hidden = true;
+    menuStep.hidden = false;
+    orderBtn.hidden = false;
+    writingForm.classList.add("is-choosing-menu");
+  });
+
+  /* ---------- SUBMIT STEP 2: PILIH MENU & SAVE KE LOCALSTORAGE ---------- */
+  menuForm.addEventListener("input", () => {
+    if (menuHint) {
+      menuHint.textContent = "";
+      menuHint.classList.remove("is-error");
+    }
+  });
+
+  menuForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const selectedMenu = menuForm.elements.menu.value;
+    if (!selectedMenu) {
+      if (menuHint) {
+        menuHint.textContent = "Choose a drink first.";
+        menuHint.classList.add("is-error");
+      }
       return;
     }
 
-    if (!moodValue) {
-      showError("Pick a mood first.");
-      return;
+    if (!draftPayload) return;
+
+    // Ambil data lama dari localStorage
+    let daftarCerita = [];
+    const tersimpan = localStorage.getItem(KUNCI_STORAGE);
+    if (tersimpan) {
+      try {
+        daftarCerita = JSON.parse(tersimpan);
+      } catch {
+        daftarCerita = [];
+      }
+    } else if (typeof dataAwalCerita !== "undefined") {
+      daftarCerita = [...dataAwalCerita];
     }
 
-    payload = { type: "text", text, mood: moodValue };
-  } else {
-    if (!strokes.length) {
-      showError("Draw something first.");
-      return;
-    }
+    // Gabungkan cerita/gambar + pilihan menu
+    const dataLengkap = {
+      id: "SC-" + Math.floor(1000 + Math.random() * 9000),
+      tanggal: new Date().toISOString(),
+      status: "waiting",
+      menu: selectedMenu,
+      ...draftPayload
+    };
 
-    payload = { type: "drawing", image: exportPNG(), mood: null };
-  }
+    daftarCerita.unshift(dataLengkap);
+    localStorage.setItem(KUNCI_STORAGE, JSON.stringify(daftarCerita));
 
-  // TODO: kirim payload ke database, lalu tampilkan kode kedai
-  console.log(payload);
-});
+    console.log("Tersimpan ke localStorage:", dataLengkap);
+
+    // Opsional: simpan ID terakhir kalau mau ditampilkan di popup/halaman berikutnya
+    sessionStorage.setItem("LAST_ORDER_ID", dataLengkap.id);
+    alert(`Order saved! Your code: ${dataLengkap.id}`);
+  });
 }
-
-
-

@@ -313,18 +313,20 @@ body {
 /* end sign up page */
 /* write story page */
 .write-sect {
-  overflow-x: hidden;
-  overflow-y: hidden;
+  position: relative;            /* kunci tinggi ke ukuran layar */
+  overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
+  padding-top: clamp(1rem, 2.5vh, 2rem);
 }
 
 .write-title {
-  margin: 5rem 0 2rem 0;
+  margin: 0 0 clamp(0.75rem, 2vh, 1.5rem) 0;
   opacity: 0;
   animation: fadein 1s ease var(--delay) forwards;
+  z-index: 2;
 }
 
 @keyframes fadein {
@@ -366,19 +368,18 @@ body {
   position: absolute;
   left: 0;
   right: 0;                      /* lebar penuh, jadi tengahnya ikut tengah meja */
-  bottom: 4rem;
+  bottom: 18vh;
   display: flex;
   justify-content: center;
 }
 
 .book-btn {
   flex: none;
-  width: clamp(180px, 24vw, 420px);
+  width: clamp(180px, 25vw, 420px);
   padding: 0;
   background: none;
   border: 0;
   cursor: pointer;
-  translate: 0 30px;
   transition: transform 1s ease, opacity 1s ease, visibility 0s;
 }
 
@@ -437,10 +438,8 @@ body {
   align-items: center;
   position: absolute;
   z-index: 1;
-  translate: 0 30px;
-
   width: 60vw;
-  height: 85vh;
+  height: 78vh;
 
   background-color: var(--brown);
   border: 5px solid var(--darkchoco);
@@ -596,6 +595,20 @@ body {
   display: none !important;
 }
 
+/* pencil & brush */
+.pencil-sect img,
+.brush-sect img {
+  position: absolute;
+  max-height: 70vh;
+  max-width: 18vw;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.pencil-sect img { top: 50%; left: 6vw; }
+.brush-sect img  { top: 50%; right: 6vw; }
+
 .mode-btn {
   padding: 0;
   background: none;
@@ -712,3 +725,76 @@ body {
 
 .tool-btn:disabled { opacity: 0.45; cursor: default; }
 .tool-btn:focus-visible { outline: 3px solid var(--mocca); outline-offset: 2px; }
+
+/* menu */
+/* Sembunyikan pensil & brush saat masuk tahap pilih menu */
+.writing-form.is-choosing-menu .pencil-sect,
+.writing-form.is-choosing-menu .brush-sect {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Layout Choose the menu */
+.menu-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  min-height: 0;
+  text-align: center;
+}
+
+.menu-title {
+  margin: 0;
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--darkchoco);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.75rem, 2vw, 1.5rem) clamp(1rem, 3vw, 2.5rem);
+  place-items: center;
+}
+
+.menu-item {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.menu-item input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.menu-item img {
+  display: block;
+  width: clamp(75px, 10vw, 135px);
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: 50%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.menu-item:hover img {
+  transform: scale(1.08);
+}
+
+.menu-item input:checked + img {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 3px var(--cream), 0 0 0 6px var(--gold);
+}
+
+.menu-grid:has(input:checked) .menu-item input:not(:checked) + img {
+  opacity: 0.55;
+}
