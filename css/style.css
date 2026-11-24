@@ -935,6 +935,10 @@ body {
   width: 50%;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b6e88f91b38ee6d10ddd717630614720567dd93
 .menu-grid:has(input:checked) .menu-item input:not(:checked) + img {
   opacity: 0.55;
 }
@@ -1396,6 +1400,7 @@ body {
   filter: brightness(0.94);
 }
 
+<<<<<<< HEAD
 .back-btn {
   position: absolute;
   top: clamp(1rem, 3vw, 2.5rem);
@@ -1418,3 +1423,5 @@ body {
   height: clamp(2.75rem, 5vw, 5rem);
   object-fit: contain;
 }
+=======
+>>>>>>> 4b6e88f91b38ee6d10ddd717630614720567dd93
