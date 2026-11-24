@@ -737,7 +737,7 @@ body {
 }
 
 .story-board h1 {
-  font-size: 5rem;
+  font-size: 6rem;
   color: #35271E;
   font-weight: 500;
   text-align: center;
@@ -765,22 +765,22 @@ body {
 }
 
 .struk-1 {
-  top: 85%;
+  top: 125%;
   left: 18%;
   transform: rotate(8deg);
 }
 .struk-2 {
-  top: 110%;
+  top: 150%;
   left: 30%;
   transform: rotate(-6deg);
 }
 .struk-3 {
-  top: 70%;
+  top: 120%;
   right: 18%;
   transform: rotate(-8deg);
 }
 .struk-4 {
-  top: 95%;
+  top: 145%;
   right: 25%;
   transform: rotate(12deg);
 }
@@ -870,16 +870,16 @@ body {
   width: 45%;
 }
 .struk-1 {
-  top: 65%;
+  top: 100%;
 }
 .struk-2 {
-  top: 90%;
+  top: 125%;
 }
 .struk-3 {
-  top: 50%;
+  top: 90%;
 }
 .struk-4 {
-  top: 75%;
+  top: 115%;
 }
 }
 
@@ -924,22 +924,69 @@ body {
   font-size: 0.4rem;
 }
 .struk-1 {
-  top: 65%;
-  transform: rotate(-8deg);
+  top:70%;
+  transform: rotate(8deg);
 }
 .struk-2 {
-  top: 118%;
-  left: 20%;
-  transform: rotate(12deg);
+  top: 65%;
+  left:40%;
+  transform: rotate(-12deg);
 }
 .struk-3 {
-  top: 53%;
-  transform: rotate(8deg);
+  top: 68%;
+  transform: rotate(7deg);
 
 }
 .struk-4 {
-  top: 105%;
-  right: 24%;
-  transform: rotate(-12deg);
+  display: none;
 }
+}
+
+@media (max-width: 360px) {
+  .story-board h1 {
+    font-size: 2rem;
+  }
+  .struk {
+    padding: 2rem 0.7rem;
+  }
+  .top h4 {
+    font-size: 0.5rem;
+    margin-bottom: 0.3rem;
+  }
+  .top span {
+    font-size: 0.3rem;
+    line-height: 1.1;
+  }
+  .struk tr {
+    font-size: 0.2rem;
+  }
+  .line {
+    margin-bottom: 0.1rem;
+    margin-top: 0.1rem;
+    transform: scaleY(0.5);
+  }
+  .struk button {
+    font-size: 0.3rem;
+  }
+  .likeCount {
+    font-size: 0.2rem;
+  }
+  .barcode {
+    margin-top: 0.3rem;
+  }
+  .barcode img {
+    width: 39%;
+  }
+  .barcode p {
+    font-size: 0.2rem;
+  }
+  .struk-1 {
+    top: 65%;
+  }
+  .struk-2 {
+    top: 63%;
+  }
+  .struk-3 {
+    top: 65%;
+  }
 }
