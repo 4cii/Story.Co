@@ -12,16 +12,11 @@
   --muted-bg: #f1e7d8;
   --bg-color: #f9f0e1;
 
-  --delay: 0.8s;
+  --muted: #a39484;
+  --field-bg: #efe5d9;
+  --field-border: #e2d5c4;
 
-  --ink: #2f0e0d;
-  --mocca-dark: #5f2f33;
-  --gold-dark: #c99a36;
-  --matcha-dark: #6d9448;
-  --panel: #e8dfc8;
-  --red: #a8554a;
-  --pink: #e8b4ae;
-  --pink-text: #7a2e28;
+  --delay: 0.8s;
 }
 
 * {
@@ -35,13 +30,7 @@
   src: url("../assets/ZT Formom.ttf") format("truetype");
 }
 
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("../assets/SFPRODISPLAYREGULAR.OTF") format("opentype");
-}
-
 body {
-  min-height: 100vh;
   background: #f9f0e1;
   color: var(--darkchoco);
   font-family: "ZT Formom", Georgia, "Times New Roman", serif;
@@ -55,7 +44,6 @@ body {
   overflow: hidden;
 }
 
-/* Home page */
 .awning {
   position: relative;
   display: block;
@@ -194,14 +182,11 @@ body {
   right: 5%;
   bottom: -33px;
   height: 34px;
-
   background-image: var(--scribble);
   background-position: center;
   background-size: 100% auto;
   background-repeat: no-repeat;
-
   transform: rotate(var(--tilt, 0deg)) scaleX(var(--flip, 1));
-
   clip-path: inset(0 100% 0 0);
   transition: clip-path 0.45s ease;
   pointer-events: none;
@@ -211,8 +196,6 @@ body {
 .btn:focus-visible::after {
   clip-path: inset(0 0 0 0);
 }
-
-/* sect 1 */
 
 .intro {
   display: flex;
@@ -237,15 +220,9 @@ body {
   }
 }
 
-/* end home page */
-
 /* sign up page */
-
 .page {
   overflow: hidden;
-  --field-bg: #efe5d9;
-  --field-border: #e2d5c4;
-  --muted: #a39484;
   --outline: #a89a88;
   display: grid;
   grid-template-columns: 47.5fr 52.5fr;
@@ -270,7 +247,6 @@ body {
   object-fit: contain;
 }
 
-/* responsive form */
 .panel {
   display: flex;
   overflow: hidden;
@@ -332,8 +308,6 @@ body {
   margin-top: 3rem;
   width: 100%;
 }
-
-/* end sign up page */
 
 /* write story page */
 .write-sect {
@@ -459,7 +433,6 @@ body {
     visibility 0s;
 }
 
-/* pensil & brush muncul setelah buku terbuka */
 .pencil-sect,
 .brush-sect {
   transition: opacity 0.5s ease 0.5s;
@@ -492,7 +465,6 @@ body {
   z-index: 1;
   width: 60vw;
   height: 78vh;
-
   background-color: var(--brown);
   border: 5px solid var(--darkchoco);
   border-radius: 2rem;
@@ -568,7 +540,6 @@ body {
   color: #a63a2c;
 }
 
-/* mood picker */
 .input-two {
   display: flex;
   align-items: center;
@@ -612,23 +583,22 @@ body {
   transform: scale(1.1);
 }
 
-.mood input:checked+img {
+.mood input:checked + img {
   transform: scale(1.15);
   box-shadow:
     0 0 0 3px var(--cream),
     0 0 0 6px var(--gold);
 }
 
-#mood-picker:has(input:checked) .mood input:not(:checked)+img {
+#mood-picker:has(input:checked) .mood input:not(:checked) + img {
   opacity: 0.55;
 }
 
-.mood input:focus-visible+img {
+.mood input:focus-visible + img {
   outline: 3px solid var(--mocca);
   outline-offset: 4px;
 }
 
-/* tombol Send menimpa bingkai bawah */
 .send-btn {
   position: absolute;
   z-index: 2;
@@ -652,7 +622,6 @@ body {
   display: none !important;
 }
 
-/* pencil & brush */
 .pencil-sect img,
 .brush-sect img {
   position: absolute;
@@ -704,7 +673,6 @@ body {
   border-radius: 0.5rem;
 }
 
-/* ---------- mode gambar ---------- */
 .story-form.is-drawing .input-two {
   display: none;
 }
@@ -823,7 +791,7 @@ body {
 }
 
 .story-board h1 {
-  font-size: 5rem;
+  font-size: 6rem;
   color: #35271e;
   font-weight: 500;
   text-align: center;
@@ -853,25 +821,25 @@ body {
 }
 
 .struk-1 {
-  top: 85%;
+  top: 125%;
   left: 18%;
   transform: rotate(8deg);
 }
 
 .struk-2 {
-  top: 110%;
+  top: 150%;
   left: 30%;
   transform: rotate(-6deg);
 }
 
 .struk-3 {
-  top: 70%;
+  top: 120%;
   right: 18%;
   transform: rotate(-8deg);
 }
 
 .struk-4 {
-  top: 95%;
+  top: 145%;
   right: 25%;
   transform: rotate(12deg);
 }
@@ -943,28 +911,178 @@ body {
   width: 50%;
 }
 
-.menu-grid:has(input:checked) .menu-item input:not(:checked)+img {
+.barcode p {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.5rem;
+  font-weight: 600;
+}
+
+.menu-grid:has(input:checked) .menu-item input:not(:checked) + img {
   opacity: 0.55;
 }
 
-/* end write story page */
+/* responsive story board */
+@media (max-width: 1200px) {
 
+  .top h4 {
+    font-size: 1.6rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .top span {
+    font-size: 0.6rem;
+  }
+
+  .barcode img {
+    width: 45%;
+  }
+
+  .struk-1 { top: 100%; }
+  .struk-2 { top: 125%; }
+  .struk-3 { top: 90%; }
+  .struk-4 { top: 115%; }
+}
+
+@media (max-width: 768px) {
+
+  .board {
+    position: relative;
+    width: 100%;
+    object-fit: fill;
+  }
+
+  .story-board h1 {
+    font-size: 4.3rem;
+  }
+
+  .struk {
+    padding: 2rem 1.4rem;
+    width: 25%;
+  }
+
+  .top h4 {
+    margin-bottom: 0.5rem;
+  }
+
+  .top span {
+    display: block;
+    line-height: 1.3;
+  }
+
+  .struk tr {
+    font-size: 0.4rem;
+  }
+
+  .line {
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .struk button {
+    font-size: 0.6rem;
+  }
+
+  .likeCount {
+    font-size: 0.5rem;
+  }
+
+  .barcode img {
+    width: 45%;
+  }
+
+  .barcode p {
+    font-size: 0.4rem;
+  }
+
+  .struk-1 {
+    top: 70%;
+    transform: rotate(8deg);
+  }
+
+  .struk-2 {
+    top: 65%;
+    left: 40%;
+    transform: rotate(-12deg);
+  }
+
+  .struk-3 {
+    top: 68%;
+    transform: rotate(7deg);
+  }
+
+  .struk-4 {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+
+  .story-board h1 {
+    font-size: 2rem;
+  }
+
+  .struk {
+    padding: 2rem 0.7rem;
+  }
+
+  .top h4 {
+    font-size: 0.5rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .top span {
+    font-size: 0.3rem;
+    line-height: 1.1;
+  }
+
+  .struk tr {
+    font-size: 0.2rem;
+  }
+
+  .line {
+    margin-bottom: 0.1rem;
+    margin-top: 0.1rem;
+    transform: scaleY(0.5);
+  }
+
+  .struk button {
+    font-size: 0.3rem;
+  }
+
+  .likeCount {
+    font-size: 0.2rem;
+  }
+
+  .barcode {
+    margin-top: 0.3rem;
+  }
+
+  .barcode img {
+    width: 39%;
+  }
+
+  .barcode p {
+    font-size: 0.2rem;
+  }
+
+  .struk-1 { top: 65%; }
+  .struk-2 { top: 63%; }
+  .struk-3 { top: 65%; }
+}
+
+/* admin */
 .admin {
   --font-display: "ZT Formom", "Times New Roman", serif;
   --font-body:
     "SF Pro Display", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ink: var(--darkchoco);
+  --gold-dark: #c99a3a;
+  --matcha-dark: #6a9150;
+  --panel: #e8dfc8;
 
   display: grid;
   grid-template-columns: 24rem 1fr;
   min-height: 100vh;
-}
-
-:where(.admin) button {
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-  border: 0;
-  background: none;
 }
 
 .sidebar {
@@ -1022,30 +1140,26 @@ body {
 }
 
 .menu a {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
+}
+
+.menu a:hover,
+.menu a.active {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .menu img,
 .logout img {
-  width: 1.9rem;
-  flex-shrink: 0;
-}
-
-.menu .active,
-.logout {
-  background: var(--mocca-dark);
-}
-
-.menu a:hover,
-.logout:hover {
-  background: var(--brown);
+  width: 2rem;
 }
 
 .logout {
-  justify-content: center;
   width: 100%;
   margin-top: auto;
-  font-size: 1.7rem;
+  font-size: 1.8rem;
+  background: none;
+  border: 0;
+  cursor: pointer;
 }
 
 .main {
@@ -1059,19 +1173,15 @@ body {
   font-family: var(--font-display);
   font-weight: 400;
   font-size: 6.4rem;
-  line-height: 0.9;
-  letter-spacing: -0.045em;
-  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.03em;
 }
 
 .subtitle {
-  margin: 0.4rem 0 1.2rem 0.4rem;
+  margin: 0.4rem 0 2rem 0.6rem;
   font-family: var(--font-display);
   font-weight: 400;
   font-size: 2.4rem;
-  line-height: 1;
-  letter-spacing: -0.03em;
-  color: var(--ink);
 }
 
 .stats {
@@ -1332,17 +1442,13 @@ body {
 }
 
 .action-menu {
-  display: none;
-  margin-top: 1.2rem;
-  padding: 1.2rem 1.4rem 1.4rem;
-  background: var(--panel, #e8dfc8);
-  border-radius: 1.6rem 0 1.6rem 1.6rem;
-}
-
-.story.open .action-menu {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding: 1.2rem;
+  background: var(--panel, #e8dfc8);
+  border-radius: 1.6rem 0 1.6rem 1.6rem;
 }
 
 .action-menu h3 {
@@ -1398,362 +1504,11 @@ body {
   filter: brightness(0.94);
 }
 
-/* =====================================================
-   RESPONSIVE
-   Tempel di PALING BAWAH style.css (setelah semua aturan lain)
-   - max-width: 768px = tablet portrait
-   - max-width: 617px = HP besar
-   Urutan penting: 768 dulu, 617 sesudahnya (617 menimpa 768).
-   ===================================================== */
-
-/* awning khusus HP: disembunyikan di laptop, tablet, dll */
+/* responsive */
 .awning-mobile {
   display: none;
 }
 
-/* ================= TABLET LANDSCAPE / LAPTOP KECIL (<= 993px) ================= */
-@media (max-width: 993px) {
-  html {
-    font-size: 15px;
-  }
-
-  /* ---------- home ---------- */
-  .history-btn {
-    right: 2.5rem;
-  }
-
-  .btn-nav {
-    margin-top: 4rem;
-  }
-
-  .coffe-img {
-    width: 45%;
-    height: auto;
-    margin: 1.5rem 0 4rem;
-  }
-
-  /* ---------- sign up ---------- */
-  .page {
-    grid-template-columns: 44fr 56fr;
-  }
-
-  .visual-img {
-    object-position: 40% center;
-  }
-
-  .panel {
-    padding: clamp(16px, 3vh, 40px) 2rem;
-  }
-
-  /* ---------- write story ---------- */
-  .writing-base {
-    width: 68vw;
-    height: 76vh;
-  }
-
-  .pencil-sect img,
-  .brush-sect img {
-    max-width: 13vw;
-  }
-
-  .pencil-sect img {
-    left: 3vw;
-  }
-
-  .brush-sect img {
-    right: 3vw;
-  }
-
-  /* ---------- story board ---------- */
-  .story-board h1 {
-    font-size: 4.2rem;
-  }
-
-  .struk {
-    width: 25%;
-    padding: 1.8rem 1.4rem;
-  }
-
-  /* ---------- admin ---------- */
-  .admin {
-    grid-template-columns: 20rem 1fr;
-  }
-
-  .sidebar {
-    padding: 2rem 1rem;
-  }
-
-  .logo img {
-    width: 100%;
-    max-width: 14rem;
-  }
-
-  .menu a {
-    font-size: 1.4rem;
-    padding: 0.9rem 1.1rem;
-    gap: 1rem;
-  }
-
-  .logout {
-    font-size: 1.5rem;
-  }
-
-  .main {
-    padding: 2rem 2rem 3.5rem;
-  }
-
-  .greeting {
-    font-size: 5.2rem;
-  }
-
-  .subtitle {
-    font-size: 2rem;
-  }
-
-  .stats {
-    gap: 1rem;
-  }
-
-  .card strong {
-    font-size: 5.2rem;
-  }
-
-  .card p {
-    font-size: 1.5rem;
-  }
-
-  .toolbar select {
-    width: 13rem;
-  }
-
-  .action-btn {
-    padding: 0.7rem 2rem;
-    font-size: 1.5rem;
-  }
-}
-
-/* ================= TABLET PORTRAIT (<= 768px) ================= */
-@media (max-width: 768px) {
-
-  /* semua ukuran rem ikut mengecil sedikit */
-  html {
-    font-size: 14px;
-  }
-
-  /* ---------- home ---------- */
-  .history-btn {
-    top: 1rem;
-    right: 1.5rem;
-  }
-
-  .btn-nav {
-    margin-top: 3rem;
-    gap: 1.2rem;
-  }
-
-  .coffe-img {
-    width: 55%;
-    height: auto;
-    margin: 1rem 0 3rem;
-  }
-
-  /* ---------- sign up ---------- */
-  /* tetap 2 kolom seperti desktop: gambar kiri, form kanan */
-  .page {
-    grid-template-columns: 42fr 58fr;
-  }
-
-  /* geser fokus gambar ke kiri supaya jendela & kue tetap kelihatan */
-  .visual-img {
-    object-position: 35% center;
-  }
-
-  .panel {
-    padding: 1.5rem;
-  }
-
-  .field input {
-    font-size: 16px;
-  }
-
-  .btn-primary {
-    margin-top: 2rem;
-  }
-
-  /* ---------- write story ---------- */
-  .writing-base {
-    width: 80vw;
-    height: 74vh;
-  }
-
-  .pencil-sect img,
-  .brush-sect img {
-    max-width: 10vw;
-    max-height: 55vh;
-  }
-
-  .pencil-sect img {
-    left: 1vw;
-  }
-
-  .brush-sect img {
-    right: 1vw;
-  }
-
-  .writing-input {
-    inset: 0.6rem;
-  }
-
-  /* ---------- story board ---------- */
-  .story-board h1 {
-    font-size: 3.6rem;
-  }
-
-  .struk {
-    width: 30%;
-    padding: 1.6rem 1.2rem;
-  }
-
-  .struk-1 {
-    top: 80%;
-    left: 8%;
-  }
-
-  .struk-2 {
-    top: 105%;
-    left: 26%;
-  }
-
-  .struk-3 {
-    top: 65%;
-    right: 8%;
-  }
-
-  .struk-4 {
-    top: 90%;
-    right: 20%;
-  }
-
-  .struk tr {
-    font-size: 0.65rem;
-  }
-
-  /* ---------- admin ---------- */
-  .admin {
-    grid-template-columns: 18rem 1fr;
-  }
-
-  .sidebar {
-    padding: 1.6rem 0.8rem;
-  }
-
-  .logo img {
-    width: 100%;
-    max-width: 12rem;
-  }
-
-  .menu a {
-    font-size: 1.3rem;
-    padding: 0.8rem 1rem;
-    gap: 0.8rem;
-  }
-
-  .logout {
-    font-size: 1.4rem;
-  }
-
-  .main {
-    padding: 1.6rem 1.6rem 3rem;
-  }
-
-  .greeting {
-    font-size: 4.4rem;
-  }
-
-  .subtitle {
-    font-size: 1.8rem;
-  }
-
-  .stats {
-    gap: 0.8rem;
-  }
-
-  .card strong {
-    font-size: 4.4rem;
-  }
-
-  .card p {
-    font-size: 1.3rem;
-  }
-
-  .toolbar select {
-    width: 12rem;
-  }
-
-  .action-btn {
-    padding: 0.6rem 1.6rem;
-    font-size: 1.4rem;
-  }
-
-  .story-text {
-    font-size: 1.15rem;
-  }
-}
-
-/* ================= HP BESAR (<= 617px) ================= */
-@media (max-width: 617px) {
-  html {
-    font-size: 12px;
-  }
-
-  /* ---------- home ---------- */
-  .awning-mobile {
-    display: block !important;
-    width: 100%;
-    height: auto;
-  }
-
-  .history-btn {
-    top: 0.6rem;
-    right: 1rem;
-    width: 40px;
-  }
-
-  .hero {
-    padding: 2rem 1rem 3rem;
-  }
-
-  .btn-nav {
-    flex-direction: column;
-    gap: 2.4rem;
-    margin-top: 2.5rem;
-  }
-
-  .btn {
-    font-size: 1.6rem;
-    padding: 0.4em 1.2em;
-  }
-
-  .intro {
-    flex-direction: column;
-  }
-
-  .coffe-img {
-    width: 75%;
-    margin: 0.5rem 0 2rem;
-  }
-
-  /* =====================================================
-   RESPONSIVE
-   Tempel di PALING BAWAH style.css (setelah semua aturan lain)
-   - max-width: 768px = tablet portrait
-   - max-width: 576px = HP
-   Urutan penting: 768 dulu, 576 sesudahnya (576 menimpa 768).
-   ===================================================== */
-
-
-/* ================= SIGN UP: sesuai desain Figma (semua ukuran layar) ================= */
-/* tombol lebih dekat ke input, form tidak kepotong di layar pendek */
 .btn-primary {
   margin-top: clamp(14px, 3vh, 28px);
 }
@@ -1762,7 +1517,6 @@ body {
   overflow-y: auto;
 }
 
-/* "Already have an account? Login." */
 .auth-switch {
   margin-top: clamp(10px, 2vh, 16px);
   text-align: center;
@@ -1781,7 +1535,6 @@ body {
   text-decoration: underline;
 }
 
-/* garis pemisah "Or" */
 .divider {
   display: flex;
   align-items: center;
@@ -1801,22 +1554,12 @@ body {
   background: var(--field-border);
 }
 
-
-
-/* awning khusus HP: disembunyikan di laptop, tablet, dll */
-.awning-mobile {
-  display: none;
-}
-
-
-/* ================= TABLET LANDSCAPE / LAPTOP KECIL (<= 993px) ================= */
 @media (max-width: 993px) {
 
   html {
     font-size: 15px;
   }
 
-  /* ---------- home ---------- */
   .history-btn {
     right: 2.5rem;
   }
@@ -1831,7 +1574,6 @@ body {
     margin: 1.5rem 0 4rem;
   }
 
-  /* ---------- sign up ---------- */
   .page {
     grid-template-columns: 44fr 56fr;
   }
@@ -1844,7 +1586,6 @@ body {
     padding: clamp(16px, 3vh, 40px) 2rem;
   }
 
-  /* ---------- write story ---------- */
   .writing-base {
     width: 68vw;
     height: 76vh;
@@ -1858,7 +1599,6 @@ body {
   .pencil-sect img { left: 3vw; }
   .brush-sect img  { right: 3vw; }
 
-  /* ---------- story board ---------- */
   .story-board h1 {
     font-size: 4.2rem;
   }
@@ -1868,7 +1608,6 @@ body {
     padding: 1.8rem 1.4rem;
   }
 
-  /* ---------- admin ---------- */
   .admin {
     grid-template-columns: 20rem 1fr;
   }
@@ -1926,16 +1665,12 @@ body {
   }
 }
 
-
-/* ================= TABLET PORTRAIT (<= 768px) ================= */
 @media (max-width: 768px) {
 
-  /* semua ukuran rem ikut mengecil sedikit */
   html {
     font-size: 14px;
   }
 
-  /* ---------- home ---------- */
   .history-btn {
     top: 1rem;
     right: 1.5rem;
@@ -1952,13 +1687,10 @@ body {
     margin: 1rem 0 3rem;
   }
 
-  /* ---------- sign up ---------- */
-  /* tetap 2 kolom seperti desktop: gambar kiri, form kanan */
   .page {
     grid-template-columns: 42fr 58fr;
   }
 
-  /* geser fokus gambar ke kiri supaya jendela & kue tetap kelihatan */
   .visual-img {
     object-position: 35% center;
   }
@@ -1975,7 +1707,6 @@ body {
     margin-top: 2rem;
   }
 
-  /* ---------- write story ---------- */
   .writing-base {
     width: 80vw;
     height: 74vh;
@@ -1994,7 +1725,6 @@ body {
     inset: 0.6rem;
   }
 
-  /* ---------- story board ---------- */
   .story-board h1 {
     font-size: 3.6rem;
   }
@@ -2013,7 +1743,6 @@ body {
     font-size: 0.65rem;
   }
 
-  /* ---------- admin ---------- */
   .admin {
     grid-template-columns: 18rem 1fr;
   }
@@ -2075,17 +1804,12 @@ body {
   }
 }
 
-
-}
-
-/* ================= HP (<= 617px) ================= */
 @media (max-width: 617px) {
 
   html {
     font-size: 12px;
   }
 
-  /* ---------- home ---------- */
   .awning {
     height: 4.5rem;
   }
@@ -2120,8 +1844,6 @@ body {
     margin: 0.5rem 0 2rem;
   }
 
-  /* ---------- sign up ---------- */
-  /* urutan HP: awning -> judul + form -> gambar kafe (ditumpuk ke bawah) */
   .page {
     display: flex;
     flex-direction: column;
@@ -2131,7 +1853,6 @@ body {
     overflow: visible;
   }
 
-  /* awning atas full lebar, nempel ke tepi layar */
   .awning-mobile {
     display: block !important;
     flex: none;
@@ -2151,9 +1872,8 @@ body {
     order: 1;
     flex: none;
     overflow: visible;
+    margin: 0;
     padding: 0.8rem 1.8rem 1rem;
-    margin-left: 5rem;
-
   }
 
   .panel-inner {
@@ -2161,7 +1881,6 @@ body {
     margin: 0 auto;
   }
 
-  /* judul "Sign Up" di tengah */
   .title {
     font-size: 56px;
     line-height: 1.1;
@@ -2179,7 +1898,6 @@ body {
     margin-bottom: 0.3rem;
   }
 
-  /* font 16px supaya iPhone tidak zoom otomatis saat input diketik */
   .field input {
     width: 100%;
     height: 44px;
@@ -2188,7 +1906,6 @@ body {
     box-sizing: border-box;
   }
 
-  /* tombol Sign Up full lebar */
   .btn-primary {
     display: block;
     width: 100%;
@@ -2197,7 +1914,6 @@ body {
     text-align: center;
   }
 
-  /* gambar kafe di bawah form */
   .visual {
     order: 2;
     flex: none;
@@ -2208,15 +1924,16 @@ body {
   }
 
   .visual-img {
-  position: static;
-  display: block;
-  width: 90%;
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
-  object-fit: contain;
-}
-  /* ---------- write story ---------- */
+    position: static;
+    display: block;
+    width: 90%;
+    max-width: 100%;
+    max-height: none;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
+  }
+
   .writing-base {
     width: 94vw;
     height: 76vh;
@@ -2232,7 +1949,6 @@ body {
     bottom: 12vh;
   }
 
-  /* pensil & kuas dikecilkan supaya tidak menutupi form */
   .pencil-sect img,
   .brush-sect img {
     max-width: 8vw;
@@ -2283,8 +1999,6 @@ body {
     font-size: 1.1rem;
   }
 
-  /* ---------- story board ---------- */
-  /* struk jadi 2 kolom, ukuran lebih lebar */
   .story-board {
     padding: 30px 8px;
   }
@@ -2315,8 +2029,6 @@ body {
     font-size: 0.75rem;
   }
 
-  /* ---------- admin ---------- */
-  /* sidebar pindah jadi bar di atas */
   .admin {
     grid-template-columns: 1fr;
   }
