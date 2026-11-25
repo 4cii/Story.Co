@@ -1743,76 +1743,479 @@ body {
     margin: 0.5rem 0 2rem;
   }
 
-  /* ---------- sign up ---------- */
-  /* sign up HP: awning di atas, form di bawah, gambar kafe disembunyikan */
-  .awning-mobile {
-    display: block;
-    width: 100%;
-    height: auto;
+  /* =====================================================
+   RESPONSIVE
+   Tempel di PALING BAWAH style.css (setelah semua aturan lain)
+   - max-width: 768px = tablet portrait
+   - max-width: 576px = HP
+   Urutan penting: 768 dulu, 576 sesudahnya (576 menimpa 768).
+   ===================================================== */
+
+
+/* ================= SIGN UP: sesuai desain Figma (semua ukuran layar) ================= */
+/* tombol lebih dekat ke input, form tidak kepotong di layar pendek */
+.btn-primary {
+  margin-top: clamp(14px, 3vh, 28px);
+}
+
+.panel {
+  overflow-y: auto;
+}
+
+/* "Already have an account? Login." */
+.auth-switch {
+  margin-top: clamp(10px, 2vh, 16px);
+  text-align: center;
+  font-family: "SF Pro Display", system-ui, sans-serif;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.auth-switch a {
+  color: var(--darkchoco);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+/* garis pemisah "Or" */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 70%;
+  margin: clamp(8px, 1.8vh, 14px) auto;
+  font-family: "SF Pro Display", system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--field-border);
+}
+
+
+
+/* awning khusus HP: disembunyikan di laptop, tablet, dll */
+.awning-mobile {
+  display: none;
+}
+
+
+/* ================= TABLET LANDSCAPE / LAPTOP KECIL (<= 993px) ================= */
+@media (max-width: 993px) {
+
+  html {
+    font-size: 15px;
   }
 
+  /* ---------- home ---------- */
+  .history-btn {
+    right: 2.5rem;
+  }
+
+  .btn-nav {
+    margin-top: 4rem;
+  }
+
+  .coffe-img {
+    width: 45%;
+    height: auto;
+    margin: 1.5rem 0 4rem;
+  }
+
+  /* ---------- sign up ---------- */
   .page {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-    align-content: start;
+    grid-template-columns: 44fr 56fr;
+  }
+
+  .visual-img {
+    object-position: 40% center;
+  }
+
+  .panel {
+    padding: clamp(16px, 3vh, 40px) 2rem;
+  }
+
+  /* ---------- write story ---------- */
+  .writing-base {
+    width: 68vw;
+    height: 76vh;
+  }
+
+  .pencil-sect img,
+  .brush-sect img {
+    max-width: 13vw;
+  }
+
+  .pencil-sect img { left: 3vw; }
+  .brush-sect img  { right: 3vw; }
+
+  /* ---------- story board ---------- */
+  .story-board h1 {
+    font-size: 4.2rem;
+  }
+
+  .struk {
+    width: 25%;
+    padding: 1.8rem 1.4rem;
+  }
+
+  /* ---------- admin ---------- */
+  .admin {
+    grid-template-columns: 20rem 1fr;
+  }
+
+  .sidebar {
+    padding: 2rem 1rem;
+  }
+
+  .logo img {
+    width: 100%;
+    max-width: 14rem;
+  }
+
+  .menu a {
+    font-size: 1.4rem;
+    padding: 0.9rem 1.1rem;
+    gap: 1rem;
+  }
+
+  .logout {
+    font-size: 1.5rem;
+  }
+
+  .main {
+    padding: 2rem 2rem 3.5rem;
+  }
+
+  .greeting {
+    font-size: 5.2rem;
+  }
+
+  .subtitle {
+    font-size: 2rem;
+  }
+
+  .stats {
+    gap: 1rem;
+  }
+
+  .card strong {
+    font-size: 5.2rem;
+  }
+
+  .card p {
+    font-size: 1.5rem;
+  }
+
+  .toolbar select {
+    width: 13rem;
+  }
+
+  .action-btn {
+    padding: 0.7rem 2rem;
+    font-size: 1.5rem;
+  }
+}
+
+
+/* ================= TABLET PORTRAIT (<= 768px) ================= */
+@media (max-width: 768px) {
+
+  /* semua ukuran rem ikut mengecil sedikit */
+  html {
+    font-size: 14px;
+  }
+
+  /* ---------- home ---------- */
+  .history-btn {
+    top: 1rem;
+    right: 1.5rem;
+  }
+
+  .btn-nav {
+    margin-top: 3rem;
+    gap: 1.2rem;
+  }
+
+  .coffe-img {
+    width: 55%;
+    height: auto;
+    margin: 1rem 0 3rem;
+  }
+
+  /* ---------- sign up ---------- */
+  /* tetap 2 kolom seperti desktop: gambar kiri, form kanan */
+  .page {
+    grid-template-columns: 42fr 58fr;
+  }
+
+  /* geser fokus gambar ke kiri supaya jendela & kue tetap kelihatan */
+  .visual-img {
+    object-position: 35% center;
+  }
+
+  .panel {
+    padding: 1.5rem;
+  }
+
+  .field input {
+    font-size: 16px;
+  }
+
+  .btn-primary {
+    margin-top: 2rem;
+  }
+
+  /* ---------- write story ---------- */
+  .writing-base {
+    width: 80vw;
+    height: 74vh;
+  }
+
+  .pencil-sect img,
+  .brush-sect img {
+    max-width: 10vw;
+    max-height: 55vh;
+  }
+
+  .pencil-sect img { left: 1vw; }
+  .brush-sect img  { right: 1vw; }
+
+  .writing-input {
+    inset: 0.6rem;
+  }
+
+  /* ---------- story board ---------- */
+  .story-board h1 {
+    font-size: 3.6rem;
+  }
+
+  .struk {
+    width: 30%;
+    padding: 1.6rem 1.2rem;
+  }
+
+  .struk-1 { top: 80%;  left: 8%; }
+  .struk-2 { top: 105%; left: 26%; }
+  .struk-3 { top: 65%;  right: 8%; }
+  .struk-4 { top: 90%;  right: 20%; }
+
+  .struk tr {
+    font-size: 0.65rem;
+  }
+
+  /* ---------- admin ---------- */
+  .admin {
+    grid-template-columns: 18rem 1fr;
+  }
+
+  .sidebar {
+    padding: 1.6rem 0.8rem;
+  }
+
+  .logo img {
+    width: 100%;
+    max-width: 12rem;
+  }
+
+  .menu a {
+    font-size: 1.3rem;
+    padding: 0.8rem 1rem;
+    gap: 0.8rem;
+  }
+
+  .logout {
+    font-size: 1.4rem;
+  }
+
+  .main {
+    padding: 1.6rem 1.6rem 3rem;
+  }
+
+  .greeting {
+    font-size: 4.4rem;
+  }
+
+  .subtitle {
+    font-size: 1.8rem;
+  }
+
+  .stats {
+    gap: 0.8rem;
+  }
+
+  .card strong {
+    font-size: 4.4rem;
+  }
+
+  .card p {
+    font-size: 1.3rem;
+  }
+
+  .toolbar select {
+    width: 12rem;
+  }
+
+  .action-btn {
+    padding: 0.6rem 1.6rem;
+    font-size: 1.4rem;
+  }
+
+  .story-text {
+    font-size: 1.15rem;
+  }
+}
+
+
+}
+
+/* ================= HP (<= 617px) ================= */
+@media (max-width: 617px) {
+
+  html {
+    font-size: 12px;
+  }
+
+  /* ---------- home ---------- */
+  .awning {
+    height: 4.5rem;
+  }
+
+  .history-btn {
+    top: 0.6rem;
+    right: 1rem;
+    width: 40px;
+  }
+
+  .hero {
+    padding: 2rem 1rem 3rem;
+  }
+
+  .btn-nav {
+    flex-direction: column;
+    gap: 2.4rem;
+    margin-top: 2.5rem;
+  }
+
+  .btn {
+    font-size: 1.6rem;
+    padding: 0.4em 1.2em;
+  }
+
+  .intro {
+    flex-direction: column;
+  }
+
+  .coffe-img {
+    width: 75%;
+    margin: 0.5rem 0 2rem;
+  }
+
+  /* ---------- sign up ---------- */
+  /* urutan HP: awning -> judul + form -> gambar kafe (ditumpuk ke bawah) */
+  .page {
+    display: flex;
+    flex-direction: column;
     height: auto;
     min-height: 100vh;
     min-height: 100dvh;
     overflow: visible;
   }
 
+  /* awning atas full lebar, nempel ke tepi layar */
+  .awning-mobile {
+    display: block !important;
+    flex: none;
+    order: 0;
+    width: 100%;
+    height: auto;
+    margin: 0;
+  }
+
+  .awning-mobile img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
   .panel {
     order: 1;
+    flex: none;
     overflow: visible;
-    padding: 1rem 1.8rem 2rem;
-  }
+    padding: 0.8rem 1.8rem 1rem;
+    margin-left: 5rem;
 
-  .visual {
-    order: 2;
-  }
-
-  .visual-img {
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    width: 100vw;
-    max-width: 100vw;
-    height: auto;
-    object-fit: bottom;
-    object-position: center;
-    display: block;
-    margin-top: 5rem;
   }
 
   .panel-inner {
     max-width: none;
-    margin-left: 5rem;
-    margin-top: 4rem;
+    margin: 0 auto;
   }
 
+  /* judul "Sign Up" di tengah */
   .title {
     font-size: 56px;
+    line-height: 1.1;
+    text-align: center;
     margin-bottom: 1rem;
   }
 
-  .field label {
-    font-size: 20px;
+  .field {
+    margin-bottom: 0.6rem;
   }
 
+  .field label {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 0.3rem;
+  }
 
+  /* font 16px supaya iPhone tidak zoom otomatis saat input diketik */
   .field input {
+    width: 100%;
     height: 44px;
     padding: 0 14px;
     font-size: 16px;
+    box-sizing: border-box;
   }
 
+  /* tombol Sign Up full lebar */
   .btn-primary {
+    display: block;
+    width: 100%;
     margin-top: 1.4rem;
     font-size: 1.4rem;
+    text-align: center;
   }
 
+  /* gambar kafe di bawah form */
+  .visual {
+    order: 2;
+    flex: none;
+    position: relative;
+    width: 100%;
+    margin-top: 3rem;
+    overflow: hidden;
+  }
+
+  .visual-img {
+  position: static;
+  display: block;
+  width: 90%;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+}
   /* ---------- write story ---------- */
   .writing-base {
     width: 94vw;
@@ -1836,13 +2239,8 @@ body {
     max-height: 40vh;
   }
 
-  .pencil-sect img {
-    left: 0;
-  }
-
-  .brush-sect img {
-    right: 0;
-  }
+  .pencil-sect img { left: 0; }
+  .brush-sect img  { right: 0; }
 
   .writing-input {
     inset: 0.5rem;
@@ -1904,29 +2302,10 @@ body {
     padding: 1.4rem 1rem;
   }
 
-  .struk-1 {
-    top: 75%;
-    left: 3%;
-    right: auto;
-  }
-
-  .struk-2 {
-    top: 85%;
-    left: auto;
-    right: 3%;
-  }
-
-  .struk-3 {
-    top: 115%;
-    left: 3%;
-    right: auto;
-  }
-
-  .struk-4 {
-    top: 125%;
-    left: auto;
-    right: 3%;
-  }
+  .struk-1 { top: 75%;  left: 3%;   right: auto; }
+  .struk-2 { top: 85%;  left: auto; right: 3%; }
+  .struk-3 { top: 115%; left: 3%;   right: auto; }
+  .struk-4 { top: 125%; left: auto; right: 3%; }
 
   .top h4 {
     font-size: 1.4rem;
