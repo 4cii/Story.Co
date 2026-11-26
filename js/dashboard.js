@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const ADMIN_NAME = "Kharim";
 const OPEN_CLASS = "open";  // class yang membuka .action-menu; samakan dengan CSS-mu
 
@@ -7,6 +8,15 @@ const VIEWS = {
   "#published-stories": { statuses: [STATUS.PUBLISHED],                 subtitle: "Stories on the board" },
   "#delete-stories":    { statuses: [STATUS.DELETED],                   subtitle: "Deleted stories" },
 };
+=======
+       // Tiap halaman: judul, subjudul, dan status cerita yang ditampilkan
+        const pages = {
+            'overview':          { title: 'Greetings, Kharim.', subtitle: "Today's view",                  show: ['waiting', 'attention'] },
+            'delete-stories':    { title: 'Delete Stories',     subtitle: 'Stories removed from the board', show: ['deleted'] },
+            'published-stories': { title: 'Published Stories',  subtitle: 'Stories live on the board',      show: ['published'] },
+            'urgent-cases':      { title: 'Urgent Cases',       subtitle: 'Stories that need attention',    show: ['attention'] }
+        };
+>>>>>>> 6191b18ab89a5fd19fae72fd595be390675e69de
 
 const LABEL = {
   waiting: "Waiting",
