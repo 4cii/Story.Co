@@ -140,6 +140,10 @@ body {
 }
 
 /* ---------- Tombol kembali (write & board) ---------- */
+.black {
+  box-shadow: 0 12px 32px rgba(74, 40, 24, 100);
+}
+
 .back-btn {
   position: absolute;
   top: clamp(1rem, 3vw, 2.5rem);
@@ -150,6 +154,7 @@ body {
   border: 0;
   cursor: pointer;
   transition: transform 0.2s ease;
+  border-radius: 5rem;
 }
 
 .back-btn:hover {
@@ -356,6 +361,7 @@ body {
   line-height: 0.95;
 }
 
+/* ---------- Anomimus ---------- */
 .anonimus {
   position: relative;
   display: grid;
@@ -441,6 +447,52 @@ body {
   opacity: 0.85;
 }
 
+/* dragable feat */
+.title-three {
+  margin: 10rem 0 4rem 0;
+  text-align: center;
+}
+/* --s = ukuran lingkaran, semua isi ikut ukuran ini */
+#area {
+  --s: min(92vw, 80vh, 790px);
+  position: relative;
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: #f1e7d6;
+  touch-action: none;
+}
+.item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  display: grid;
+  place-items: center;
+  cursor: grab;
+  user-select: none;
+  will-change: transform;
+}
+.item:active {
+  cursor: grabbing;
+}
+.pill {
+  width: calc(var(--s) * 0.38);
+  height: calc(var(--s) * 0.12);
+  border-radius: 999px;
+  font-size: calc(var(--s) * 0.058);
+  white-space: nowrap;
+}
+.face {
+  width: calc(var(--s) * 0.16);
+  height: calc(var(--s) * 0.16);
+}
+.face svg {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
 /* Responsif HP: tampilkan 1 kolom saja */
 @media (max-width: 768px) {
   .anonimus {
@@ -453,6 +505,147 @@ body {
     display: none;
   }
 }
+
+/* FAQ */
+.faq {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;       
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.title-four {
+  margin: 7rem 0 5rem 0;
+  text-align: center;
+}
+
+.faq-item {
+  margin-bottom: 16px;
+  padding: 20px 24px;
+  background: #f1e7d6;
+  border-radius: 10px;
+}
+
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 2rem;
+  cursor: pointer;
+  list-style: none; 
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #532726;
+  transition: transform 0.3s;
+}
+
+.faq-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: #faf0e0;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* panah berputar saat dibuka */
+.faq-item[open] .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  font-family: "SF Pro Display", sans-serif;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: #532726;
+  color: #faf0e0;
+  border-radius: 8px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.faq-answer p {
+  margin: 0;
+}
+
+.faq-item[open] .faq-answer {
+  animation: muncul 0.3s ease;
+}
+
+@keyframes muncul {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* footer */
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.footer img {
+  width: 100vw;
+  height: auto;
+}
+
+.footer-link-wrap {
+  position: absolute;
+  bottom: 2rem; /* Jarak dari tepi paling bawah, ubah ke 0 jika ingin nempel mentok */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 clamp(1.6rem, 4vw, 4rem);
+}
+
+.footer-link {
+  font-size: clamp(1.5rem, 2vw, 1rem);
+  color: #1c5f45;
+}
+
+.btn-footer-warp {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 clamp(1.6rem, 4vw, 4rem);
+}
+
+/* BENERIN AH */
+.btn-footer {
+  text-align: center;
+  height: 7rem;
+  width: 30rem;
+  box-shadow: 0 12px 32px rgba(74, 40, 24, 0.5);
+  bottom: -12rem; 
+  /* PAKE X Y AJA NNTI */
+}
+
 
 /* ==========================================================================
    7. SIGN UP PAGE
@@ -610,7 +803,7 @@ body {
 }
 
 .write-title {
-  margin: 0 0 clamp(0.75rem, 2vh, 1.5rem) 0;
+  margin: 4rem 0 clamp(0.75rem, 2vh, 1.5rem) 0;
   opacity: 0;
   animation: fadein 1s ease var(--delay) forwards;
   z-index: 2;
