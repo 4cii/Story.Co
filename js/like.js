@@ -1,15 +1,15 @@
 const semuaTombolLike = document.querySelectorAll(".likeBtn");
 
 semuaTombolLike.forEach((likeBtn, index) => {
-  // Cari ikon dan angka khusus di dalam tombol struk yang ini saja
+
   const heartIcon = likeBtn.querySelector(".heartIcon");
   const likeCount = likeBtn.querySelector(".likeCount");
 
-  // Bedakan kunci localStorage tiap struk pakai index (0, 1, 2, 3)
+
   let count = parseInt(localStorage.getItem(`storyLikes_${index}`)) || 0;
   let isLiked = localStorage.getItem(`isStoryLiked_${index}`) === "true";
 
-  // Tampilan awal tiap struk saat dibuka
+  // Tampilan awal
   likeCount.textContent = count;
   if (isLiked) {
     heartIcon.classList.replace("ri-heart-line", "ri-heart-fill");
@@ -18,7 +18,7 @@ semuaTombolLike.forEach((likeBtn, index) => {
     heartIcon.style.color = "black";
   }
 
-  // Fungsi tambah & kurang khusus struk ini
+  // Fungsi tambah & kurang khusus struk 
   function tambahLike() {
     count++;
     heartIcon.classList.replace("ri-heart-line", "ri-heart-fill");
@@ -33,7 +33,7 @@ semuaTombolLike.forEach((likeBtn, index) => {
     likeCount.textContent = count;
   }
 
-  // Event klik untuk masing-masing struk
+  // Event klik buat masing-masing struk
   likeBtn.addEventListener("click", () => {
     isLiked = !isLiked;
 
@@ -47,3 +47,5 @@ semuaTombolLike.forEach((likeBtn, index) => {
     localStorage.setItem(`isStoryLiked_${index}`, isLiked);
   });
 });
+
+
