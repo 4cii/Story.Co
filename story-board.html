@@ -1,222 +1,83 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lorem ipsum</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.9.1/fonts/remixicon.min.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.9.1/fonts/remixicon.min.css"
+    />
+  </head>
+  <body>
     <main>
-    <!-- board -->
-    <div class="story-board">
-      <a href="index.html" class="back-btn"><img src="assets/back-btn.png" alt=""></a>
-      <h1>Were here to hear <br>your stories</h1>
-        <img class="board" src="assets/board.svg" alt="board">
-        
-        <div class="wadah-struk">
-             <!-- struk 1 -->
-         <div class="struk struk-1">
+      <!-- board -->
+      <div class="story-board">
+        <a href="index.html" class="back-btn"
+          ><img src="assets/back-btn.png" alt=""
+        /></a>
+        <h1>Were here to hear <br />your stories</h1>
+        <img class="board" src="assets/board.svg" alt="board" />
+
+        <div class="wadah-struk" id="struk-list"></div>
+        <p class="empty-board" id="empty-board" hidden>
+          No stories on the board yet.
+        </p>
+
+        <template id="struk-template">
+          <div class="struk">
             <div class="top">
-                <h4>My Story:</h4>
-                <span>“Hari ini seneng banget, bisa makan bareng sama temen-temen”</span>
-            
+              <h4>My Story:</h4>
+              <span data-f="story"></span>
+              <img
+                class="struk-img"
+                data-f="image"
+                alt="Drawing story"
+                hidden
+              />
             </div>
             <div class="line"></div>
-            <!-- preposisi -->
             <table>
-                <tr>
-                    <td>Date</td>
-                    <td class="right">12 November 2026</td>
-                </tr>
-                <tr>
-                    <td>Day</td>
-                    <td class="right">Thursday</td>
-                </tr>
-                <tr>
-                    <td>Time</td>
-                    <td class="right">10:30</td>
-                </tr>
-                <tr>
-                    <td>Mood</td>
-                    <td class="right">Happy</td>
-                </tr>
-            </table>
-
-            <div class="line"></div>
-            <!-- pesanan -->
-            <table>
-                <tr>
-                    <td>Order <br><strong>01 x Latte</strong></td>
-                    <td class="right">1 Item</td>
-                </tr>
+              <tr>
+                <td>Date</td>
+                <td class="right" data-f="date"></td>
+              </tr>
+              <tr>
+                <td>Day</td>
+                <td class="right" data-f="day"></td>
+              </tr>
+              <tr>
+                <td>Time</td>
+                <td class="right" data-f="time"></td>
+              </tr>
+              <tr>
+                <td>Mood</td>
+                <td class="right" data-f="mood"></td>
+              </tr>
             </table>
             <div class="line"></div>
-            <!-- like -->
-
-                <button class="likeBtn" type="button">
-                    <i class="heartIcon ri-heart-line"></i>
-                    <span class="likeCount">0</span>
-                </button>
+            <table>
+              <tr>
+                <td>Order <br /><strong data-f="order"></strong></td>
+                <td class="right">1 Item</td>
+              </tr>
+            </table>
+            <div class="line"></div>
+            <button class="likeBtn" type="button" aria-pressed="false">
+              <i class="heartIcon ri-heart-line"></i>
+              <span class="likeCount">0</span>
+            </button>
             <div class="barcode">
-                <img src="assets/barcode1.svg" alt="">
-                <p>KEEP THIS RECEIPT AS A MEMORY</p>
+              <img src="assets/barcode1.svg" alt="" />
+              <p>KEEP THIS RECEIPT AS A MEMORY</p>
             </div>
-         </div>
-        <!-- struk 2 -->
-         <div class="struk struk-2">
-            <div class="top">
-                <h4>My Story:</h4>
-                <span>“Hari ini seneng banget, bisa makan bareng sama temen-temen”</span>
-            
-            </div>
-            <div class="line"></div>
-            <!-- preposisi -->
-            <table>
-                <tr>
-                    <td>Date</td>
-                    <td class="right">12 November 2026</td>
-                </tr>
-                <tr>
-                    <td>Day</td>
-                    <td class="right">Thursday</td>
-                </tr>
-                <tr>
-                    <td>Time</td>
-                    <td class="right">10:30</td>
-                </tr>
-                <tr>
-                    <td>Mood</td>
-                    <td class="right">Happy</td>
-                </tr>
-            </table>
+          </div>
+        </template>
 
-            <div class="line"></div>
-            <!-- pesanan -->
-            <table>
-                <tr>
-                    <td>Order <br><strong>01 x Latte</strong></td>
-                    <td class="right">1 Item</td>
-                </tr>
-            </table>
-            <div class="line"></div>
-            <!-- like -->
-
-                <button class="likeBtn" type="button">
-                    <i class="heartIcon ri-heart-line"></i>
-                    <span class="likeCount">0</span>
-                </button>
-            <div class="barcode">
-                <img src="assets/barcode1.svg" alt="">
-                <p>KEEP THIS RECEIPT AS A MEMORY</p>
-            </div>
-         </div>
-        <!-- struk 3 -->
-         <div class="struk struk-3">
-            <div class="top">
-                <h4>My Story:</h4>
-                <span>“Hari ini seneng banget, bisa makan bareng sama temen-temen”</span>
-            
-            </div>
-            <div class="line"></div>
-            <!-- preposisi -->
-            <table>
-                <tr>
-                    <td>Date</td>
-                    <td class="right">12 November 2026</td>
-                </tr>
-                <tr>
-                    <td>Day</td>
-                    <td class="right">Thursday</td>
-                </tr>
-                <tr>
-                    <td>Time</td>
-                    <td class="right">10:30</td>
-                </tr>
-                <tr>
-                    <td>Mood</td>
-                    <td class="right">Happy</td>
-                </tr>
-            </table>
-
-            <div class="line"></div>
-            <!-- pesanan -->
-            <table>
-                <tr>
-                    <td>Order <br><strong>01 x Latte</strong></td>
-                    <td class="right">1 Item</td>
-                </tr>
-            </table>
-            <div class="line"></div>
-            <!-- like -->
-
-                <button class="likeBtn" type="button">
-                    <i class="heartIcon ri-heart-line"></i>
-                    <span class="likeCount">0</span>
-                </button>
-            <div class="barcode">
-                <img src="assets/barcode1.svg" alt="">
-                <p>KEEP THIS RECEIPT AS A MEMORY</p>
-            </div>
-         </div>
-        <!-- struk 4 -->
-         <div class="struk struk-4">
-            <div class="top">
-                <h4>My Story:</h4>
-                <span>“Hari ini seneng banget, bisa makan bareng sama temen-temen”</span>
-            
-            </div>
-            <div class="line"></div>
-            <!-- preposisi -->
-            <table>
-                <tr>
-                    <td>Date</td>
-                    <td class="right">12 November 2026</td>
-                </tr>
-                <tr>
-                    <td>Day</td>
-                    <td class="right">Thursday</td>
-                </tr>
-                <tr>
-                    <td>Time</td>
-                    <td class="right">10:30</td>
-                </tr>
-                <tr>
-                    <td>Mood</td>
-                    <td class="right">Happy</td>
-                </tr>
-            </table>
-
-            <div class="line"></div>
-            <!-- pesanan -->
-            <table>
-                <tr>
-                    <td>Order <br><strong>01 x Latte</strong></td>
-                    <td class="right">1 Item</td>
-                </tr>
-            </table>
-            <div class="line"></div>
-            <!-- like -->
-
-                <button class="likeBtn" type="button">
-                    <i class="heartIcon ri-heart-line"></i>
-                    <span class="likeCount">0</span>
-                </button>
-            <div class="barcode">
-                <img src="assets/barcode1.svg" alt="">
-                <p>KEEP THIS RECEIPT AS A MEMORY</p>
-            </div>
-         </div>
-       
-        </div>
-       
-       
-        
-    </div>
+        <script src="js/data.js"></script>
+        <script src="js/browse.js"></script>
+      </div>
     </main>
-    <!-- js -->
-     <script src="js/like.js"></script>
-     <script src="js/data.js"></script>
-</body>
+  </body>
 </html>

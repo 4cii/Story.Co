@@ -9,7 +9,14 @@
 </head>
 
 <body>
+  
+    <div class="page">
+      <!-- Gambar cafe (kiri) -->
+      <div class="visual">
+        <img class="visual-img" src="assets/cafe-signup-img.png" alt="" />
+      </div>
 
+<<<<<<< HEAD
   <style>
     body {
       overflow: hidden;
@@ -17,41 +24,63 @@
   </style>
 
   <img class="awning-mobile" src="assets/awning-atap.png" alt="" />
+=======
+      <!-- Form (kanan) -->
+      <main class="panel">
+        <div class="panel-inner">
+          <h1 class="title">Sign In</h1>
+>>>>>>> 7d1c2b45bdb1c09cb7b703a304d2a558596d0ac7
 
+          <form class="form" action="#" method="post">
+            <div class="field">
+              <label for="name">Name</label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Your Name..."
+                autocomplete="name"
+                required
+              />
+            </div>
 
-  <div class="page">
-    <!-- Gambar cafe (kiri) -->
-    <div class="visual">
-      <img class="visual-img" src="assets/cafe-signup-img.png" alt="" />
+            <div class="field">
+              <label for="email">Email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Your Email..."
+                autocomplete="email"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="password">Password</label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Input Password..."
+                autocomplete="current-password"
+                required
+              />
+            </div>
+
+            <p
+              class="form-hint"
+              id="auth-error"
+              role="status"
+              aria-live="polite"
+            ></p>
+
+            <button class="btn btn-primary" type="submit">Sign In →</button>
+          </form>
+        </div>
+      </main>
     </div>
 
-    <!-- Form (kanan) -->
-    <main class="panel">
-      <div class="panel-inner">
-        <h1 class="title">Sign In</h1>
-
-        <form class="form" action="#" method="post">
-          <div class="field">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" placeholder="Your Name..." autocomplete="name" required />
-          </div>
-
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="Your Email..." autocomplete="email" required />
-          </div>
-
-          <div class="field">
-            <label for="password">Password</label>
-            <input id="password" name="password" type="password" placeholder="Input Password..."
-              autocomplete="new-password" required />
-          </div>
-
-          <button class="btn btn-primary" type="submit">Sign In →</button>
-        </form>
-      </div>
-    </main>
-  </div>
-</body>
-
+    <script src="js/auth.js"></script>
+  </body>
 </html>

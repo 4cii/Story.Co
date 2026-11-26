@@ -5,7 +5,7 @@ semuaTombolLike.forEach((likeBtn, index) => {
   const heartIcon = likeBtn.querySelector(".heartIcon");
   const likeCount = likeBtn.querySelector(".likeCount");
 
-  // Bedakan kunci localStorage tiap struk pakai index (0, 1, 2, 3)
+  // Membedakan kunci local storage
   let count = parseInt(localStorage.getItem(`storyLikes_${index}`)) || 0;
   let isLiked = localStorage.getItem(`isStoryLiked_${index}`) === "true";
 

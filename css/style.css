@@ -1,3 +1,25 @@
+/* ==========================================================================
+   STORY.CO - style.css
+
+   DAFTAR ISI
+   1.  Variabel & reset
+   2.  Font
+   3.  Base (body)
+   4.  Utilitas
+   5.  Komponen bersama (tombol .btn, tombol kembali)
+   6.  Home page
+   7.  Sign up page
+   8.  Write story page
+   9.  History page
+   10. Story board (struk)
+   11. Admin (dashboard)
+   12. Gambar cerita (dashboard & board)
+   13. Responsive
+   ========================================================================== */
+
+/* ==========================================================================
+   1. VARIABEL & RESET
+   ========================================================================== */
 :root {
   --brown: #512524;
   --mocca: #7e4146;
@@ -17,6 +39,14 @@
   --field-border: #e2d5c4;
 
   --delay: 0.8s;
+  --ink: #2f0e0d;
+  --mocca-dark: #5f2f33;
+  --gold-dark: #c99a36;
+  --matcha-dark: #6d9448;
+  --panel: #e8dfc8;
+  --red: #a8554a;
+  --pink: #e8b4ae;
+  --pink-text: #7a2e28;
 }
 
 * {
@@ -25,12 +55,23 @@
   box-sizing: border-box;
 }
 
+/* ==========================================================================
+   2. FONT*/
 @font-face {
   font-family: "ZT Formom";
   src: url("../assets/ZT Formom.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("../assets/SFPRODISPLAYREGULAR.OTF") format("opentype");
+}
+
+/* ==========================================================================
+   3. BASE
+   ========================================================================== */
 body {
+  min-height: 100vh;
   background: #f9f0e1;
   color: var(--darkchoco);
   font-family: "ZT Formom", Georgia, "Times New Roman", serif;
@@ -38,7 +79,95 @@ body {
   flex-direction: column;
 }
 
-/* home page */
+/* ==========================================================================
+   4. UTILITAS
+   ========================================================================== */
+
+/* teks khusus pembaca layar (tidak terlihat) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* atribut hidden selalu menang atas display lain */
+[hidden] {
+  display: none !important;
+}
+
+/* ==========================================================================
+   5. KOMPONEN BERSAMA
+   ========================================================================== */
+
+/* ---------- Tombol .btn (dengan coretan saat hover) ---------- */
+.btn {
+  position: relative;
+  display: inline-block;
+  padding: 0.45em 1.5em;
+  font-family: "ZT Formom", sans-serif;
+  font-size: clamp(10px, 2rem, 35px);
+  color: var(--white);
+  text-decoration: none;
+  background: linear-gradient(90deg, var(--mocca), var(--darkchoco));
+  border: 3px solid var(--mocca);
+  border-radius: 8px;
+  transition: transform 0.5s ease;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: -33px;
+  height: 34px;
+  background-image: var(--scribble);
+  background-position: center;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  transform: rotate(var(--tilt, 0deg)) scaleX(var(--flip, 1));
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.45s ease;
+  pointer-events: none;
+}
+
+.btn:hover::after,
+.btn:focus-visible::after {
+  clip-path: inset(0 0 0 0);
+}
+
+/* ---------- Tombol kembali (write & board) ---------- */
+.back-btn {
+  position: absolute;
+  top: clamp(1rem, 3vw, 2.5rem);
+  left: clamp(1rem, 3vw, 2.5rem);
+  z-index: 10;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.back-btn:hover {
+  transform: scale(1.08);
+}
+
+.back-btn img {
+  display: block;
+  width: clamp(2.75rem, 5vw, 5rem);
+  height: clamp(2.75rem, 5vw, 5rem);
+  object-fit: contain;
+}
+
+/* ==========================================================================
+   6. HOME PAGE
+   ========================================================================== */
+
+/* ---------- Hero: kanopi & tombol riwayat ---------- */
 .hero-sect {
   position: relative;
   overflow: hidden;
@@ -98,6 +227,7 @@ body {
   opacity: 1;
 }
 
+/* ---------- Hero: judul & coretan ---------- */
 .hero {
   flex: 1;
   display: flex;
@@ -117,7 +247,7 @@ body {
   letter-spacing: -0.02em;
 }
 
-.line {
+.line-a {
   display: block;
 }
 
@@ -153,6 +283,7 @@ body {
   vertical-align: -0.02em;
 }
 
+/* ---------- Tombol navigasi home ---------- */
 .btn-nav {
   margin-top: 5rem;
   display: flex;
@@ -161,44 +292,10 @@ body {
   gap: 2rem;
 }
 
-.btn {
-  position: relative;
-  display: inline-block;
-  padding: 0.45em 1.5em;
-  font-family: "ZT Formom", sans-serif;
-  font-size: clamp(10px, 2rem, 35px);
-  color: var(--white);
-  text-decoration: none;
-  background: linear-gradient(90deg, var(--mocca), var(--darkchoco));
-  border: 3px solid var(--mocca);
-  border-radius: 8px;
-  transition: transform 0.5s ease;
-}
-
-.btn::after {
-  content: "";
-  position: absolute;
-  left: 5%;
-  right: 5%;
-  bottom: -33px;
-  height: 34px;
-  background-image: var(--scribble);
-  background-position: center;
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  transform: rotate(var(--tilt, 0deg)) scaleX(var(--flip, 1));
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 0.45s ease;
-  pointer-events: none;
-}
-
-.btn:hover::after,
-.btn:focus-visible::after {
-  clip-path: inset(0 0 0 0);
-}
-
+/* ---------- Section intro (gambar kopi berputar) ---------- */
 .intro {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -220,6 +317,7 @@ body {
   }
 }
 
+
 /* sign up page */
 
 
@@ -236,6 +334,150 @@ body {
 .story[hidden] {
   display: none;
 }
+
+/* ---------- Testimoni ---------- */
+.testimoni {
+  margin: 4rem 5rem 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2vw;
+}
+
+.card-test {
+  background: var(--muted-bg);
+  padding: 2rem 1.5rem;
+  border-radius: 1.7rem;
+}
+
+.card-test p,
+.card-ano {
+  font-size: 1.25rem;
+}
+
+.card-test h3 {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+.title-two {
+  margin: 6rem 0 clamp(2.5rem, 4.5vw, 4rem);
+  text-align: center;
+  line-height: 1.05;
+}
+
+.title-two .highlighted {
+  display: inline-block;
+  padding: 0 0.22em 0.08em;
+  background-color: var(--gold, #e2b95f);
+  color: var(--cream, #f9f0df);
+  line-height: 0.95;
+}
+
+.anonimus {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.4rem, 2.2vw, 2.4rem);
+  width: 100%;
+  max-width: 106rem;
+  height: clamp(46rem, 62vh, 62rem);
+  margin: 0 auto;
+  padding: 0 clamp(1.6rem, 4vw, 4rem);
+  overflow: hidden;
+
+  /* Efek fade-out halus di bagian atas & bawah */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 12%,
+    #000 68%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 12%,
+    #000 68%,
+    transparent 100%
+  );
+}
+
+.anonimus-col {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Offset awal kolom tengah & kanan biar terlihat staggered */
+.anonimus-col:nth-child(2) {
+  padding-top: 4rem;
+}
+
+.anonimus-track {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.4rem, 2.2vw, 2.4rem);
+  will-change: transform;
+}
+
+.card-anonimus {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: clamp(24rem, 32vw, 31rem);
+  padding: 2.4rem 2rem;
+  background: var(--muted-bg, #eee4d4);
+  border-radius: 1.7rem;
+  text-align: center;
+  color: var(--ink, #2b1b14);
+}
+
+.card-ano {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.card-ano p {
+  margin: 0;
+  max-width: 24ch;
+  font-family: "ZT Formom", "Times New Roman", serif;
+  font-size: clamp(1.4rem, 1.8vw, 1.85rem);
+  line-height: 1.25;
+}
+
+.card-ano h3 {
+  margin: 0;
+  font-family: "ZT Formom", "Times New Roman", serif;
+  font-weight: 400;
+  font-size: clamp(1.1rem, 1.3vw, 1.3rem);
+  opacity: 0.85;
+}
+
+/* Responsif HP: tampilkan 1 kolom saja */
+@media (max-width: 768px) {
+  .anonimus {
+    grid-template-columns: 1fr;
+    max-width: 36rem;
+    height: 44rem;
+  }
+
+  .anonimus-col:nth-child(n + 2) {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   7. SIGN UP PAGE
+   ========================================================================== */
+
+/* ---------- Layout halaman (dua kolom) ---------- */
+
 .page {
   overflow-y: hidden;
   --outline: #a89a88;
@@ -246,6 +488,7 @@ body {
   height: 100vh;
 }
 
+/* ---------- Kolom gambar ---------- */
 .visual {
   position: relative;
   overflow: hidden;
@@ -262,9 +505,16 @@ body {
   object-fit: contain;
 }
 
+/* kanopi versi mobile (tersembunyi di desktop) */
+.awning-mobile {
+  display: none;
+}
+
+/* ---------- Kolom form ---------- */
 .panel {
   display: flex;
   overflow: hidden;
+  overflow-y: auto;
   padding: clamp(16px, 3vh, 40px) clamp(24px, 4vw, 56px);
   margin-right: 5rem;
 }
@@ -286,6 +536,7 @@ body {
   letter-spacing: -0.02em;
 }
 
+/* ---------- Input ---------- */
 .field {
   margin-bottom: clamp(8px, 1.6vh, 14px);
 }
@@ -320,14 +571,59 @@ body {
   outline-offset: 2px;
 }
 
+/* ---------- Tombol utama & tautan ganti halaman ---------- */
 .btn-primary {
-  margin-top: 3rem;
+  margin-top: clamp(14px, 3vh, 28px);
   width: 100%;
 }
 
 /* end sign up page */
 
 /* write story page */
+
+.auth-switch {
+  margin-top: clamp(10px, 2vh, 16px);
+  text-align: center;
+  font-family: "SF Pro Display", system-ui, sans-serif;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.auth-switch a {
+  color: var(--darkchoco);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 70%;
+  margin: clamp(8px, 1.8vh, 14px) auto;
+  font-family: "SF Pro Display", system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--field-border);
+}
+
+/* ==========================================================================
+   8. WRITE STORY PAGE
+   ========================================================================== */
+
+/* ---------- Layout halaman & meja ---------- */
+
 .write-sect {
   position: relative;
   overflow: hidden;
@@ -389,6 +685,7 @@ body {
   justify-content: center;
 }
 
+/* ---------- Buku menu (pembuka) ---------- */
 .book-btn {
   flex: none;
   width: clamp(180px, 25vw, 420px);
@@ -429,7 +726,18 @@ body {
     visibility 0s 1s;
 }
 
+/* ---------- Kartu: tersembunyi sampai buku diklik ---------- */
 .writing-base {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 1;
+  width: 60vw;
+  height: 78vh;
+  background-color: var(--brown);
+  border: 5px solid var(--darkchoco);
+  border-radius: 2rem;
   visibility: hidden;
   opacity: 0;
   scale: 0.9;
@@ -451,6 +759,7 @@ body {
     visibility 0s;
 }
 
+/* pensil & brush muncul setelah buku terbuka */
 .pencil-sect,
 .brush-sect {
   transition: opacity 0.5s ease 0.5s;
@@ -464,7 +773,6 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .book-btn,
   .book-btn.fade-out,
   .writing-base,
@@ -475,21 +783,7 @@ body {
   }
 }
 
-.writing-base {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  z-index: 1;
-  width: 60vw;
-  height: 78vh;
-  background-color: var(--brown);
-  border: 5px solid var(--darkchoco);
-  border-radius: 2rem;
-  opacity: 0;
-  pointer-events: none;
-}
-
+/* area dalam kartu (krem) */
 .writing-input {
   position: absolute;
   inset: 0.9rem;
@@ -501,6 +795,7 @@ body {
   border-radius: 1rem;
 }
 
+/* ---------- Form tulis ---------- */
 .story-form {
   display: flex;
   flex-direction: column;
@@ -558,6 +853,7 @@ body {
   color: #a63a2c;
 }
 
+/* ---------- Mood picker ---------- */
 .input-two {
   display: flex;
   align-items: center;
@@ -617,6 +913,7 @@ body {
   outline-offset: 4px;
 }
 
+/* ---------- Tombol Send / Order (menimpa bingkai bawah) ---------- */
 .send-btn {
   position: absolute;
   z-index: 2;
@@ -627,19 +924,7 @@ body {
   cursor: pointer;
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-[hidden] {
-  display: none !important;
-}
-
+/* ---------- Pensil & brush (pengganti mode) ---------- */
 .pencil-sect img,
 .brush-sect img {
   position: absolute;
@@ -691,6 +976,7 @@ body {
   border-radius: 0.5rem;
 }
 
+/* ---------- Mode gambar ---------- */
 .story-form.is-drawing .input-two {
   display: none;
 }
@@ -721,6 +1007,7 @@ body {
   border-radius: 0.75rem;
 }
 
+/* bar di bawah canvas: undo | warna | redo */
 .draw-bar {
   display: flex;
   flex: none;
@@ -798,7 +1085,312 @@ body {
   outline-offset: 2px;
 }
 
-/* story board */
+/* ---------- Choose the menu ---------- */
+.menu-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  min-height: 0;
+  text-align: center;
+}
+
+.menu-title {
+  margin: 0;
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--darkchoco);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.75rem, 2vw, 1.5rem) clamp(1rem, 3vw, 2.5rem);
+  place-items: center;
+}
+
+.menu-item {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.menu-item input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.menu-item img {
+  display: block;
+  width: clamp(75px, 10vw, 135px);
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: 50%;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.menu-item:hover img {
+  transform: scale(1.08);
+}
+
+.menu-item input:checked + img {
+  transform: scale(1.12);
+  box-shadow:
+    0 0 0 3px var(--cream),
+    0 0 0 6px var(--gold);
+}
+
+.menu-grid:has(input:checked) .menu-item input:not(:checked) + img {
+  opacity: 0.55;
+}
+
+/* ---------- Success order ---------- */
+.success-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1.2rem;
+  padding: 2rem;
+}
+
+.success-panel[hidden] {
+  display: none;
+}
+
+.success-title {
+  margin: 0;
+  font-size: clamp(2.8rem, 5vw, 5.5rem);
+  line-height: 1.05;
+}
+
+.success-text {
+  margin: 0;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+}
+
+.code-chip {
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  font-family: "ZT Formom", serif;
+  padding: 1.2rem 2.8rem;
+  background-color: var(--cream);
+  color: var(--darkchoco);
+  border: 2px solid var(--darkchoco);
+  border-radius: 1ch;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.code-chip:hover {
+  background-color: var(--darkchoco);
+  color: var(--cream);
+  transform: scale(1.03);
+}
+
+.success-note {
+  margin: 0;
+  font-size: 1.3rem;
+  opacity: 0.8;
+}
+
+/* ==========================================================================
+   9. HISTORY PAGE
+   ========================================================================== */
+
+/* ---------- Layout & kotak input kode ---------- */
+.history-sect {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.6rem;
+  background-color: var(--bg-color, #f6eedf);
+  color: var(--ink, #2b1b14);
+}
+
+.code-box {
+  width: 100%;
+  max-width: 44rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.code-box[hidden],
+.history-result[hidden] {
+  display: none;
+}
+
+.code-title {
+  margin: 0 0 2.8rem;
+  font-family: "ZT Formom", "Times New Roman", serif;
+  font-weight: 400;
+  font-size: clamp(4.2rem, 8vw, 6.8rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--ink, #2b1b14);
+}
+
+.code-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.code-input {
+  width: 100%;
+  height: 7.2rem;
+  padding: 0 2rem;
+  font-family: "ZT Formom", "Times New Roman", serif;
+  font-size: 2.6rem;
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--ink, #2b1b14);
+  background: transparent;
+  border: 1.5px solid var(--ink, #2b1b14);
+  border-radius: 1.2rem;
+  outline: none;
+  transition:
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.code-input::placeholder {
+  font-size: 1.6rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: #a89d8e;
+}
+
+.code-input:focus {
+  background-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 0 3px rgba(92, 53, 47, 0.15);
+}
+
+.code-error {
+  min-height: 2.2rem;
+  margin: 0.8rem 0 0.6rem;
+  font-size: 1.3rem;
+  color: #b34d45;
+}
+
+.enter-btn {
+  width: 100%;
+  height: 4.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "ZT Formom", "Times New Roman", serif;
+  font-size: 1.9rem;
+  color: var(--cream, #f9f0df);
+  background: linear-gradient(90deg, #623b36 0%, #2b1b14 100%);
+  border: 1.5px solid #623b36;
+  border-radius: 0.9rem;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    filter 0.2s ease;
+}
+
+.enter-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+/* ---------- Hasil struk history ---------- */
+.history-result {
+  width: 100%;
+  max-width: 38rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.status-banner {
+  width: 100%;
+  padding: 1rem 1.6rem;
+  border-radius: 1rem;
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.status-banner.is-waiting {
+  background: var(--gold, #e2b95f);
+  color: #5c4814;
+}
+
+.status-banner.is-published {
+  background: var(--matcha, #88ab66);
+  color: #263814;
+}
+
+.status-banner.is-attention {
+  background: var(--pink, #e8b4ae);
+  color: #7a2e28;
+}
+
+.status-banner.is-deleted {
+  background: #d7cdbe;
+  color: #4f4638;
+}
+
+.history-struk {
+  position: static !important;
+  transform: none !important;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.history-likes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0;
+  font-size: 1.3rem;
+  color: #b34d45;
+}
+
+.history-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.board-link {
+  font-family: "ZT Formom", "Times New Roman", serif;
+  font-size: 1.7rem;
+  color: var(--ink, #2b1b14);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   10. STORY BOARD (STRUK)
+   ========================================================================== */
+
+/* ---------- Layout board ---------- */
 .story-board {
   position: relative;
   display: grid;
@@ -821,7 +1413,7 @@ body {
   display: block;
 }
 
-/* struk */
+/* ---------- Struk (kertas) ---------- */
 .struk {
   position: absolute;
   background-image: url("/assets/paper.svg");
@@ -868,6 +1460,7 @@ body {
   filter: drop-shadow(0.4rem 0.4rem 0.2rem rgba(0, 0, 0, 0.45));
 }
 
+/* ---------- Isi struk ---------- */
 .line {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -935,13 +1528,8 @@ body {
   font-weight: 600;
 }
 
-.menu-grid:has(input:checked) .menu-item input:not(:checked) + img {
-  opacity: 0.55;
-}
-
-/* responsive story board */
+/* ---------- Responsive: story board ---------- */
 @media (max-width: 1200px) {
-
   .top h4 {
     font-size: 1.6rem;
     margin-bottom: 0.3rem;
@@ -955,14 +1543,21 @@ body {
     width: 45%;
   }
 
-  .struk-1 { top: 100%; }
-  .struk-2 { top: 125%; }
-  .struk-3 { top: 90%; }
-  .struk-4 { top: 115%; }
+  .struk-1 {
+    top: 100%;
+  }
+  .struk-2 {
+    top: 125%;
+  }
+  .struk-3 {
+    top: 90%;
+  }
+  .struk-4 {
+    top: 115%;
+  }
 }
 
 @media (max-width: 768px) {
-
   .board {
     position: relative;
     width: 100%;
@@ -1034,7 +1629,6 @@ body {
 }
 
 @media (max-width: 360px) {
-
   .story-board h1 {
     font-size: 2rem;
   }
@@ -1083,26 +1677,35 @@ body {
     font-size: 0.2rem;
   }
 
-  .struk-1 { top: 65%; }
-  .struk-2 { top: 63%; }
-  .struk-3 { top: 65%; }
+  .struk-1 {
+    top: 65%;
+  }
+  .struk-2 {
+    top: 63%;
+  }
+  .struk-3 {
+    top: 65%;
+  }
 }
 
-/* admin */
+/* ==========================================================================
+   11. ADMIN (DASHBOARD)
+   ========================================================================== */
+
+/* ---------- Layout & variabel admin ---------- */
 .admin {
   --font-display: "ZT Formom", "Times New Roman", serif;
   --font-body:
     "SF Pro Display", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --ink: var(--darkchoco);
   --gold-dark: #c99a3a;
   --matcha-dark: #6a9150;
-  --panel: #e8dfc8;
 
   display: grid;
   grid-template-columns: 24rem 1fr;
   min-height: 100vh;
 }
 
+/* ---------- Sidebar ---------- */
 .sidebar {
   position: sticky;
   top: 0;
@@ -1180,6 +1783,7 @@ body {
   cursor: pointer;
 }
 
+/* ---------- Konten utama & sapaan ---------- */
 .main {
   min-width: 0;
   padding: 2.4rem 2.8rem 4rem;
@@ -1202,6 +1806,7 @@ body {
   font-size: 2.4rem;
 }
 
+/* ---------- Kartu statistik ---------- */
 .stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1249,6 +1854,7 @@ body {
   border-color: var(--darkchoco);
 }
 
+/* ---------- Toolbar (pencarian & filter mood) ---------- */
 .toolbar {
   display: flex;
   gap: 1.2rem;
@@ -1306,6 +1912,7 @@ body {
   border-color: #a39d90;
 }
 
+/* ---------- Daftar cerita ---------- */
 .list {
   display: flex;
   flex-direction: column;
@@ -1337,6 +1944,7 @@ body {
   margin-bottom: 0.8rem;
 }
 
+/* ---------- Badge status & mood ---------- */
 .badge {
   display: inline-block;
   padding: 0.2rem 1rem;
@@ -1374,6 +1982,10 @@ body {
   color: #722722;
 }
 
+.badge-mood-stressed {
+  background: #e38025;
+}
+
 .badge-mood-frustrated {
   background: #e38025;
   color: #6c3a0c;
@@ -1389,6 +2001,7 @@ body {
   color: #0f4350;
 }
 
+/* ---------- Isi cerita ---------- */
 .story-text {
   font-size: 1.3rem;
   line-height: 1.45;
@@ -1423,6 +2036,7 @@ body {
   border-radius: 1rem;
 }
 
+/* ---------- Tombol & menu Action ---------- */
 .action-btn {
   flex-shrink: 0;
   display: inline-flex;
@@ -1522,58 +2136,32 @@ body {
   filter: brightness(0.94);
 }
 
-/* responsive */
-.awning-mobile {
+.option[hidden] {
   display: none;
 }
 
-.btn-primary {
-  margin-top: clamp(14px, 3vh, 28px);
+.option-restore {
+  background: #7ca3b8;
+  color: var(--bg-color, var(--cream));
 }
 
-.panel {
-  overflow-y: auto;
+/* ==========================================================================
+   12. GAMBAR CERITA (DASHBOARD & BOARD)
+   ========================================================================== */
+.story-img,
+.struk-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
 }
 
-.auth-switch {
-  margin-top: clamp(10px, 2vh, 16px);
-  text-align: center;
-  font-family: "SF Pro Display", system-ui, sans-serif;
-  font-size: 14px;
-  color: var(--muted);
-}
+/* ==========================================================================
+   13. RESPONSIVE
+   ========================================================================== */
 
-.auth-switch a {
-  color: var(--darkchoco);
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.auth-switch a:hover {
-  text-decoration: underline;
-}
-
-.divider {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  width: 70%;
-  margin: clamp(8px, 1.8vh, 14px) auto;
-  font-family: "SF Pro Display", system-ui, sans-serif;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.divider::before,
-.divider::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--field-border);
-}
-
+/* ---------- <= 993px (tablet) ---------- */
 @media (max-width: 993px) {
-
   html {
     font-size: 15px;
   }
@@ -1614,8 +2202,12 @@ body {
     max-width: 13vw;
   }
 
-  .pencil-sect img { left: 3vw; }
-  .brush-sect img  { right: 3vw; }
+  .pencil-sect img {
+    left: 3vw;
+  }
+  .brush-sect img {
+    right: 3vw;
+  }
 
   .story-board h1 {
     font-size: 4.2rem;
@@ -1683,8 +2275,8 @@ body {
   }
 }
 
+/* ---------- <= 768px (tablet kecil) ---------- */
 @media (max-width: 768px) {
-
   html {
     font-size: 14px;
   }
@@ -1736,8 +2328,12 @@ body {
     max-height: 55vh;
   }
 
-  .pencil-sect img { left: 1vw; }
-  .brush-sect img  { right: 1vw; }
+  .pencil-sect img {
+    left: 1vw;
+  }
+  .brush-sect img {
+    right: 1vw;
+  }
 
   .writing-input {
     inset: 0.6rem;
@@ -1752,10 +2348,22 @@ body {
     padding: 1.6rem 1.2rem;
   }
 
-  .struk-1 { top: 80%;  left: 8%; }
-  .struk-2 { top: 105%; left: 26%; }
-  .struk-3 { top: 65%;  right: 8%; }
-  .struk-4 { top: 90%;  right: 20%; }
+  .struk-1 {
+    top: 80%;
+    left: 8%;
+  }
+  .struk-2 {
+    top: 105%;
+    left: 26%;
+  }
+  .struk-3 {
+    top: 65%;
+    right: 8%;
+  }
+  .struk-4 {
+    top: 90%;
+    right: 20%;
+  }
 
   .struk tr {
     font-size: 0.65rem;
@@ -1822,8 +2430,8 @@ body {
   }
 }
 
+/* ---------- <= 617px (HP) ---------- */
 @media (max-width: 617px) {
-
   html {
     font-size: 12px;
   }
@@ -1973,8 +2581,12 @@ body {
     max-height: 40vh;
   }
 
-  .pencil-sect img { left: 0; }
-  .brush-sect img  { right: 0; }
+  .pencil-sect img {
+    left: 0;
+  }
+  .brush-sect img {
+    right: 0;
+  }
 
   .writing-input {
     inset: 0.5rem;
@@ -2034,10 +2646,26 @@ body {
     padding: 1.4rem 1rem;
   }
 
-  .struk-1 { top: 75%;  left: 3%;   right: auto; }
-  .struk-2 { top: 85%;  left: auto; right: 3%; }
-  .struk-3 { top: 115%; left: 3%;   right: auto; }
-  .struk-4 { top: 125%; left: auto; right: 3%; }
+  .struk-1 {
+    top: 75%;
+    left: 3%;
+    right: auto;
+  }
+  .struk-2 {
+    top: 85%;
+    left: auto;
+    right: 3%;
+  }
+  .struk-3 {
+    top: 115%;
+    left: 3%;
+    right: auto;
+  }
+  .struk-4 {
+    top: 125%;
+    left: auto;
+    right: 3%;
+  }
 
   .top h4 {
     font-size: 1.4rem;
@@ -2172,8 +2800,8 @@ body {
   }
 }
 
+/* ---------- <= 356px (HP kecil) ---------- */
 @media (max-width: 356px) {
-
   html {
     font-size: 11px;
   }
@@ -2301,10 +2929,26 @@ body {
     padding: 1.1rem 0.8rem;
   }
 
-  .struk-1 { top: 72%;  left: 2%;   right: auto; }
-  .struk-2 { top: 82%;  left: auto; right: 2%; }
-  .struk-3 { top: 110%; left: 2%;   right: auto; }
-  .struk-4 { top: 120%; left: auto; right: 2%; }
+  .struk-1 {
+    top: 72%;
+    left: 2%;
+    right: auto;
+  }
+  .struk-2 {
+    top: 82%;
+    left: auto;
+    right: 2%;
+  }
+  .struk-3 {
+    top: 110%;
+    left: 2%;
+    right: auto;
+  }
+  .struk-4 {
+    top: 120%;
+    left: auto;
+    right: 2%;
+  }
 
   .top h4 {
     font-size: 1.2rem;
