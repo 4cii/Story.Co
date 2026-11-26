@@ -17,7 +17,6 @@
    13. Responsive
    ========================================================================== */
 
-
 /* ==========================================================================
    1. VARIABEL & RESET
    ========================================================================== */
@@ -56,10 +55,8 @@
   box-sizing: border-box;
 }
 
-
 /* ==========================================================================
-   2. FONT
-   ========================================================================== */
+   2. FONT*/
 @font-face {
   font-family: "ZT Formom";
   src: url("../assets/ZT Formom.ttf") format("truetype");
@@ -69,7 +66,6 @@
   font-family: "SF Pro Display";
   src: url("../assets/SFPRODISPLAYREGULAR.OTF") format("opentype");
 }
-
 
 /* ==========================================================================
    3. BASE
@@ -82,7 +78,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-
 
 /* ==========================================================================
    4. UTILITAS
@@ -102,7 +97,6 @@ body {
 [hidden] {
   display: none !important;
 }
-
 
 /* ==========================================================================
    5. KOMPONEN BERSAMA
@@ -168,7 +162,6 @@ body {
   height: clamp(2.75rem, 5vw, 5rem);
   object-fit: contain;
 }
-
 
 /* ==========================================================================
    6. HOME PAGE
@@ -339,8 +332,9 @@ body {
   border-radius: 1.7rem;
 }
 
-.card-test p {
-  font-size: 1.2rem;
+.card-test p,
+.card-ano {
+  font-size: 1.25rem;
 }
 
 .card-test h3 {
@@ -349,14 +343,116 @@ body {
 }
 
 .title-two {
+  margin: 6rem 0 clamp(2.5rem, 4.5vw, 4rem);
   text-align: center;
+  line-height: 1.05;
 }
 
-.highlighted {
-  background-color: var(--gold);
-  color: var(--cream);
+.title-two .highlighted {
+  display: inline-block;
+  padding: 0 0.22em 0.08em;
+  background-color: var(--gold, #e2b95f);
+  color: var(--cream, #f9f0df);
+  line-height: 0.95;
 }
 
+.anonimus {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.4rem, 2.2vw, 2.4rem);
+  width: 100%;
+  max-width: 106rem;
+  height: clamp(46rem, 62vh, 62rem);
+  margin: 0 auto;
+  padding: 0 clamp(1.6rem, 4vw, 4rem);
+  overflow: hidden;
+
+  /* Efek fade-out halus di bagian atas & bawah */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 12%,
+    #000 68%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 12%,
+    #000 68%,
+    transparent 100%
+  );
+}
+
+.anonimus-col {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Offset awal kolom tengah & kanan biar terlihat staggered */
+.anonimus-col:nth-child(2) {
+  padding-top: 4rem;
+}
+
+.anonimus-track {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.4rem, 2.2vw, 2.4rem);
+  will-change: transform;
+}
+
+.card-anonimus {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: clamp(24rem, 32vw, 31rem);
+  padding: 2.4rem 2rem;
+  background: var(--muted-bg, #eee4d4);
+  border-radius: 1.7rem;
+  text-align: center;
+  color: var(--ink, #2b1b14);
+}
+
+.card-ano {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.card-ano p {
+  margin: 0;
+  max-width: 24ch;
+  font-family: "ZT Formom", "Times New Roman", serif;
+  font-size: clamp(1.4rem, 1.8vw, 1.85rem);
+  line-height: 1.25;
+}
+
+.card-ano h3 {
+  margin: 0;
+  font-family: "ZT Formom", "Times New Roman", serif;
+  font-weight: 400;
+  font-size: clamp(1.1rem, 1.3vw, 1.3rem);
+  opacity: 0.85;
+}
+
+/* Responsif HP: tampilkan 1 kolom saja */
+@media (max-width: 768px) {
+  .anonimus {
+    grid-template-columns: 1fr;
+    max-width: 36rem;
+    height: 44rem;
+  }
+
+  .anonimus-col:nth-child(n + 2) {
+    display: none;
+  }
+}
 
 /* ==========================================================================
    7. SIGN UP PAGE
@@ -497,7 +593,6 @@ body {
   height: 1px;
   background: var(--field-border);
 }
-
 
 /* ==========================================================================
    8. WRITE STORY PAGE
@@ -653,7 +748,6 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .book-btn,
   .book-btn.fade-out,
   .writing-base,
@@ -1088,7 +1182,6 @@ body {
   opacity: 0.8;
 }
 
-
 /* ==========================================================================
    9. HISTORY PAGE
    ========================================================================== */
@@ -1121,7 +1214,7 @@ body {
 
 .code-title {
   margin: 0 0 2.8rem;
-  font-family: 'ZT Formom', 'Times New Roman', serif;
+  font-family: "ZT Formom", "Times New Roman", serif;
   font-weight: 400;
   font-size: clamp(4.2rem, 8vw, 6.8rem);
   line-height: 0.92;
@@ -1140,7 +1233,7 @@ body {
   width: 100%;
   height: 7.2rem;
   padding: 0 2rem;
-  font-family: 'ZT Formom', 'Times New Roman', serif;
+  font-family: "ZT Formom", "Times New Roman", serif;
   font-size: 2.6rem;
   letter-spacing: 0.06em;
   text-align: center;
@@ -1150,7 +1243,9 @@ body {
   border: 1.5px solid var(--ink, #2b1b14);
   border-radius: 1.2rem;
   outline: none;
-  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .code-input::placeholder {
@@ -1178,14 +1273,16 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: 'ZT Formom', 'Times New Roman', serif;
+  font-family: "ZT Formom", "Times New Roman", serif;
   font-size: 1.9rem;
   color: var(--cream, #f9f0df);
   background: linear-gradient(90deg, #623b36 0%, #2b1b14 100%);
   border: 1.5px solid #623b36;
   border-radius: 0.9rem;
   cursor: pointer;
-  transition: transform 0.15s ease, filter 0.2s ease;
+  transition:
+    transform 0.15s ease,
+    filter 0.2s ease;
 }
 
 .enter-btn:hover {
@@ -1258,12 +1355,11 @@ body {
 }
 
 .board-link {
-  font-family: 'ZT Formom', 'Times New Roman', serif;
+  font-family: "ZT Formom", "Times New Roman", serif;
   font-size: 1.7rem;
   color: var(--ink, #2b1b14);
   text-decoration: underline;
 }
-
 
 /* ==========================================================================
    10. STORY BOARD (STRUK)
@@ -1409,7 +1505,6 @@ body {
 
 /* ---------- Responsive: story board ---------- */
 @media (max-width: 1200px) {
-
   .top h4 {
     font-size: 1.6rem;
     margin-bottom: 0.3rem;
@@ -1423,14 +1518,21 @@ body {
     width: 45%;
   }
 
-  .struk-1 { top: 100%; }
-  .struk-2 { top: 125%; }
-  .struk-3 { top: 90%; }
-  .struk-4 { top: 115%; }
+  .struk-1 {
+    top: 100%;
+  }
+  .struk-2 {
+    top: 125%;
+  }
+  .struk-3 {
+    top: 90%;
+  }
+  .struk-4 {
+    top: 115%;
+  }
 }
 
 @media (max-width: 768px) {
-
   .board {
     position: relative;
     width: 100%;
@@ -1502,7 +1604,6 @@ body {
 }
 
 @media (max-width: 360px) {
-
   .story-board h1 {
     font-size: 2rem;
   }
@@ -1551,11 +1652,16 @@ body {
     font-size: 0.2rem;
   }
 
-  .struk-1 { top: 65%; }
-  .struk-2 { top: 63%; }
-  .struk-3 { top: 65%; }
+  .struk-1 {
+    top: 65%;
+  }
+  .struk-2 {
+    top: 63%;
+  }
+  .struk-3 {
+    top: 65%;
+  }
 }
-
 
 /* ==========================================================================
    11. ADMIN (DASHBOARD)
@@ -2014,7 +2120,6 @@ body {
   color: var(--bg-color, var(--cream));
 }
 
-
 /* ==========================================================================
    12. GAMBAR CERITA (DASHBOARD & BOARD)
    ========================================================================== */
@@ -2026,14 +2131,12 @@ body {
   border-radius: 0.5rem;
 }
 
-
 /* ==========================================================================
    13. RESPONSIVE
    ========================================================================== */
 
 /* ---------- <= 993px (tablet) ---------- */
 @media (max-width: 993px) {
-
   html {
     font-size: 15px;
   }
@@ -2074,8 +2177,12 @@ body {
     max-width: 13vw;
   }
 
-  .pencil-sect img { left: 3vw; }
-  .brush-sect img  { right: 3vw; }
+  .pencil-sect img {
+    left: 3vw;
+  }
+  .brush-sect img {
+    right: 3vw;
+  }
 
   .story-board h1 {
     font-size: 4.2rem;
@@ -2145,7 +2252,6 @@ body {
 
 /* ---------- <= 768px (tablet kecil) ---------- */
 @media (max-width: 768px) {
-
   html {
     font-size: 14px;
   }
@@ -2197,8 +2303,12 @@ body {
     max-height: 55vh;
   }
 
-  .pencil-sect img { left: 1vw; }
-  .brush-sect img  { right: 1vw; }
+  .pencil-sect img {
+    left: 1vw;
+  }
+  .brush-sect img {
+    right: 1vw;
+  }
 
   .writing-input {
     inset: 0.6rem;
@@ -2213,10 +2323,22 @@ body {
     padding: 1.6rem 1.2rem;
   }
 
-  .struk-1 { top: 80%;  left: 8%; }
-  .struk-2 { top: 105%; left: 26%; }
-  .struk-3 { top: 65%;  right: 8%; }
-  .struk-4 { top: 90%;  right: 20%; }
+  .struk-1 {
+    top: 80%;
+    left: 8%;
+  }
+  .struk-2 {
+    top: 105%;
+    left: 26%;
+  }
+  .struk-3 {
+    top: 65%;
+    right: 8%;
+  }
+  .struk-4 {
+    top: 90%;
+    right: 20%;
+  }
 
   .struk tr {
     font-size: 0.65rem;
@@ -2285,7 +2407,6 @@ body {
 
 /* ---------- <= 617px (HP) ---------- */
 @media (max-width: 617px) {
-
   html {
     font-size: 12px;
   }
@@ -2435,8 +2556,12 @@ body {
     max-height: 40vh;
   }
 
-  .pencil-sect img { left: 0; }
-  .brush-sect img  { right: 0; }
+  .pencil-sect img {
+    left: 0;
+  }
+  .brush-sect img {
+    right: 0;
+  }
 
   .writing-input {
     inset: 0.5rem;
@@ -2496,10 +2621,26 @@ body {
     padding: 1.4rem 1rem;
   }
 
-  .struk-1 { top: 75%;  left: 3%;   right: auto; }
-  .struk-2 { top: 85%;  left: auto; right: 3%; }
-  .struk-3 { top: 115%; left: 3%;   right: auto; }
-  .struk-4 { top: 125%; left: auto; right: 3%; }
+  .struk-1 {
+    top: 75%;
+    left: 3%;
+    right: auto;
+  }
+  .struk-2 {
+    top: 85%;
+    left: auto;
+    right: 3%;
+  }
+  .struk-3 {
+    top: 115%;
+    left: 3%;
+    right: auto;
+  }
+  .struk-4 {
+    top: 125%;
+    left: auto;
+    right: 3%;
+  }
 
   .top h4 {
     font-size: 1.4rem;
@@ -2636,7 +2777,6 @@ body {
 
 /* ---------- <= 356px (HP kecil) ---------- */
 @media (max-width: 356px) {
-
   html {
     font-size: 11px;
   }
@@ -2764,10 +2904,26 @@ body {
     padding: 1.1rem 0.8rem;
   }
 
-  .struk-1 { top: 72%;  left: 2%;   right: auto; }
-  .struk-2 { top: 82%;  left: auto; right: 2%; }
-  .struk-3 { top: 110%; left: 2%;   right: auto; }
-  .struk-4 { top: 120%; left: auto; right: 2%; }
+  .struk-1 {
+    top: 72%;
+    left: 2%;
+    right: auto;
+  }
+  .struk-2 {
+    top: 82%;
+    left: auto;
+    right: 2%;
+  }
+  .struk-3 {
+    top: 110%;
+    left: 2%;
+    right: auto;
+  }
+  .struk-4 {
+    top: 120%;
+    left: auto;
+    right: 2%;
+  }
 
   .top h4 {
     font-size: 1.2rem;

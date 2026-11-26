@@ -4,12 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Story.Co</title>
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <div class="hero-sect">
       <img class="awning" src="assets/awning.png" alt="awning.png" />
-      <a href="history.html" class="history-btn" type="button" aria-label="See My History">
+      <a
+        href="history.html"
+        class="history-btn"
+        type="button"
+        aria-label="See My History"
+      >
         <svg
           width="95"
           height="71"
@@ -102,25 +107,49 @@
       </main>
       <section class="intro">
         <img class="coffe-img" src="assets/Coffe.png" alt="coffee-cup" />
-        
+
         <h1 class="hero-title">100% Coffee</h1>
 
         <div class="testimoni">
-          <div class="card-test" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-max="12" data-tilt-scale="1.05" data-tilt-gyroscope="false">
+          <div
+            class="card-test"
+            data-tilt
+            data-tilt-glare
+            data-tilt-max-glare="0.3"
+            data-tilt-max="12"
+            data-tilt-scale="1.05"
+            data-tilt-gyroscope="false"
+          >
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Praesentium, similique?
             </p>
             <h3>Tighnari Yuan</h3>
           </div>
-          <div class="card-test" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-max="12" data-tilt-scale="1.05" data-tilt-gyroscope="false">
+          <div
+            class="card-test"
+            data-tilt
+            data-tilt-glare
+            data-tilt-max-glare="0.3"
+            data-tilt-max="12"
+            data-tilt-scale="1.05"
+            data-tilt-gyroscope="false"
+          >
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Praesentium, similique?
             </p>
             <h3>Tighnari Yuan</h3>
           </div>
-          <div class="card-test" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-max="12" data-tilt-scale="1.05" data-tilt-gyroscope="false">
+          <div
+            class="card-test"
+            data-tilt
+            data-tilt-glare
+            data-tilt-max-glare="0.3"
+            data-tilt-max="12"
+            data-tilt-scale="1.05"
+            data-tilt-gyroscope="false"
+          >
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Praesentium, similique?
@@ -129,12 +158,98 @@
           </div>
         </div>
 
-        <h1 class="hero-title title-two">Share your stories<br>as <span class="highlighted">Anonymous</span></h1>
+        <h1 class="hero-title title-two">
+          Share your stories<br />as <span class="highlighted">Anonymous</span>
+        </h1>
 
+        <div class="anonimus">
+          <div class="anonimus-col" data-dir="up" data-speed="18">
+            <div class="anonimus-track">
+              <div class="card-anonimus">
+                <div class="card-ano">
+                  <p>
+                    “I feel safe to share or write whatever things pass in my
+                    mind”
+                  </p>
+                  <h3>-Tighnari</h3>
+                </div>
+              </div>
+              <div class="card-anonimus">
+                <div class="card-ano">
+                  <p>
+                    “Sometimes a cup of matcha and an honest note is all I need
+                    today.”
+                  </p>
+                  <h3>-Collei</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="anonimus-col" data-dir="down" data-speed="22">
+            <div class="anonimus-track">
+              <div class="card-anonimus">
+                <div class="card-ano">
+                  <p>
+                    “Writing here feels like leaving a secret letter on a warm
+                    cafe table.”
+                  </p>
+                  <h3>-Alhaitham</h3>
+                </div>
+              </div>
+              <div class="card-anonimus">
+                <div class="card-ano">
+                  <p>
+                    “No judgment, just stories floating quietly with warm
+                    coffee.”
+                  </p>
+                  <h3>-Kaveh</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="anonimus-col" data-dir="up" data-speed="20">
+            <div class="anonimus-track">
+              <div class="card-anonimus">
+                <div class="card-ano">
+                  <p>
+                    “I love reading other people's little moments while waiting
+                    for my order.”
+                  </p>
+                  <h3>-Cyno</h3>
+                </div>
+              </div>
+              <div class="card-anonimus">
+                <div class="card-ano">
+                  <p>
+                    “Simple words hit differently when you don't have to reveal
+                    your name.”
+                  </p>
+                  <h3>-Nilou</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
     <!-- script -->
-     <script src="js/write.js"></script>
-     <script src="js/vanilla-tilt.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"
+      integrity="sha512-Mf/xUqfWvDIr+1B6zfnIDIiG7XHzyP/guXUWgV6PgaQoIFeXkJQR5XWh9fqAiCiRCpemabt3naV4jhDWVnuYDQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollTrigger.min.js"
+      integrity="sha512-YzMW3OzvgtVpIIPPpjnCy8wVTq5slHRrxnLH1oD5dkVjZf8+8DJYd+GYmmWXZNmroTqKXFFzFS3XZ/LBvaNgZg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script src="js/main.js"></script>
+    <script src="js/write.js"></script>
+    <script src="js/vanilla-tilt.js"></script>
   </body>
 </html>
