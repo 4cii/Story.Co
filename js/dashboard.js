@@ -83,3 +83,9 @@
         searchInput.addEventListener('input', filterStories);
         window.addEventListener('hashchange', showPage);
         showPage();
+
+        document.addEventListener('click', (e) => {
+    if (!e.target.closest('.story')) {
+        document.querySelectorAll('.story.open').forEach((s) => s.classList.remove('open'));
+    }
+});
