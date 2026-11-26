@@ -1,3 +1,26 @@
+/* ==========================================================================
+   STORY.CO - style.css
+
+   DAFTAR ISI
+   1.  Variabel & reset
+   2.  Font
+   3.  Base (body)
+   4.  Utilitas
+   5.  Komponen bersama (tombol .btn, tombol kembali)
+   6.  Home page
+   7.  Sign up page
+   8.  Write story page
+   9.  History page
+   10. Story board (struk)
+   11. Admin (dashboard)
+   12. Gambar cerita (dashboard & board)
+   13. Responsive
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. VARIABEL & RESET
+   ========================================================================== */
 :root {
   --brown: #512524;
   --mocca: #7e4146;
@@ -17,6 +40,14 @@
   --field-border: #e2d5c4;
 
   --delay: 0.8s;
+  --ink: #2f0e0d;
+  --mocca-dark: #5f2f33;
+  --gold-dark: #c99a36;
+  --matcha-dark: #6d9448;
+  --panel: #e8dfc8;
+  --red: #a8554a;
+  --pink: #e8b4ae;
+  --pink-text: #7a2e28;
 }
 
 * {
@@ -25,12 +56,26 @@
   box-sizing: border-box;
 }
 
+
+/* ==========================================================================
+   2. FONT
+   ========================================================================== */
 @font-face {
   font-family: "ZT Formom";
   src: url("../assets/ZT Formom.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("../assets/SFPRODISPLAYREGULAR.OTF") format("opentype");
+}
+
+
+/* ==========================================================================
+   3. BASE
+   ========================================================================== */
 body {
+  min-height: 100vh;
   background: #f9f0e1;
   color: var(--darkchoco);
   font-family: "ZT Formom", Georgia, "Times New Roman", serif;
@@ -38,7 +83,98 @@ body {
   flex-direction: column;
 }
 
-/* home page */
+
+/* ==========================================================================
+   4. UTILITAS
+   ========================================================================== */
+
+/* teks khusus pembaca layar (tidak terlihat) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* atribut hidden selalu menang atas display lain */
+[hidden] {
+  display: none !important;
+}
+
+
+/* ==========================================================================
+   5. KOMPONEN BERSAMA
+   ========================================================================== */
+
+/* ---------- Tombol .btn (dengan coretan saat hover) ---------- */
+.btn {
+  position: relative;
+  display: inline-block;
+  padding: 0.45em 1.5em;
+  font-family: "ZT Formom", sans-serif;
+  font-size: clamp(10px, 2rem, 35px);
+  color: var(--white);
+  text-decoration: none;
+  background: linear-gradient(90deg, var(--mocca), var(--darkchoco));
+  border: 3px solid var(--mocca);
+  border-radius: 8px;
+  transition: transform 0.5s ease;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: -33px;
+  height: 34px;
+  background-image: var(--scribble);
+  background-position: center;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  transform: rotate(var(--tilt, 0deg)) scaleX(var(--flip, 1));
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.45s ease;
+  pointer-events: none;
+}
+
+.btn:hover::after,
+.btn:focus-visible::after {
+  clip-path: inset(0 0 0 0);
+}
+
+/* ---------- Tombol kembali (write & board) ---------- */
+.back-btn {
+  position: absolute;
+  top: clamp(1rem, 3vw, 2.5rem);
+  left: clamp(1rem, 3vw, 2.5rem);
+  z-index: 10;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.back-btn:hover {
+  transform: scale(1.08);
+}
+
+.back-btn img {
+  display: block;
+  width: clamp(2.75rem, 5vw, 5rem);
+  height: clamp(2.75rem, 5vw, 5rem);
+  object-fit: contain;
+}
+
+
+/* ==========================================================================
+   6. HOME PAGE
+   ========================================================================== */
+
+/* ---------- Hero: kanopi & tombol riwayat ---------- */
 .hero-sect {
   position: relative;
   overflow: hidden;
@@ -98,6 +234,7 @@ body {
   opacity: 1;
 }
 
+/* ---------- Hero: judul & coretan ---------- */
 .hero {
   flex: 1;
   display: flex;
@@ -117,7 +254,7 @@ body {
   letter-spacing: -0.02em;
 }
 
-.line {
+.line-a {
   display: block;
 }
 
@@ -153,6 +290,7 @@ body {
   vertical-align: -0.02em;
 }
 
+/* ---------- Tombol navigasi home ---------- */
 .btn-nav {
   margin-top: 5rem;
   display: flex;
@@ -161,43 +299,7 @@ body {
   gap: 2rem;
 }
 
-.btn {
-  position: relative;
-  display: inline-block;
-  padding: 0.45em 1.5em;
-  font-family: "ZT Formom", sans-serif;
-  font-size: clamp(10px, 2rem, 35px);
-  color: var(--white);
-  text-decoration: none;
-  background: linear-gradient(90deg, var(--mocca), var(--darkchoco));
-  border: 3px solid var(--mocca);
-  border-radius: 8px;
-  transition: transform 0.5s ease;
-}
-
-.btn::after {
-  content: "";
-  position: absolute;
-  left: 5%;
-  right: 5%;
-  bottom: -33px;
-  height: 34px;
-  background-image: var(--scribble);
-  background-position: center;
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  transform: rotate(var(--tilt, 0deg)) scaleX(var(--flip, 1));
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 0.45s ease;
-  pointer-events: none;
-}
-
-.btn:hover::after,
-.btn:focus-visible::after {
-  clip-path: inset(0 0 0 0);
-}
-
-/* sect 1 */
+/* ---------- Section intro (gambar kopi berputar) ---------- */
 .intro {
   display: flex;
   flex-direction: column;
@@ -222,6 +324,7 @@ body {
   }
 }
 
+/* ---------- Testimoni ---------- */
 .testimoni {
   margin: 4rem 5rem 3rem;
   display: flex;
@@ -248,17 +351,18 @@ body {
 .title-two {
   text-align: center;
 }
+
 .highlighted {
   background-color: var(--gold);
   color: var(--cream);
 }
 
 
+/* ==========================================================================
+   7. SIGN UP PAGE
+   ========================================================================== */
 
-/* end home page */
-
-
-/* sign up page */
+/* ---------- Layout halaman (dua kolom) ---------- */
 .page {
   overflow: hidden;
   --outline: #a89a88;
@@ -269,6 +373,7 @@ body {
   height: 100vh;
 }
 
+/* ---------- Kolom gambar ---------- */
 .visual {
   position: relative;
   overflow: hidden;
@@ -285,9 +390,16 @@ body {
   object-fit: contain;
 }
 
+/* kanopi versi mobile (tersembunyi di desktop) */
+.awning-mobile {
+  display: none;
+}
+
+/* ---------- Kolom form ---------- */
 .panel {
   display: flex;
   overflow: hidden;
+  overflow-y: auto;
   padding: clamp(16px, 3vh, 40px) clamp(24px, 4vw, 56px);
   margin-right: 5rem;
 }
@@ -308,6 +420,7 @@ body {
   letter-spacing: -0.02em;
 }
 
+/* ---------- Input ---------- */
 .field {
   margin-bottom: clamp(8px, 1.6vh, 14px);
 }
@@ -342,12 +455,55 @@ body {
   outline-offset: 2px;
 }
 
+/* ---------- Tombol utama & tautan ganti halaman ---------- */
 .btn-primary {
-  margin-top: 3rem;
+  margin-top: clamp(14px, 3vh, 28px);
   width: 100%;
 }
 
-/* write story page */
+.auth-switch {
+  margin-top: clamp(10px, 2vh, 16px);
+  text-align: center;
+  font-family: "SF Pro Display", system-ui, sans-serif;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.auth-switch a {
+  color: var(--darkchoco);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 70%;
+  margin: clamp(8px, 1.8vh, 14px) auto;
+  font-family: "SF Pro Display", system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--field-border);
+}
+
+
+/* ==========================================================================
+   8. WRITE STORY PAGE
+   ========================================================================== */
+
+/* ---------- Layout halaman & meja ---------- */
 .write-sect {
   position: relative;
   overflow: hidden;
@@ -409,6 +565,7 @@ body {
   justify-content: center;
 }
 
+/* ---------- Buku menu (pembuka) ---------- */
 .book-btn {
   flex: none;
   width: clamp(180px, 25vw, 420px);
@@ -449,7 +606,18 @@ body {
     visibility 0s 1s;
 }
 
+/* ---------- Kartu: tersembunyi sampai buku diklik ---------- */
 .writing-base {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 1;
+  width: 60vw;
+  height: 78vh;
+  background-color: var(--brown);
+  border: 5px solid var(--darkchoco);
+  border-radius: 2rem;
   visibility: hidden;
   opacity: 0;
   scale: 0.9;
@@ -471,6 +639,7 @@ body {
     visibility 0s;
 }
 
+/* pensil & brush muncul setelah buku terbuka */
 .pencil-sect,
 .brush-sect {
   transition: opacity 0.5s ease 0.5s;
@@ -495,21 +664,7 @@ body {
   }
 }
 
-.writing-base {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  z-index: 1;
-  width: 60vw;
-  height: 78vh;
-  background-color: var(--brown);
-  border: 5px solid var(--darkchoco);
-  border-radius: 2rem;
-  opacity: 0;
-  pointer-events: none;
-}
-
+/* area dalam kartu (krem) */
 .writing-input {
   position: absolute;
   inset: 0.9rem;
@@ -521,6 +676,7 @@ body {
   border-radius: 1rem;
 }
 
+/* ---------- Form tulis ---------- */
 .story-form {
   display: flex;
   flex-direction: column;
@@ -578,6 +734,7 @@ body {
   color: #a63a2c;
 }
 
+/* ---------- Mood picker ---------- */
 .input-two {
   display: flex;
   align-items: center;
@@ -637,6 +794,7 @@ body {
   outline-offset: 4px;
 }
 
+/* ---------- Tombol Send / Order (menimpa bingkai bawah) ---------- */
 .send-btn {
   position: absolute;
   z-index: 2;
@@ -647,19 +805,7 @@ body {
   cursor: pointer;
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-[hidden] {
-  display: none !important;
-}
-
+/* ---------- Pensil & brush (pengganti mode) ---------- */
 .pencil-sect img,
 .brush-sect img {
   position: absolute;
@@ -710,8 +856,8 @@ body {
   outline-offset: 4px;
   border-radius: 0.5rem;
 }
-/* mode gambar */
 
+/* ---------- Mode gambar ---------- */
 .story-form.is-drawing .input-two {
   display: none;
 }
@@ -742,6 +888,7 @@ body {
   border-radius: 0.75rem;
 }
 
+/* bar di bawah canvas: undo | warna | redo */
 .draw-bar {
   display: flex;
   flex: none;
@@ -819,7 +966,76 @@ body {
   outline-offset: 2px;
 }
 
-/* success order */
+/* ---------- Choose the menu ---------- */
+.menu-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  min-height: 0;
+  text-align: center;
+}
+
+.menu-title {
+  margin: 0;
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--darkchoco);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.75rem, 2vw, 1.5rem) clamp(1rem, 3vw, 2.5rem);
+  place-items: center;
+}
+
+.menu-item {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.menu-item input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.menu-item img {
+  display: block;
+  width: clamp(75px, 10vw, 135px);
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: 50%;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.menu-item:hover img {
+  transform: scale(1.08);
+}
+
+.menu-item input:checked + img {
+  transform: scale(1.12);
+  box-shadow:
+    0 0 0 3px var(--cream),
+    0 0 0 6px var(--gold);
+}
+
+.menu-grid:has(input:checked) .menu-item input:not(:checked) + img {
+  opacity: 0.55;
+}
+
+/* ---------- Success order ---------- */
 .success-panel {
   display: flex;
   flex-direction: column;
@@ -854,7 +1070,10 @@ body {
   border: 2px solid var(--darkchoco);
   border-radius: 1ch;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
 }
 
 .code-chip:hover {
@@ -869,7 +1088,12 @@ body {
   opacity: 0.8;
 }
 
-/* history page */
+
+/* ==========================================================================
+   9. HISTORY PAGE
+   ========================================================================== */
+
+/* ---------- Layout & kotak input kode ---------- */
 .history-sect {
   min-height: 100vh;
   display: flex;
@@ -969,7 +1193,7 @@ body {
   transform: translateY(-1px);
 }
 
-/* Hasil Struk History */
+/* ---------- Hasil struk history ---------- */
 .history-result {
   width: 100%;
   max-width: 38rem;
@@ -1040,7 +1264,12 @@ body {
   text-decoration: underline;
 }
 
-/* story board */
+
+/* ==========================================================================
+   10. STORY BOARD (STRUK)
+   ========================================================================== */
+
+/* ---------- Layout board ---------- */
 .story-board {
   position: relative;
   display: grid;
@@ -1063,7 +1292,7 @@ body {
   display: block;
 }
 
-/* struk */
+/* ---------- Struk (kertas) ---------- */
 .struk {
   position: absolute;
   background-image: url("/assets/paper.svg");
@@ -1110,6 +1339,7 @@ body {
   filter: drop-shadow(0.4rem 0.4rem 0.2rem rgba(0, 0, 0, 0.45));
 }
 
+/* ---------- Isi struk ---------- */
 .line {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -1171,21 +1401,13 @@ body {
   width: 50%;
 }
 
-.menu-grid:has(input:checked) .menu-item input:not(:checked) + img {
-  opacity: 0.55;
-}
-/* end write story page */
 .barcode p {
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.5rem;
   font-weight: 600;
 }
 
-.menu-grid:has(input:checked) .menu-item input:not(:checked) + img {
-  opacity: 0.55;
-}
-
-/* responsive story board */
+/* ---------- Responsive: story board ---------- */
 @media (max-width: 1200px) {
 
   .top h4 {
@@ -1334,21 +1556,25 @@ body {
   .struk-3 { top: 65%; }
 }
 
-/* admin */
+
+/* ==========================================================================
+   11. ADMIN (DASHBOARD)
+   ========================================================================== */
+
+/* ---------- Layout & variabel admin ---------- */
 .admin {
   --font-display: "ZT Formom", "Times New Roman", serif;
   --font-body:
     "SF Pro Display", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --ink: var(--darkchoco);
   --gold-dark: #c99a3a;
   --matcha-dark: #6a9150;
-  --panel: #e8dfc8;
 
   display: grid;
   grid-template-columns: 24rem 1fr;
   min-height: 100vh;
 }
 
+/* ---------- Sidebar ---------- */
 .sidebar {
   position: sticky;
   top: 0;
@@ -1426,6 +1652,7 @@ body {
   cursor: pointer;
 }
 
+/* ---------- Konten utama & sapaan ---------- */
 .main {
   min-width: 0;
   padding: 2.4rem 2.8rem 4rem;
@@ -1448,6 +1675,7 @@ body {
   font-size: 2.4rem;
 }
 
+/* ---------- Kartu statistik ---------- */
 .stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1495,6 +1723,7 @@ body {
   border-color: var(--darkchoco);
 }
 
+/* ---------- Toolbar (pencarian & filter mood) ---------- */
 .toolbar {
   display: flex;
   gap: 1.2rem;
@@ -1552,6 +1781,7 @@ body {
   border-color: #a39d90;
 }
 
+/* ---------- Daftar cerita ---------- */
 .list {
   display: flex;
   flex-direction: column;
@@ -1583,6 +1813,7 @@ body {
   margin-bottom: 0.8rem;
 }
 
+/* ---------- Badge status & mood ---------- */
 .badge {
   display: inline-block;
   padding: 0.2rem 1rem;
@@ -1619,9 +1850,11 @@ body {
   background: #bc5850;
   color: #722722;
 }
+
 .badge-mood-stressed {
-  background: #E38025;
+  background: #e38025;
 }
+
 .badge-mood-frustrated {
   background: #e38025;
   color: #6c3a0c;
@@ -1637,6 +1870,7 @@ body {
   color: #0f4350;
 }
 
+/* ---------- Isi cerita ---------- */
 .story-text {
   font-size: 1.3rem;
   line-height: 1.45;
@@ -1671,6 +1905,7 @@ body {
   border-radius: 1rem;
 }
 
+/* ---------- Tombol & menu Action ---------- */
 .action-btn {
   flex-shrink: 0;
   display: inline-flex;
@@ -1779,69 +2014,24 @@ body {
   color: var(--bg-color, var(--cream));
 }
 
-.back-btn {
-  position: absolute;
-  top: clamp(1rem, 3vw, 2.5rem);
-  left: clamp(1rem, 3vw, 2.5rem);
-  z-index: 10;
-  padding: 0;
-  background: none;
-  border: 0;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-/* responsive */
-.awning-mobile {
-  display: none;
+
+/* ==========================================================================
+   12. GAMBAR CERITA (DASHBOARD & BOARD)
+   ========================================================================== */
+.story-img,
+.struk-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
 }
 
-.btn-primary {
-  margin-top: clamp(14px, 3vh, 28px);
-}
 
-.panel {
-  overflow-y: auto;
-}
+/* ==========================================================================
+   13. RESPONSIVE
+   ========================================================================== */
 
-.story-img, .struk-img { display: block; max-width: 100%; height: auto; border-radius: 0.5rem; }
-/* badge untuk mood baru: samakan warnanya dengan .badge-mood-frustrated */
-.auth-switch {
-  margin-top: clamp(10px, 2vh, 16px);
-  text-align: center;
-  font-family: "SF Pro Display", system-ui, sans-serif;
-  font-size: 14px;
-  color: var(--muted);
-}
-
-.auth-switch a {
-  color: var(--darkchoco);
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.auth-switch a:hover {
-  text-decoration: underline;
-}
-
-.divider {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  width: 70%;
-  margin: clamp(8px, 1.8vh, 14px) auto;
-  font-family: "SF Pro Display", system-ui, sans-serif;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.divider::before,
-.divider::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--field-border);
-}
-
+/* ---------- <= 993px (tablet) ---------- */
 @media (max-width: 993px) {
 
   html {
@@ -1953,6 +2143,7 @@ body {
   }
 }
 
+/* ---------- <= 768px (tablet kecil) ---------- */
 @media (max-width: 768px) {
 
   html {
@@ -2092,6 +2283,7 @@ body {
   }
 }
 
+/* ---------- <= 617px (HP) ---------- */
 @media (max-width: 617px) {
 
   html {
@@ -2442,6 +2634,7 @@ body {
   }
 }
 
+/* ---------- <= 356px (HP kecil) ---------- */
 @media (max-width: 356px) {
 
   html {
