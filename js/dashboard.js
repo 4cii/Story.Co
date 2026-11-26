@@ -1,5 +1,4 @@
-
-        // Tiap halaman: judul, subjudul, dan status cerita yang ditampilkan
+       // Tiap halaman: judul, subjudul, dan status cerita yang ditampilkan
         const pages = {
             'overview':          { title: 'Greetings, Kharim.', subtitle: "Today's view",                  show: ['waiting', 'attention'] },
             'delete-stories':    { title: 'Delete Stories',     subtitle: 'Stories removed from the board', show: ['deleted'] },
