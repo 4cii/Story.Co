@@ -9,12 +9,15 @@
 
   <body>
     <div class="write-sect">
-      <a href="index.html" class="back-btn"><img src="assets/back-btn.png" alt=""></a>
+      <a href="index.html" class="back-btn"
+        ><img src="assets/back-btn.png" alt=""
+      /></a>
       <h1 class="write-title">Sit with me</h1>
       <div class="writing-table">
         <img class="table-img" src="assets/table.png" alt="table" />
 
         <div class="writing-form">
+          <!-- back btn -->
           <button
             type="button"
             class="book-btn"
@@ -28,12 +31,12 @@
             <!-- write & draw -->
             <div class="writing-input" id="write-step">
               <form class="story-form" id="story-form" novalidate>
+                <!-- text field -->
                 <div class="input-one">
                   <label class="story-label" id="story-label" for="write-story"
-                    >My story...</label
+                    >My story...></label
                   >
 
-                  <!-- mode tulis -->
                   <textarea
                     id="write-story"
                     name="write-story"
@@ -122,7 +125,7 @@
                     aria-live="polite"
                   ></p>
                 </div>
-
+                <!-- mood cat -->
                 <div
                   class="input-two"
                   role="radiogroup"
@@ -154,7 +157,7 @@
                 </div>
               </form>
             </div>
-
+            <!-- send btn -->
             <button
               class="btn send-btn"
               id="send-btn"
@@ -164,40 +167,40 @@
               Send →
             </button>
 
-            <!-- choose menu -->
+            <!-- scene2-choose menu -->
             <div class="writing-input menu-input" id="menu-step" hidden>
               <form class="menu-form" id="menu-form" novalidate>
                 <h2 class="menu-title">Choose the menu</h2>
 
-                <!-- radio menu -->
+                <!-- radio fix -->
                 <div
                   class="menu-grid"
                   role="radiogroup"
                   aria-label="Choose a drink"
                 >
                   <label class="menu-item">
-                    <input type="radio" name="menu" value="Iced Latte" />
-                    <img src="assets/drink-1.png" alt="Iced Latte" />
+                    <input type="radio" name="menu" value="Matcha" />
+                    <img src="assets/drink-1.png" alt="Matcha" />
+                  </label>
+                  <label class="menu-item">
+                    <input type="radio" name="menu" value="GreenTea" />
+                    <img src="assets/drink-5.png" alt="GreenTea" />
+                  </label>
+                  <label class="menu-item">
+                    <input type="radio" name="menu" value="CocoaMallow" />
+                    <img src="assets/drink-2.png" alt="CocoaMallow" />
+                  </label>
+                  <label class="menu-item">
+                    <input type="radio" name="menu" value="Coffee" />
+                    <img src="assets/drink-coffee.png" alt="Coffee" />
                   </label>
                   <label class="menu-item">
                     <input type="radio" name="menu" value="Latte" />
-                    <img src="assets/drink-5.png" alt="Hot Latte" />
+                    <img src="assets/drink-latte.png" alt="Latte" />
                   </label>
                   <label class="menu-item">
                     <input type="radio" name="menu" value="Tea" />
-                    <img src="assets/drink-2.png" alt="Hot Tea" />
-                  </label>
-                  <label class="menu-item">
-                    <input type="radio" name="menu" value="Hot Chocolate" />
-                    <img src="assets/drink-coffee.png" alt="Hot Chocolate" />
-                  </label>
-                  <label class="menu-item">
-                    <input type="radio" name="menu" value="Hot Matcha" />
-                    <img src="assets/drink-latte.png" alt="Hot Matcha" />
-                  </label>
-                  <label class="menu-item">
-                    <input type="radio" name="menu" value="Iced Matcha" />
-                    <img src="assets/drink-tea.png" alt="Iced Matcha" />
+                    <img src="assets/drink-tea.png" alt="Tea" />
                   </label>
                 </div>
 
@@ -209,7 +212,7 @@
                 ></p>
               </form>
             </div>
-
+            <!-- final btn -->
             <button
               class="btn send-btn"
               id="order-btn"
@@ -219,6 +222,31 @@
             >
               Order →
             </button>
+
+            <!-- sucsess alert (dipindah ke dalam .writing-base) -->
+            <div class="writing-input success-panel" id="success-panel" hidden>
+              <h2 class="success-title">Your order is in!</h2>
+              <p class="success-text">Keep this code to see your story later.</p>
+              <button
+                type="button"
+                class="code-chip"
+                id="code-chip"
+                aria-label="Copy your code"
+              >
+                <span id="story-code"></span>
+              </button>
+              <p
+                class="success-note"
+                id="copy-hint"
+                role="status"
+                aria-live="polite"
+              >
+                Tap the code to copy it. We can't recover it.
+              </p>
+              <button type="button" class="btn" id="write-again">
+                Write another
+              </button>
+            </div>
           </div>
 
           <!-- pensil = mode tulis -->
@@ -250,7 +278,7 @@
       </div>
     </div>
 
-    <script src="js/script.js"></script>
-    <script src="js/admin.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/write.js"></script>
   </body>
 </html>

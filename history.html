@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>History</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="history-sect">
+      <a href="index.html" class="back-btn"
+        ><img src="assets/back-btn.png" alt=""
+      /></a>
+
+      <!-- BAGIAN 1: FORM INPUT KODE UNIK -->
+      <section class="code-box" id="code-box">
+        <h1 class="code-title">Input your<br />Code</h1>
+
+        <form class="code-form" id="code-form" novalidate>
+          <input
+            type="text"
+            id="code-input"
+            class="code-input"
+            placeholder="e.g. MATCHA-5065"
+            autocomplete="off"
+            spellcheck="false"
+            required
+          />
+
+          <p class="code-error" id="code-error" role="status" aria-live="polite"></p>
+
+          <button type="submit" class="enter-btn">Enter →</button>
+        </form>
+      </section>
+
+      <!-- BAGIAN 2: HASIL STRUK & STATUS CERITA -->
+      <section class="history-result" id="history-result" hidden>
+        <div class="status-banner" id="status-banner"></div>
+
+        <!-- Menggunakan desain struk yang sama dengan story-board.html -->
+        <div class="struk history-struk">
+          <div class="top">
+            <h4>My Story:</h4>
+            <span id="res-story"></span>
+            <img class="struk-img" id="res-image" alt="Drawing story" hidden />
+          </div>
+          <div class="line"></div>
+          <table>
+            <tr>
+              <td>Code</td>
+              <td class="right"><strong id="res-code"></strong></td>
+            </tr>
+            <tr>
+              <td>Date</td>
+              <td class="right" id="res-date"></td>
+            </tr>
+            <tr>
+              <td>Day</td>
+              <td class="right" id="res-day"></td>
+            </tr>
+            <tr>
+              <td>Time</td>
+              <td class="right" id="res-time"></td>
+            </tr>
+            <tr>
+              <td>Mood</td>
+              <td class="right" id="res-mood"></td>
+            </tr>
+          </table>
+          <div class="line"></div>
+          <table>
+            <tr>
+              <td>Order <br /><strong id="res-order"></strong></td>
+              <td class="right">1 Item</td>
+            </tr>
+          </table>
+          <div class="line"></div>
+          <div class="history-likes">
+            <i class="ri-heart-fill"></i>
+            <span id="res-likes">0</span> Likes
+          </div>
+          <div class="barcode">
+            <img src="assets/barcode1.svg" alt="" />
+            <p>KEEP THIS RECEIPT AS A MEMORY</p>
+          </div>
+        </div>
+
+        <div class="history-actions">
+          <button type="button" class="enter-btn" id="search-again">
+            Check Another Code
+          </button>
+          <a href="story-board.html" class="board-link" id="go-board" hidden>
+            View on Story Board →
+          </a>
+        </div>
+      </section>
+    </div>
+    <script src="js/data.js"></script>
+    <script src="js/history.js"></script>
+  </body>
+</html>

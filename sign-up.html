@@ -50,15 +50,24 @@
                 name="password"
                 type="password"
                 placeholder="Input Password..."
-                autocomplete="new-password"
+                autocomplete="current-password"
                 required
               />
             </div>
+
+            <p
+              class="form-hint"
+              id="auth-error"
+              role="status"
+              aria-live="polite"
+            ></p>
 
             <button class="btn btn-primary" type="submit">Sign In →</button>
           </form>
         </div>
       </main>
     </div>
+
+    <script src="js/auth.js"></script>
   </body>
 </html>
