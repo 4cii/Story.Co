@@ -7,6 +7,18 @@ const VIEWS = {
   "#published-stories": { statuses: [STATUS.PUBLISHED],                 subtitle: "Stories on the board" },
   "#delete-stories":    { statuses: [STATUS.DELETED],                   subtitle: "Deleted stories" },
 };
+<<<<<<< HEAD
+=======
+
+       // Tiap halaman: judul, subjudul, dan status cerita yang ditampilkan
+        const pages = {
+            'overview':          { title: 'Greetings, Kharim.', subtitle: "Today's view",                  show: ['waiting', 'attention'] },
+            'delete-stories':    { title: 'Delete Stories',     subtitle: 'Stories removed from the board', show: ['deleted'] },
+            'published-stories': { title: 'Published Stories',  subtitle: 'Stories live on the board',      show: ['published'] },
+            'urgent-cases':      { title: 'Urgent Cases',       subtitle: 'Stories that need attention',    show: ['attention'] }
+        };
+
+>>>>>>> b55d162e4c9aabd2d682b8eacf142c07dac56b4a
 
 const LABEL = {
   waiting: "Waiting",
@@ -84,6 +96,18 @@ if (list && tpl) {
     } else {
       f("text").textContent = c.story || "";
     }
+
+
+        moodSelect.addEventListener('change', filterStories);
+        searchInput.addEventListener('input', filterStories);
+        window.addEventListener('hashchange', showPage);
+        showPage();
+
+        document.addEventListener('click', (e) => {
+    if (!e.target.closest('.story')) {
+        document.querySelectorAll('.story.open').forEach((s) => s.classList.remove('open'));
+    }
+});
 
     f("code").textContent = c.code;
     f("ago").textContent = timeAgo(c.createdAt);
@@ -184,3 +208,4 @@ if (list && tpl) {
   muatData();
   render();
 }
+

@@ -322,6 +322,24 @@ body {
   }
 }
 
+
+/* sign up page */
+
+
+.action-menu {
+  display: none;
+}
+
+
+.story.open .action-menu {
+  display: block;
+}
+
+
+.story[hidden] {
+  display: none;
+}
+
 /* ---------- Testimoni ---------- */
 .testimoni {
   margin: 4rem 5rem 3rem;
@@ -652,8 +670,9 @@ body {
    ========================================================================== */
 
 /* ---------- Layout halaman (dua kolom) ---------- */
+
 .page {
-  overflow: hidden;
+  overflow-y: hidden;
   --outline: #a89a88;
   display: grid;
   grid-template-columns: 47.5fr 52.5fr;
@@ -697,6 +716,7 @@ body {
   width: 100%;
   max-width: 520px;
   margin: auto;
+  overflow: hidden;
 }
 
 .title {
@@ -750,6 +770,10 @@ body {
   width: 100%;
 }
 
+/* end sign up page */
+
+/* write story page */
+
 .auth-switch {
   margin-top: clamp(10px, 2vh, 16px);
   text-align: center;
@@ -792,6 +816,7 @@ body {
    ========================================================================== */
 
 /* ---------- Layout halaman & meja ---------- */
+
 .write-sect {
   position: relative;
   overflow: hidden;
@@ -2347,7 +2372,7 @@ body {
 }
 
 .action-menu {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 0.6rem;
   margin-top: 1rem;
