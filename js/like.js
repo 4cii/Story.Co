@@ -5,7 +5,6 @@ semuaTombolLike.forEach((likeBtn, index) => {
   const heartIcon = likeBtn.querySelector(".heartIcon");
   const likeCount = likeBtn.querySelector(".likeCount");
 
-
   let count = parseInt(localStorage.getItem(`storyLikes_${index}`)) || 0;
   let isLiked = localStorage.getItem(`isStoryLiked_${index}`) === "true";
 

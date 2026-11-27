@@ -17,7 +17,6 @@
    13. Responsive
    ========================================================================== */
 
-
 /* ==========================================================================
    1. VARIABEL & RESET
    ========================================================================== */
@@ -56,10 +55,8 @@
   box-sizing: border-box;
 }
 
-
 /* ==========================================================================
-   2. FONT
-   ========================================================================== */
+   2. FONT*/
 @font-face {
   font-family: "ZT Formom";
   src: url("../assets/ZT Formom.ttf") format("truetype");
@@ -69,7 +66,6 @@
   font-family: "SF Pro Display";
   src: url("../assets/SFPRODISPLAYREGULAR.OTF") format("opentype");
 }
-
 
 /* ==========================================================================
    3. BASE
@@ -82,7 +78,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-
 
 /* ==========================================================================
    4. UTILITAS
@@ -102,7 +97,6 @@ body {
 [hidden] {
   display: none !important;
 }
-
 
 /* ==========================================================================
    5. KOMPONEN BERSAMA
@@ -146,6 +140,10 @@ body {
 }
 
 /* ---------- Tombol kembali (write & board) ---------- */
+.black {
+  box-shadow: 0 12px 32px rgba(74, 40, 24, 100);
+}
+
 .back-btn {
   position: absolute;
   top: clamp(1rem, 3vw, 2.5rem);
@@ -156,6 +154,7 @@ body {
   border: 0;
   cursor: pointer;
   transition: transform 0.2s ease;
+  border-radius: 5rem;
 }
 
 .back-btn:hover {
@@ -168,7 +167,6 @@ body {
   height: clamp(2.75rem, 5vw, 5rem);
   object-fit: contain;
 }
-
 
 /* ==========================================================================
    6. HOME PAGE
@@ -333,14 +331,43 @@ body {
   gap: 2vw;
 }
 
+/* sign up page */
+
+
+.action-menu {
+  display: none;
+}
+
+
+.story.open .action-menu {
+  display: block;
+}
+
+
+.story[hidden] {
+  display: none;
+}
+
+/* ---------- Testimoni ---------- */
+.testimoni {
+  margin: 4rem 5rem 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2vw;
+}
+
 .card-test {
   background: var(--muted-bg);
   padding: 2rem 1.5rem;
   border-radius: 1.7rem;
 }
-
 .card-test p {
   font-size: 1.2rem;
+}
+.card-test p,
+.card-ano {
+  font-size: 1.25rem;
 }
 
 .card-test h3 {
@@ -365,6 +392,314 @@ body {
 /* ---------- Layout halaman (dua kolom) ---------- */
 .page {
   overflow: hidden;
+
+  margin: 6rem 0 clamp(2.5rem, 4.5vw, 4rem);
+  text-align: center;
+  line-height: 1.05;
+}
+
+.title-two .highlighted {
+  display: inline-block;
+  padding: 0 0.22em 0.08em;
+  background-color: var(--gold, #e2b95f);
+  color: var(--cream, #f9f0df);
+  line-height: 0.95;
+}
+
+/* ---------- Anomimus ---------- */
+.anonimus {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.4rem, 2.2vw, 2.4rem);
+  width: 100%;
+  max-width: 106rem;
+  height: clamp(46rem, 62vh, 62rem);
+  margin: 0 auto;
+  padding: 0 clamp(1.6rem, 4vw, 4rem);
+  overflow: hidden;
+
+  /* Efek fade-out halus di bagian atas & bawah */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 12%,
+    #000 68%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 12%,
+    #000 68%,
+    transparent 100%
+  );
+}
+
+.anonimus-col {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Offset awal kolom tengah & kanan biar terlihat staggered */
+.anonimus-col:nth-child(2) {
+  padding-top: 4rem;
+}
+
+.anonimus-track {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.4rem, 2.2vw, 2.4rem);
+  will-change: transform;
+}
+
+.card-anonimus {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: clamp(24rem, 32vw, 31rem);
+  padding: 2.4rem 2rem;
+  background: var(--muted-bg, #eee4d4);
+  border-radius: 1.7rem;
+  text-align: center;
+  color: var(--ink, #2b1b14);
+}
+
+.card-ano {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.card-ano p {
+  margin: 0;
+  max-width: 24ch;
+  font-family: "ZT Formom", "Times New Roman", serif;
+  font-size: clamp(1.4rem, 1.8vw, 1.85rem);
+  line-height: 1.25;
+}
+
+.card-ano h3 {
+  margin: 0;
+  font-family: "ZT Formom", "Times New Roman", serif;
+  font-weight: 400;
+  font-size: clamp(1.1rem, 1.3vw, 1.3rem);
+  opacity: 0.85;
+}
+
+/* dragable feat */
+.title-three {
+  margin: 10rem 0 4rem 0;
+  text-align: center;
+}
+/* --s = ukuran lingkaran, semua isi ikut ukuran ini */
+#area {
+  --s: min(92vw, 80vh, 790px);
+  position: relative;
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: #f1e7d6;
+  touch-action: none;
+}
+.item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  display: grid;
+  place-items: center;
+  cursor: grab;
+  user-select: none;
+  will-change: transform;
+}
+.item:active {
+  cursor: grabbing;
+}
+.pill {
+  width: calc(var(--s) * 0.38);
+  height: calc(var(--s) * 0.12);
+  border-radius: 999px;
+  font-size: calc(var(--s) * 0.058);
+  white-space: nowrap;
+}
+.face {
+  width: calc(var(--s) * 0.16);
+  height: calc(var(--s) * 0.16);
+}
+.face svg {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Responsif HP: tampilkan 1 kolom saja */
+@media (max-width: 768px) {
+  .anonimus {
+    grid-template-columns: 1fr;
+    max-width: 36rem;
+    height: 44rem;
+  }
+
+  .anonimus-col:nth-child(n + 2) {
+    display: none;
+  }
+}
+
+/* FAQ */
+.faq {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;       
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.title-four {
+  margin: 7rem 0 5rem 0;
+  text-align: center;
+}
+
+.faq-item {
+  margin-bottom: 16px;
+  padding: 20px 24px;
+  background: #f1e7d6;
+  border-radius: 10px;
+}
+
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 2rem;
+  cursor: pointer;
+  list-style: none; 
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #532726;
+  transition: transform 0.3s;
+}
+
+.faq-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: #faf0e0;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* panah berputar saat dibuka */
+.faq-item[open] .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  font-family: "SF Pro Display", sans-serif;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: #532726;
+  color: #faf0e0;
+  border-radius: 8px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.faq-answer p {
+  margin: 0;
+}
+
+.faq-item[open] .faq-answer {
+  animation: muncul 0.3s ease;
+}
+
+@keyframes muncul {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* footer */
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.footer img {
+  width: 100vw;
+  height: auto;
+}
+
+.footer-link-wrap {
+  position: absolute;
+  bottom: 2rem; /* Jarak dari tepi paling bawah, ubah ke 0 jika ingin nempel mentok */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 clamp(1.6rem, 4vw, 4rem);
+}
+
+.footer-link {
+  font-size: clamp(1.5rem, 2vw, 1rem);
+  color: #1c5f45;
+}
+
+.btn-footer-warp {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 clamp(1.6rem, 4vw, 4rem);
+}
+
+/* BENERIN AH */
+.btn-footer {
+  text-align: center;
+  height: 7rem;
+  width: 30rem;
+  box-shadow: 0 12px 32px rgba(74, 40, 24, 0.5);
+  bottom: -12rem; 
+  /* PAKE X Y AJA NNTI */
+}
+
+
+/* ==========================================================================
+   7. SIGN UP PAGE
+   ========================================================================== */
+
+/* ---------- Layout halaman (dua kolom) ---------- */
+
+.page {
+  overflow-y: hidden;
   --outline: #a89a88;
   display: grid;
   grid-template-columns: 47.5fr 52.5fr;
@@ -408,6 +743,7 @@ body {
   width: 100%;
   max-width: 520px;
   margin: auto;
+  overflow: hidden;
 }
 
 .title {
@@ -460,6 +796,9 @@ body {
   margin-top: clamp(14px, 3vh, 28px);
   width: 100%;
 }
+/* end sign up page */
+
+/* write story page */
 
 .auth-switch {
   margin-top: clamp(10px, 2vh, 16px);
@@ -497,13 +836,12 @@ body {
   height: 1px;
   background: var(--field-border);
 }
-
-
 /* ==========================================================================
    8. WRITE STORY PAGE
    ========================================================================== */
 
 /* ---------- Layout halaman & meja ---------- */
+
 .write-sect {
   position: relative;
   overflow: hidden;
@@ -515,7 +853,7 @@ body {
 }
 
 .write-title {
-  margin: 0 0 clamp(0.75rem, 2vh, 1.5rem) 0;
+  margin: 4rem 0 clamp(0.75rem, 2vh, 1.5rem) 0;
   opacity: 0;
   animation: fadein 1s ease var(--delay) forwards;
   z-index: 2;
@@ -1122,6 +1460,7 @@ body {
 .code-title {
   margin: 0 0 2.8rem;
   font-family: 'ZT Formom', 'Times New Roman', serif;
+  font-family: "ZT Formom", "Times New Roman", serif;
   font-weight: 400;
   font-size: clamp(4.2rem, 8vw, 6.8rem);
   line-height: 0.92;
@@ -1141,6 +1480,7 @@ body {
   height: 7.2rem;
   padding: 0 2rem;
   font-family: 'ZT Formom', 'Times New Roman', serif;
+  font-family: "ZT Formom", "Times New Roman", serif;
   font-size: 2.6rem;
   letter-spacing: 0.06em;
   text-align: center;
@@ -1151,6 +1491,9 @@ body {
   border-radius: 1.2rem;
   outline: none;
   transition: box-shadow 0.2s ease, background-color 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .code-input::placeholder {
@@ -1179,6 +1522,7 @@ body {
   align-items: center;
   justify-content: center;
   font-family: 'ZT Formom', 'Times New Roman', serif;
+  font-family: "ZT Formom", "Times New Roman", serif;
   font-size: 1.9rem;
   color: var(--cream, #f9f0df);
   background: linear-gradient(90deg, #623b36 0%, #2b1b14 100%);
@@ -1186,6 +1530,9 @@ body {
   border-radius: 0.9rem;
   cursor: pointer;
   transition: transform 0.15s ease, filter 0.2s ease;
+  transition:
+    transform 0.15s ease,
+    filter 0.2s ease;
 }
 
 .enter-btn:hover {
@@ -1259,10 +1606,13 @@ body {
 
 .board-link {
   font-family: 'ZT Formom', 'Times New Roman', serif;
+
+  font-family: "ZT Formom", "Times New Roman", serif;
   font-size: 1.7rem;
   color: var(--ink, #2b1b14);
   text-decoration: underline;
 }
+
 
 
 /* ==========================================================================
@@ -1279,22 +1629,133 @@ body {
   padding: 50px 10px;
 }
 .story-board h1 {
+
   font-size: clamp(2.5rem, 8vw, 6rem); /* Kecil di HP (40px), besar di Desktop (96px) */
   color: #35271E;
+  font-size: 6rem;
+  color: #35271e;
   font-weight: 500;
   text-align: center;
   margin-bottom: clamp(1rem, 3vw, 2rem);
 }
 
-.board {
+.board-wrap {
+  position: relative;
   max-width: 95%;
-  display: block;
 }
+
 
 /* ---------- Struk (kertas) ---------- */
 .struk {
   position: absolute;
   background-image: url("/assets/paper.svg");
+
+.board {
+  max-width: 100%;
+  display: block;
+}
+/* ---------- Struk (kertas) ---------- */
+.wadah-struk {
+  position: absolute;
+  inset: 12% 14% 43% 14%;
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  place-items: center;
+}
+
+.wadah-struk .struk {
+  --w: 26cqw;
+  position: relative;
+  width: var(--w);
+  max-width: none;
+  padding: calc(var(--w) * 0.11) calc(var(--w) * 0.1);
+  translate: var(--dx, 0) var(--dy, 0);
+  transform: rotate(var(--rot, 0deg));
+}
+
+/* TABLET (<= 1024px): 4 kartu (2 kolom x 2 baris) */
+@media (max-width: 1024px) {
+  .wadah-struk {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .wadah-struk .struk {
+    --w: 36cqw; /* kartu otomatis membesar mengisi 2 kolom */
+  }
+}
+
+/* HP (<= 600px): 2 kartu (2 kolom x 1 baris) */
+@media (max-width: 600px) {
+  .wadah-struk {
+    inset: 15% 12% 45% 12%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+  }
+
+  .wadah-struk .struk {
+    --w: 42cqw; /* kartu lebih besar & terbaca jelas di layar kecil */
+  }
+}
+
+.wadah-struk .struk:hover {
+  z-index: 2;
+  transform: translateY(-5px);          /* meluruskan diri dan naik sedikit */
+}
+
+/* isi kartu ikut mengecil dan membesar bersama kartu */
+.wadah-struk .top {
+  max-width: 100%;
+}
+
+.wadah-struk .top h4 {
+  font-size: calc(var(--w) * 0.1);
+  margin-bottom: calc(var(--w) * 0.035);
+}
+
+.wadah-struk .top span {
+  font-size: calc(var(--w) * 0.041);
+  line-height: 1.3;
+  overflow-wrap: anywhere;              /* teks tanpa spasi tidak meluber keluar kartu */
+}
+
+.wadah-struk .struk tr {
+  font-size: calc(var(--w) * 0.03);
+}
+
+.wadah-struk .line {
+  margin-block: calc(var(--w) * 0.03);
+}
+
+.wadah-struk .struk button {
+  font-size: calc(var(--w) * 0.058);
+}
+
+.wadah-struk .likeCount {
+  font-size: calc(var(--w) * 0.047);
+}
+
+.wadah-struk .barcode {
+  margin-top: calc(var(--w) * 0.06);
+}
+
+.wadah-struk .barcode p {
+  font-size: calc(var(--w) * 0.03);
+}
+
+.wadah-struk .struk-img {
+  max-height: calc(var(--w) * 0.3);
+  object-fit: contain;
+}
+
+.struk {
+  position: absolute;
+  background-image: url("/assets/paper.svg"); 
+  width: 22%;                    /* dihitung dari lebar board */
+  translate: -50% -50%;          /* left/top = titik tengah kartu */
+  transform: rotate(var(--rot, 0deg));
   background-repeat: no-repeat;
   background-size: 100% 100%;
   display: grid;
@@ -1467,6 +1928,105 @@ body {
   font-size: 0.4rem;
 }
 
+  .top h4 {
+    font-size: 1.6rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .top span {
+    font-size: 0.6rem;
+  }
+
+  .barcode img {
+    width: 45%;
+  }
+
+  .struk-1 {
+    top: 100%;
+  }
+  .struk-2 {
+    top: 125%;
+  }
+  .struk-3 {
+    top: 90%;
+  }
+  .struk-4 {
+    top: 115%;
+  }
+}
+
+@media (max-width: 768px) {
+  .board-wrap {
+    width: 100%;
+  }
+
+  .board {
+    width: 100%;
+    object-fit: fill;
+  }
+
+  .story-board h1 {
+    font-size: 4.3rem;
+  }
+
+  .struk {
+    padding: 2rem 1.4rem;
+    width: 25%;
+  }
+
+  .top h4 {
+    margin-bottom: 0.5rem;
+  }
+
+  .top span {
+    display: block;
+    line-height: 1.3;
+  }
+
+  .struk tr {
+    font-size: 0.4rem;
+  }
+
+  .line {
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .struk button {
+    font-size: 0.6rem;
+  }
+
+  .likeCount {
+    font-size: 0.5rem;
+  }
+
+  .barcode img {
+    width: 45%;
+  }
+
+  .barcode p {
+    font-size: 0.4rem;
+  }
+
+  .struk-1 {
+    top: 70%;
+    transform: rotate(8deg);
+  }
+
+  .struk-2 {
+    top: 65%;
+    left: 40%;
+    transform: rotate(-12deg);
+  }
+
+  .struk-3 {
+    top: 68%;
+    transform: rotate(7deg);
+  }
+
+  .struk-4 {
+    display: none;
+  }
 }
 
 @media (max-width: 360px) {
@@ -2064,6 +2624,650 @@ body {
 /* ---------- <= 768px (tablet kecil) ---------- */
 @media (max-width: 768px) {
 
+  .struk {
+    padding: 2rem 0.7rem;
+  }
+
+  .top h4 {
+    font-size: 0.5rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .top span {
+    font-size: 0.3rem;
+    line-height: 1.1;
+  }
+
+  .struk tr {
+    font-size: 0.2rem;
+  }
+
+  .line {
+    margin-bottom: 0.1rem;
+    margin-top: 0.1rem;
+    transform: scaleY(0.5);
+  }
+
+  .struk button {
+    font-size: 0.3rem;
+  }
+
+  .likeCount {
+    font-size: 0.2rem;
+  }
+
+  .barcode {
+    margin-top: 0.3rem;
+  }
+
+  .barcode img {
+    width: 39%;
+  }
+
+  .barcode p {
+    font-size: 0.2rem;
+  }
+
+  .struk-1 {
+    top: 65%;
+  }
+  .struk-2 {
+    top: 63%;
+  }
+  .struk-3 {
+    top: 65%;
+  }
+}
+
+/* ==========================================================================
+   11. ADMIN (DASHBOARD)
+   ========================================================================== */
+
+/* ---------- Layout & variabel admin ---------- */
+.admin {
+  --font-display: "ZT Formom", "Times New Roman", serif;
+  --font-body:
+    "SF Pro Display", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --gold-dark: #c99a3a;
+  --matcha-dark: #6a9150;
+
+  display: grid;
+  grid-template-columns: 24rem 1fr;
+  min-height: 100vh;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 2.4rem 1.2rem;
+  background: var(--mocca);
+  color: var(--cream);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0 0.8rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 3rem;
+  letter-spacing: -0.03em;
+}
+
+.logo img {
+  width: 15rem;
+}
+
+.logo small {
+  font-size: 1.5rem;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 2.6rem;
+}
+
+.menu a,
+.logout {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1rem 1.3rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--bg-color, var(--cream));
+  border-radius: 1rem;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.menu a {
+  font-size: 1.8rem;
+}
+
+.menu a:hover,
+.menu a.active {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.menu img,
+.logout img {
+  width: 2rem;
+}
+
+.logout {
+  width: 100%;
+  margin-top: auto;
+  font-size: 1.8rem;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+/* ---------- Konten utama & sapaan ---------- */
+.main {
+  min-width: 0;
+  padding: 2.4rem 2.8rem 4rem;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.greeting {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 6.4rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.subtitle {
+  margin: 0.4rem 0 2rem 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 2.4rem;
+}
+
+/* ---------- Kartu statistik ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem;
+  margin-bottom: 1.8rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.2rem 1rem;
+  border: 2px solid;
+  border-radius: 1.4rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.card p {
+  font-size: 1.7rem;
+  letter-spacing: -0.02em;
+}
+
+.card strong {
+  font-size: 6.4rem;
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.card-waiting {
+  background: var(--gold);
+  border-color: var(--gold-dark);
+}
+
+.card-published {
+  background: var(--matcha);
+  border-color: var(--matcha-dark);
+}
+
+.card-attention {
+  background: var(--red, #a8554a);
+  border-color: var(--darkchoco);
+}
+
+/* ---------- Toolbar (pencarian & filter mood) ---------- */
+.toolbar {
+  display: flex;
+  gap: 1.2rem;
+  margin-bottom: 1.8rem;
+}
+
+.search {
+  position: relative;
+  flex: 1;
+}
+
+.search img {
+  position: absolute;
+  left: 1.4rem;
+  top: 50%;
+  width: 1.8rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.search input,
+.toolbar select {
+  height: 4.4rem;
+  font-family: var(--font-body);
+  font-size: 1.3rem;
+  color: var(--darkchoco);
+  background-color: #f1e7d8;
+  border: 2px solid #e4dbcd;
+  border-radius: 1.2rem;
+  outline: none;
+  appearance: none;
+}
+
+.search input {
+  width: 100%;
+  padding: 0 1.6rem 0 4.4rem;
+}
+
+.toolbar select {
+  width: 15rem;
+  padding: 0 3.6rem 0 1.4rem;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 9l7 7 7-7' fill='none' stroke='%232B1B14' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.2rem center;
+  background-size: 1.6rem;
+}
+
+:where(.admin) ::placeholder {
+  color: #a8a091;
+}
+
+.search input:focus,
+.toolbar select:focus {
+  border-color: #a39d90;
+}
+
+/* ---------- Daftar cerita ---------- */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.story {
+  padding: 1.4rem 1.6rem 1.2rem;
+  background: var(--cream);
+  border: 2px solid #d7cdbe;
+  border-radius: 1.4rem;
+  font-family: var(--font-body);
+}
+
+.story-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+}
+
+.story-body {
+  min-width: 0;
+}
+
+.tags {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+
+/* ---------- Badge status & mood ---------- */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 1rem;
+  font-size: 1rem;
+  border-radius: 5rem;
+}
+
+.badge-deleted {
+  background: #d7cdbe;
+  color: #5a4f3f;
+}
+
+.badge-waiting {
+  background: var(--gold);
+  color: #7a6322;
+}
+
+.badge-published {
+  background: var(--matcha);
+  color: #3f5a24;
+}
+
+.badge-attention {
+  background: var(--pink, #e8b4ae);
+  color: var(--pink-text, #7a2e28);
+}
+
+.badge-mood-happy {
+  background: #e2b95f;
+  color: #7a6322;
+}
+
+.badge-mood-angry {
+  background: #bc5850;
+  color: #722722;
+}
+
+.badge-mood-stressed {
+  background: #e38025;
+}
+
+.badge-mood-frustrated {
+  background: #e38025;
+  color: #6c3a0c;
+}
+
+.badge-mood-calm {
+  background: #468f64;
+  color: #1d482f;
+}
+
+.badge-mood-sad {
+  background: #4a9bb0;
+  color: #0f4350;
+}
+
+/* ---------- Isi cerita ---------- */
+.story-text {
+  font-size: 1.3rem;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.meta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.6rem;
+  font-size: 1rem;
+  color: #8a8070;
+}
+
+.story-attention {
+  border: 2px solid #b34d45;
+}
+
+.story-attention .story-text {
+  margin-top: 1rem;
+  font-family: "SF Pro Display";
+  font-weight: 100;
+}
+
+.note {
+  flex: 1;
+  padding: 1rem 1.4rem;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  color: var(--pink-text, #7a2e28);
+  background: var(--pink, #e8b4ae);
+  border-radius: 1rem;
+}
+
+/* ---------- Tombol & menu Action ---------- */
+.action-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 2.4rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.7rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  background: var(--matcha);
+  border-radius: 5rem;
+  transition: background 0.2s ease;
+}
+
+.action-btn img {
+  width: 1.3rem;
+  transition: transform 0.3s ease;
+}
+
+.story.open .story-row {
+  align-items: flex-start;
+}
+
+.story.open .action-btn {
+  padding: 1rem 1.6rem 1.2rem;
+  margin-bottom: -1.2rem;
+  background: var(--panel, #e8dfc8);
+  border-radius: 1.6rem 1.6rem 0 0;
+}
+
+.story.open .action-btn img {
+  transform: rotate(180deg);
+}
+
+.action-menu {
+  display: none;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding: 1.2rem;
+  background: var(--panel, #e8dfc8);
+  border-radius: 1.6rem 0 1.6rem 1.6rem;
+}
+
+.action-menu h3 {
+  margin-bottom: 0.2rem;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: #8a7e66;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+  padding: 0.9rem 1.6rem;
+  text-align: left;
+  border-radius: 0.8rem;
+}
+
+.option img {
+  width: 1.8rem;
+  flex-shrink: 0;
+}
+
+.option strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.6rem;
+}
+
+.option span {
+  font-size: 0.9rem;
+}
+
+.option-delete {
+  background: var(--red, #a8554a);
+  color: var(--bg-color);
+}
+
+.option-publish {
+  background: var(--matcha);
+  color: var(--ink);
+}
+
+.option-attention {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.option:hover {
+  filter: brightness(0.94);
+}
+
+.option[hidden] {
+  display: none;
+}
+
+.option-restore {
+  background: #7ca3b8;
+  color: var(--bg-color, var(--cream));
+}
+
+/* ==========================================================================
+   12. GAMBAR CERITA (DASHBOARD & BOARD)
+   ========================================================================== */
+.story-img,
+.struk-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+/* ==========================================================================
+   13. RESPONSIVE
+   ========================================================================== */
+
+/* ---------- <= 993px (tablet) ---------- */
+@media (max-width: 993px) {
+  html {
+    font-size: 15px;
+  }
+
+  .history-btn {
+    right: 2.5rem;
+  }
+
+  .btn-nav {
+    margin-top: 4rem;
+  }
+
+  .coffe-img {
+    width: 45%;
+    height: auto;
+    margin: 1.5rem 0 4rem;
+  }
+
+  .page {
+    grid-template-columns: 44fr 56fr;
+  }
+
+  .visual-img {
+    object-position: 40% center;
+  }
+
+  .panel {
+    padding: clamp(16px, 3vh, 40px) 2rem;
+  }
+
+  .writing-base {
+    width: 68vw;
+    height: 76vh;
+  }
+
+  .pencil-sect img,
+  .brush-sect img {
+    max-width: 13vw;
+  }
+
+  .pencil-sect img {
+    left: 3vw;
+  }
+  .brush-sect img {
+    right: 3vw;
+  }
+
+  .story-board h1 {
+    font-size: 4.2rem;
+  }
+
+  .struk {
+    width: 25%;
+    padding: 1.8rem 1.4rem;
+  }
+
+  .admin {
+    grid-template-columns: 20rem 1fr;
+  }
+
+  .sidebar {
+    padding: 2rem 1rem;
+  }
+
+  .logo img {
+    width: 100%;
+    max-width: 14rem;
+  }
+
+  .menu a {
+    font-size: 1.4rem;
+    padding: 0.9rem 1.1rem;
+    gap: 1rem;
+  }
+
+  .logout {
+    font-size: 1.5rem;
+  }
+
+  .main {
+    padding: 2rem 2rem 3.5rem;
+  }
+
+  .greeting {
+    font-size: 5.2rem;
+  }
+
+  .subtitle {
+    font-size: 2rem;
+  }
+
+  .stats {
+    gap: 1rem;
+  }
+
+  .card strong {
+    font-size: 5.2rem;
+  }
+
+  .card p {
+    font-size: 1.5rem;
+  }
+
+  .toolbar select {
+    width: 13rem;
+  }
+
+  .action-btn {
+    padding: 0.7rem 2rem;
+    font-size: 1.5rem;
+  }
+}
+
+/* ---------- <= 768px (tablet kecil) ---------- */
+@media (max-width: 768px) {
   html {
     font-size: 14px;
   }
@@ -2117,6 +3321,12 @@ body {
 
   .pencil-sect img { left: 1vw; }
   .brush-sect img  { right: 1vw; }
+  .pencil-sect img {
+    left: 1vw;
+  }
+  .brush-sect img {
+    right: 1vw;
+  }
 
   .writing-input {
     inset: 0.6rem;
@@ -2135,6 +3345,22 @@ body {
   .struk-2 { top: 105%; left: 26%; }
   .struk-3 { top: 65%;  right: 8%; }
   .struk-4 { top: 90%;  right: 20%; }
+  .struk-1 {
+    top: 80%;
+    left: 8%;
+  }
+  .struk-2 {
+    top: 105%;
+    left: 26%;
+  }
+  .struk-3 {
+    top: 65%;
+    right: 8%;
+  }
+  .struk-4 {
+    top: 90%;
+    right: 20%;
+  }
 
   .struk tr {
     font-size: 0.65rem;
@@ -2353,8 +3579,15 @@ body {
     max-height: 40vh;
   }
 
+
   .pencil-sect img { left: 0; }
   .brush-sect img  { right: 0; }
+  .pencil-sect img {
+    left: 0;
+  }
+  .brush-sect img {
+    right: 0;
+  }
 
   .writing-input {
     inset: 0.5rem;
@@ -2406,6 +3639,7 @@ body {
   }
 
   .board {
+    display: block;
     max-width: 100%;
   }
 
@@ -2418,6 +3652,28 @@ body {
   .struk-2 { top: 85%;  left: auto; right: 3%; }
   .struk-3 { top: 115%; left: 3%;   right: auto; }
   .struk-4 { top: 125%; left: auto; right: 3%; }
+
+  .struk-1 {
+    top: 75%;
+    left: 3%;
+    right: auto;
+  }
+  .struk-2 {
+    top: 85%;
+    left: auto;
+    right: 3%;
+  }
+  .struk-3 {
+    top: 115%;
+    left: 3%;
+    right: auto;
+  }
+  .struk-4 {
+    top: 125%;
+    left: auto;
+    right: 3%;
+  }
+
 
   .top h4 {
     font-size: 1.4rem;
@@ -2554,7 +3810,6 @@ body {
 
 /* ---------- <= 356px (HP kecil) ---------- */
 @media (max-width: 356px) {
-
   html {
     font-size: 11px;
   }
@@ -2682,10 +3937,32 @@ body {
     padding: 1.1rem 0.8rem;
   }
 
+
   .struk-1 { top: 72%;  left: 2%;   right: auto; }
   .struk-2 { top: 82%;  left: auto; right: 2%; }
   .struk-3 { top: 110%; left: 2%;   right: auto; }
   .struk-4 { top: 120%; left: auto; right: 2%; }
+
+  .struk-1 {
+    top: 72%;
+    left: 2%;
+    right: auto;
+  }
+  .struk-2 {
+    top: 82%;
+    left: auto;
+    right: 2%;
+  }
+  .struk-3 {
+    top: 110%;
+    left: 2%;
+    right: auto;
+  }
+  .struk-4 {
+    top: 120%;
+    left: auto;
+    right: 2%;
+  }
 
   .top h4 {
     font-size: 1.2rem;
@@ -2765,4 +4042,5 @@ body {
     padding: 0.6rem 0.8rem;
     gap: 0.6rem;
   }
+}
 }

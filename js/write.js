@@ -1,8 +1,4 @@
-const KUNCI_STORAGE = "STORY_CO_DATA";
-
-// ==========================================
-// 1. BTN SCRIBBLE
-// ==========================================
+// Scribble button effect
 const scribbles = [
   "../assets/oret-ijo2.png",
   "../assets/oret-kuning2.png",
@@ -22,7 +18,7 @@ document.querySelectorAll(".btn").forEach((btn) => {
     let i;
     do {
       i = Math.floor(Math.random() * scribbles.length);
-    } while (i === last && scribbles.length > 1);   
+    } while (i === last && scribbles.length > 1);
     last = i;
 
     btn.style.setProperty("--scribble", `url("${scribbles[i]}")`);
@@ -35,9 +31,7 @@ document.querySelectorAll(".btn").forEach((btn) => {
 });
 
 
-// ==========================================
-// 2. BUKU MENU MEMBUKA KARTU
-// ==========================================
+// Buku menu membuka kartu (writing sect)
 const bookBtn = document.getElementById("book-btn");
 const writingForm = document.querySelector(".writing-form");
 
@@ -52,9 +46,7 @@ if (bookBtn && writingForm) {
 }
 
 
-// ==========================================
-// 3. STEP 1 (TULIS/GAMBAR) -> STEP 2 (CHOOSE MENU) -> SAVE LOCALSTORAGE
-// ==========================================
+// 3. STEP 1 -> STEP 2 -> PANEL SUKSES
 const storyForm = document.getElementById("story-form");
 const menuForm = document.getElementById("menu-form");
 
@@ -70,16 +62,19 @@ if (storyForm && menuForm) {
   const redoBtn = document.getElementById("redo");
   const swatches = document.querySelectorAll(".swatch");
 
-  // Elemen perpindahan step
+  // Elemen perpindahan step & panel sukses
   const writeStep = document.getElementById("write-step");
   const sendBtn = document.getElementById("send-btn");
   const menuStep = document.getElementById("menu-step");
   const orderBtn = document.getElementById("order-btn");
   const menuHint = document.getElementById("menu-hint");
+  const successPanel = document.getElementById("success-panel");
+  const storyCodeEl = document.getElementById("story-code");
+  const codeChipBtn = document.getElementById("code-chip");
+  const copyHintEl = document.getElementById("copy-hint");
+  const writeAgainBtn = document.getElementById("write-again");
 
-  // Variabel penampung sementara sebelum pilih minuman
   let draftPayload = null;
-
   let mode = "write";
   let color = document.querySelector('.swatch[aria-pressed="true"]').dataset.color;
   const brushSize = 5;
@@ -87,7 +82,7 @@ if (storyForm && menuForm) {
   let redoStack = [];
   let current = null;
 
-  /* ---------- pesan error ---------- */
+  // error message
   const showError = (msg) => {
     hint.textContent = msg;
     hint.classList.add("is-error");
@@ -101,7 +96,7 @@ if (storyForm && menuForm) {
 
   storyForm.addEventListener("input", clearError);
 
-  /* ---------- ganti mode: tulis / gambar ---------- */
+  // ganti mode
   function setMode(next) {
     mode = next;
     storyForm.classList.toggle("is-drawing", next === "draw");
@@ -125,7 +120,7 @@ if (storyForm && menuForm) {
     b.addEventListener("click", () => setMode(b.dataset.mode)),
   );
 
-  /* ---------- color picker ---------- */
+  // color picker
   swatches.forEach((s) => {
     s.style.background = s.dataset.color;
     s.addEventListener("click", () => {
@@ -134,7 +129,7 @@ if (storyForm && menuForm) {
     });
   });
 
-  /* ---------- canvas ---------- */
+  // canvas
   function setStyle(s) {
     ctx.strokeStyle = s.color;
     ctx.fillStyle = s.color;
@@ -235,13 +230,13 @@ if (storyForm && menuForm) {
     out.width = canvas.width;
     out.height = canvas.height;
     const c = out.getContext("2d");
-    c.fillStyle = "#faf3e8";                   
+    c.fillStyle = "#faf3e8";
     c.fillRect(0, 0, out.width, out.height);
     c.drawImage(canvas, 0, 0);
     return out.toDataURL("image/png");
   }
 
-  /* ---------- SUBMIT STEP 1: VALIDASI & PINDAH KE CHOOSE MENU ---------- */
+  // SUBMIT CERITA
   storyForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -261,17 +256,16 @@ if (storyForm && menuForm) {
         return;
       }
 
-      draftPayload = { type: "text", text, mood: moodValue };
+      draftPayload = { type: "text", story: text, mood: moodValue };
     } else {
       if (!strokes.length) {
         showError("Draw something first.");
         return;
       }
 
-      draftPayload = { type: "drawing", image: exportPNG(), mood: null };
+      draftPayload = { type: "drawing", story: exportPNG(), mood: null };
     }
 
-    // Ganti tampilan ke Step 2 (Choose the menu)
     writeStep.hidden = true;
     sendBtn.hidden = true;
     menuStep.hidden = false;
@@ -279,7 +273,7 @@ if (storyForm && menuForm) {
     writingForm.classList.add("is-choosing-menu");
   });
 
-  /* ---------- SUBMIT STEP 2: PILIH MENU & SAVE KE LOCALSTORAGE ---------- */
+  // SUBMIT MENU DAN SIMPAN KE JS
   menuForm.addEventListener("input", () => {
     if (menuHint) {
       menuHint.textContent = "";
@@ -290,8 +284,8 @@ if (storyForm && menuForm) {
   menuForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const selectedMenu = menuForm.elements.menu.value;
-    if (!selectedMenu) {
+    const checkedMenu = menuForm.querySelector('input[name="menu"]:checked');
+    if (!checkedMenu) {
       if (menuHint) {
         menuHint.textContent = "Choose a drink first.";
         menuHint.classList.add("is-error");
@@ -301,42 +295,77 @@ if (storyForm && menuForm) {
 
     if (!draftPayload) return;
 
-    // Ambil data lama dari localStorage
-    let daftarCerita = [];
-    const tersimpan = localStorage.getItem(KUNCI_STORAGE);
-    if (tersimpan) {
-      try {
-        daftarCerita = JSON.parse(tersimpan);
-      } catch {
-        daftarCerita = [];
+    // Panggil tambahCerita() dari data.js agar format cocok dengan dashboard & board
+    const hasil = tambahCerita({
+      type: draftPayload.type,
+      story: draftPayload.story,
+      mood: draftPayload.mood,
+      drink: checkedMenu.value,
+    });
+
+    if (!hasil.ok) {
+      if (menuHint) {
+        menuHint.textContent = hasil.error;
+        menuHint.classList.add("is-error");
       }
-    } else if (typeof dataAwalCerita !== "undefined") {
-      daftarCerita = [...dataAwalCerita];
+      return;
     }
 
-    const sekarang = new Date();
-    const formatMood = draftPayload.mood
-      ? draftPayload.mood.charAt(0).toUpperCase() + draftPayload.mood.slice(1)
-      : null;
+    tampilkanSukses(hasil.story.code);
+  });
 
-    // Objek struk sesuai struktur yang diminta
-    const struk = {
-      story: draftPayload.type === "text" ? draftPayload.text : draftPayload.image,
-      date: sekarang.toLocaleDateString("en-CA"),
-      day: sekarang.toLocaleDateString("en-US", { weekday: "long" }),
-      time: sekarang.toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      }),
-      mood: formatMood,
-      code: selectedMenu,
-      status: "pending",
-    };
+  // SUCSESS N RESET
+  function tampilkanSukses(kode) {
+    menuStep.hidden = true;
+    orderBtn.hidden = true;
+    if (storyCodeEl) storyCodeEl.textContent = kode;
+    if (copyHintEl) copyHintEl.textContent = "Tap the code to copy it. We can't recover it.";
+    if (successPanel) successPanel.hidden = false;
+  }
 
-    daftarCerita.unshift(struk);
-    localStorage.setItem(KUNCI_STORAGE, JSON.stringify(daftarCerita));
+  function resetSemua() {
+    draftPayload = null;
+    storyForm.reset();
+    menuForm.reset();
 
-    console.log("Struk tersimpan:", struk);
+    strokes.length = 0;
+    redoStack = [];
+    redraw();
+    updateTools();
+    clearError();
+
+    if (menuHint) {
+      menuHint.textContent = "";
+      menuHint.classList.remove("is-error");
+    }
+
+    setMode("write");
+    if (successPanel) successPanel.hidden = true;
+    menuStep.hidden = true;
+    orderBtn.hidden = true;
+    writeStep.hidden = false;
+    sendBtn.hidden = false;
+    writingForm.classList.remove("is-choosing-menu");
+  }
+
+  // Listener 1: Salin kode saat code-chip diklik
+  codeChipBtn?.addEventListener("click", async () => {
+    const kode = storyCodeEl?.textContent?.trim();
+    if (!kode) return;
+
+    try {
+      await navigator.clipboard.writeText(kode);
+      if (copyHintEl) copyHintEl.textContent = "Copied! Save it somewhere safe.";
+    } catch {
+      if (copyHintEl) copyHintEl.textContent = `Code: ${kode} (copy manually)`;
+    }
+  });
+
+  // Listener 2: Tulis cerita lagi
+  writeAgainBtn?.addEventListener("click", resetSemua);
+
+  // Listener 3: Reset jika tombol back diklik saat form sedang terbuka
+  document.querySelector(".back-btn")?.addEventListener("click", () => {
+    draftPayload = null;
   });
 }

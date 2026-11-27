@@ -1,66 +1,168 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Story.Co - Admin Panel</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
 
 <body>
+    <main>
+
+  <body>
+
     <div class="admin">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="logo">
+          <img src="assets/logo-storyco.png" alt="Story.Co" />
+        </div>
 
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <div class="logo">
-                <img src="assets/logo-storyco.png" alt="Story.Co">
+        <nav class="menu">
+          <a href="#overview"
+            ><img src="assets/overview.png" alt="" />Overview</a
+          >
+          <a href="#delete-stories"
+            ><img src="assets/trash.png" alt="" />Delete Stories</a
+          >
+          <a href="#published-stories"
+            ><img src="assets/published.png" alt="" />Published Stories</a
+          >
+          <a href="#urgent-cases"
+            ><img src="assets/sirine.png" alt="" />Urgent Cases</a
+          >
+        </nav>
+
+        <button class="logout">
+          <img src="assets/logout.png" alt="" />Log Out
+        </button>
+      </aside>
+
+      <!-- MAINPAGE -->
+      <main class="main">
+        <h1 class="greeting" id="title"></h1>
+        <p class="subtitle" id="subtitle"></p>
+
+        <section class="stats" id="stats">
+          <div class="card card-waiting">
+            <p>Waiting :</p>
+            <strong id="count-waiting">0</strong>
+          </div>
+          <div class="card card-published">
+            <p>Published Today :</p>
+            <strong id="count-published">0</strong>
+          </div>
+          <div class="card card-attention">
+            <p>Needs Attention :</p>
+            <strong id="count-attention">0</strong>
+          </div>
+        </section>
+
+        <div class="toolbar">
+          <label class="search">
+            <img src="assets/akar-icons_search.png" alt="" />
+            <input type="text" placeholder="Cari kata dalam cerita..." />
+          </label>
+          <select class="category">
+            <option value="all">Moods Category</option>
+            <option value="angry">Angry</option>
+            <option value="stressed">Stressed</option>
+            <option value="happy">Happy</option>
+            <option value="calm">Calm</option>
+            <option value="sad">Sad</option>
+          </select>
+        </div>
+
+        <section class="list" id="story-list" aria-live="polite"></section>
+
+        <template id="story-template">
+          <article class="story">
+            <div class="story-row">
+              <div class="story-body">
+                <div class="tags">
+                  <span class="badge" data-f="status"></span>
+                  <span class="badge" data-f="mood"></span>
+                </div>
+
+                <p class="note" data-f="note" hidden></p>
+                <p class="story-text" data-f="text"></p>
+                <img
+                  class="story-img"
+                  data-f="image"
+                  alt="Drawing story"
+                  hidden
+                />
+
+                <div class="meta">
+                  <span data-f="code"></span>
+                  <span data-f="ago"></span>
+                </div>
+              </div>
+
+              <button type="button" class="action-btn" aria-expanded="false">
+                Action
+                <img
+                  src="assets/arrow-down.svg"
+                  alt=""
+                  onerror="this.style.display = 'none'"
+                />
+              </button>
             </div>
 
-            <nav class="menu">
-                <a href="#overview"><img src="assets/overview.png" alt="">Overview</a>
-                <a href="#delete-stories"><img src="assets/trash.png" alt="">Delete Stories</a>
-                <a href="#published-stories"><img src="assets/published.png" alt="">Published Stories</a>
-                <a href="#urgent-cases"><img src="assets/sirine.png" alt="">Urgent Cases</a>
-            </nav>
+            <div class="action-menu" role="menu">
+              <h3>Change Story Status</h3>
 
-            <button class="logout"><img src="assets/logout.png" alt="">Log Out</button>
-        </aside>
-
-
-        <main class="main">
-            <h1 class="greeting" id="title"></h1>
-            <p class="subtitle" id="subtitle"></p>
-
-            <section class="stats" id="stats">
-                <div class="card card-waiting">
-                    <p>Waiting :</p>
-                    <strong id="count-waiting">0</strong>
+              <button
+                type="button"
+                class="option option-delete"
+                data-status="deleted"
+              >
+                <img src="assets/trash.png" alt="" />
+                <div>
+                  <strong>Delete</strong>
+                  <span>Permanently remove this story from the platform.</span>
                 </div>
-                <div class="card card-published">
-                    <p>Published Today :</p>
-                    <strong id="count-published">0</strong>
-                </div>
-                <div class="card card-attention">
-                    <p>Needs Attention :</p>
-                    <strong id="count-attention">0</strong>
-                </div>
-            </section>
+              </button>
 
-            <div class="toolbar">
-                <label class="search">
-                    <img src="assets/akar-icons_search.png" alt="">
-                    <input type="text" placeholder="Cari kata dalam cerita...">
-                </label>
-                <select class="category">
-                    <option value="all">Moods Category</option>
-                    <option value="angry">Angry</option>
-                    <option value="frustrated">Frustrated</option>
-                    <option value="happy">Happy</option>
-                    <option value="calm">Calm</option>
-                    <option value="sad">Sad</option>
-                </select>
+              <button
+                type="button"
+                class="option option-publish"
+                data-status="published"
+              >
+                <img src="assets/published.png" alt="" />
+                <div>
+                  <strong>Publish Today</strong>
+                  <span>Approve and show on board</span>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                class="option option-attention"
+                data-status="attention"
+              >
+                <img src="assets/sirine.png" alt="" />
+                <div>
+                  <strong>Needs Attention</strong>
+                  <span>Approve and show on board</span>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                class="option option-restore"
+                data-status="waiting"
+              >
+                <img src="assets/overview.png" alt="" />
+                <div>
+                  <strong>Restore Story</strong>
+                  <span>Move back to waiting list</span>
+                </div>
+              </button>
             </div>
+<<<<<<< HEAD
 
             <section class="list">
 
@@ -277,105 +379,13 @@
                     <div class="meta"><span>C-0417</span><span>1 hour ago</span></div>
                 </article>
 
-<<<<<<< HEAD
-            </section>
-        </main>
-    </div>
-
-    <!-- JS -->
-    <script>
-        // Tiap halaman: judul, subjudul, dan status cerita yang ditampilkan
-        const pages = {
-            'overview':          { title: 'Greetings, Kharim.', subtitle: "Today's view",                  show: ['waiting', 'attention'] },
-            'delete-stories':    { title: 'Delete Stories',     subtitle: 'Stories removed from the board', show: ['deleted'] },
-            'published-stories': { title: 'Published Stories',  subtitle: 'Stories live on the board',      show: ['published'] },
-            'urgent-cases':      { title: 'Urgent Cases',       subtitle: 'Stories that need attention',    show: ['attention'] }
-        };
-
-        // Teks & warna badge untuk tiap status
-        const badges = {
-            waiting:   ['Waiting',         'badge-waiting'],
-            published: ['Published',       'badge-published'],
-            attention: ['Needs attention', 'badge-attention'],
-            deleted:   ['Deleted',         'badge-deleted']
-        };
-
-        const stories = document.querySelectorAll('.story');
-        const moodSelect = document.querySelector('.category');
-        const searchInput = document.querySelector('.search input');
-
-        // Tampilkan halaman sesuai #hash
-        function showPage() {
-            const name = location.hash.slice(1) in pages ? location.hash.slice(1) : 'overview';
-            const page = pages[name];
-
-            document.getElementById('title').textContent = page.title;
-            document.getElementById('subtitle').textContent = page.subtitle;
-            document.getElementById('stats').style.display = name === 'overview' ? '' : 'none';
-
-            document.querySelectorAll('.menu a').forEach((a) => {
-                a.classList.toggle('active', a.getAttribute('href') === '#' + name);
-            });
-
-            filterStories();
-        }
-
-        // Sembunyikan cerita yang tidak cocok dengan halaman, mood, dan kata kunci
-        function filterStories() {
-            const page = pages[location.hash.slice(1)] || pages['overview'];
-            const mood = moodSelect.value;
-            const keyword = searchInput.value.trim().toLowerCase();
-
-            stories.forEach((story) => {
-                const statusMatch = page.show.includes(story.dataset.status);
-                const moodMatch = mood === 'all' || story.dataset.mood === mood;
-                const textMatch = story.querySelector('.story-text').textContent.toLowerCase().includes(keyword);
-                story.hidden = !(statusMatch && moodMatch && textMatch);
-            });
-
-            // update angka di kartu statistik
-            for (const status of ['waiting', 'published', 'attention']) {
-                document.getElementById('count-' + status).textContent =
-                    document.querySelectorAll('.story[data-status="' + status + '"]').length;
-            }
-        }
-
-        // Klik tombol Action & pilihan di menunya
-        document.querySelector('.list').addEventListener('click', (e) => {
-            const story = e.target.closest('.story');
-            if (!story) return;
-
-            // klik tombol Action: buka / tutup menu
-            if (e.target.closest('.action-btn')) {
-                const wasOpen = story.classList.contains('open');
-                document.querySelectorAll('.story.open').forEach((s) => s.classList.remove('open'));
-                if (!wasOpen) story.classList.add('open');
-            }
-
-            // klik pilihan status: ubah status + badge, lalu pindah halaman otomatis
-            const option = e.target.closest('.option');
-            if (option) {
-                const status = option.dataset.status;
-                const badge = story.querySelector('.badge');
-                story.dataset.status = status;
-                badge.textContent = badges[status][0];
-                badge.className = 'badge ' + badges[status][1];
-                story.classList.remove('open');
-                filterStories();
-            }
-        });
-
-        moodSelect.addEventListener('change', filterStories);
-        searchInput.addEventListener('input', filterStories);
-        window.addEventListener('hashchange', showPage);
-        showPage();
-    </script>
-=======
-                </div>
 
             </section>
 
-        </main>
+    
+            </section>
+
+     </main>
 
 
         <!-- js -->
@@ -384,8 +394,21 @@
 
 
 
->>>>>>> 4b6e88f91b38ee6d10ddd717630614720567dd93
+
 
 </body>
 
 </html>
+=======
+          </article>
+        </template>
+      </main>
+    </div>
+
+    <!-- js -->
+    <script src="js/data.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>
+>>>>>>> 7d1c2b45bdb1c09cb7b703a304d2a558596d0ac7

@@ -1,22 +1,39 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  
     <div class="page">
+      <a href="index.html" class="back-btn black"
+        ><img src="assets/back-btn.png" alt=""
+      /></a>
+
       <!-- Gambar cafe (kiri) -->
       <div class="visual">
         <img class="visual-img" src="assets/cafe-signup-img.png" alt="" />
       </div>
 
+<<<<<<< HEAD
+  <style>
+    body {
+      overflow: hidden;
+    }
+  </style>
+
+  <img class="awning-mobile" src="assets/awning-atap.png" alt="" />
+=======
       <!-- Form (kanan) -->
       <main class="panel">
         <div class="panel-inner">
           <h1 class="title">Sign In</h1>
+>>>>>>> 7d1c2b45bdb1c09cb7b703a304d2a558596d0ac7
 
           <form class="form" action="#" method="post">
             <div class="field">
@@ -50,15 +67,24 @@
                 name="password"
                 type="password"
                 placeholder="Input Password..."
-                autocomplete="new-password"
+                autocomplete="current-password"
                 required
               />
             </div>
+
+            <p
+              class="form-hint"
+              id="auth-error"
+              role="status"
+              aria-live="polite"
+            ></p>
 
             <button class="btn btn-primary" type="submit">Sign In →</button>
           </form>
         </div>
       </main>
     </div>
+
+    <script src="js/auth.js"></script>
   </body>
 </html>
