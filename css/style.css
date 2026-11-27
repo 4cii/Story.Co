@@ -1576,15 +1576,117 @@ body {
   margin-bottom: 2rem;
 }
 
-.board {
+.board-wrap {
+  position: relative;
   max-width: 95%;
-  display: block;
 }
 
+.board {
+  max-width: 100%;
+  display: block;
+}
 /* ---------- Struk (kertas) ---------- */
+.wadah-struk {
+  position: absolute;
+  inset: 12% 14% 43% 14%;
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  place-items: center;
+}
+
+.wadah-struk .struk {
+  --w: 26cqw;
+  position: relative;
+  width: var(--w);
+  max-width: none;
+  padding: calc(var(--w) * 0.11) calc(var(--w) * 0.1);
+  translate: var(--dx, 0) var(--dy, 0);
+  transform: rotate(var(--rot, 0deg));
+}
+
+/* TABLET (<= 1024px): 4 kartu (2 kolom x 2 baris) */
+@media (max-width: 1024px) {
+  .wadah-struk {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .wadah-struk .struk {
+    --w: 36cqw; /* kartu otomatis membesar mengisi 2 kolom */
+  }
+}
+
+/* HP (<= 600px): 2 kartu (2 kolom x 1 baris) */
+@media (max-width: 600px) {
+  .wadah-struk {
+    inset: 15% 12% 45% 12%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+  }
+
+  .wadah-struk .struk {
+    --w: 42cqw; /* kartu lebih besar & terbaca jelas di layar kecil */
+  }
+}
+
+.wadah-struk .struk:hover {
+  z-index: 2;
+  transform: translateY(-5px);          /* meluruskan diri dan naik sedikit */
+}
+
+/* isi kartu ikut mengecil dan membesar bersama kartu */
+.wadah-struk .top {
+  max-width: 100%;
+}
+
+.wadah-struk .top h4 {
+  font-size: calc(var(--w) * 0.1);
+  margin-bottom: calc(var(--w) * 0.035);
+}
+
+.wadah-struk .top span {
+  font-size: calc(var(--w) * 0.041);
+  line-height: 1.3;
+  overflow-wrap: anywhere;              /* teks tanpa spasi tidak meluber keluar kartu */
+}
+
+.wadah-struk .struk tr {
+  font-size: calc(var(--w) * 0.03);
+}
+
+.wadah-struk .line {
+  margin-block: calc(var(--w) * 0.03);
+}
+
+.wadah-struk .struk button {
+  font-size: calc(var(--w) * 0.058);
+}
+
+.wadah-struk .likeCount {
+  font-size: calc(var(--w) * 0.047);
+}
+
+.wadah-struk .barcode {
+  margin-top: calc(var(--w) * 0.06);
+}
+
+.wadah-struk .barcode p {
+  font-size: calc(var(--w) * 0.03);
+}
+
+.wadah-struk .struk-img {
+  max-height: calc(var(--w) * 0.3);
+  object-fit: contain;
+}
+
 .struk {
   position: absolute;
-  background-image: url("/assets/paper.svg");
+  background-image: url("/assets/paper.svg"); 
+  width: 22%;                    /* dihitung dari lebar board */
+  translate: -50% -50%;          /* left/top = titik tengah kartu */
+  transform: rotate(var(--rot, 0deg));
   background-repeat: no-repeat;
   background-size: 100% 100%;
   display: grid;
@@ -1726,8 +1828,11 @@ body {
 }
 
 @media (max-width: 768px) {
+  .board-wrap {
+    width: 100%;
+  }
+
   .board {
-    position: relative;
     width: 100%;
     object-fit: fill;
   }
@@ -2806,6 +2911,7 @@ body {
   }
 
   .board {
+    display: block;
     max-width: 100%;
   }
 
